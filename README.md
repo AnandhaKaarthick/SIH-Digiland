@@ -71,21 +71,28 @@ DigiLand processes all 4 key revenue document schemas (**Record of Rights / Khat
 
 ## ⚡ 1-Click Dual Launcher (Frontend + Backend)
 
-Start both the **FastAPI Backend (Port 8000)** and **React Frontend (Port 5173)** simultaneously using any of the following options:
+Start both the **FastAPI Backend (Port 8000)** and **React Frontend (Port 5173)** simultaneously using a single command:
 
-### 🔹 Option A: Double-Click Batch File (Windows)
+### 🔹 Option 1: Single Python File Launcher (Recommended)
+Run in terminal or double-click:
+```bash
+python run.py
+```
+> *This automatically starts the FastAPI backend, starts the Vite React frontend, and opens the Web App in your browser.*
+
+### 🔹 Option 2: Windows Batch File
 Double-click `start.bat` in File Explorer, or run in terminal:
 ```cmd
 start.bat
 ```
 
-### 🔹 Option B: PowerShell Script
+### 🔹 Option 3: PowerShell Script
 Run in PowerShell:
 ```powershell
 .\start.ps1
 ```
 
-### 🔹 Option C: npm Command (Cross-Platform)
+### 🔹 Option 4: npm Command (Cross-Platform)
 Run in terminal:
 ```bash
 npm start
