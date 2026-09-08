@@ -69,7 +69,31 @@ DigiLand processes all 4 key revenue document schemas (**Record of Rights / Khat
 
 ---
 
-## 🚀 Quick Start Guide
+## ⚡ 1-Click Dual Launcher (Frontend + Backend)
+
+Start both the **FastAPI Backend (Port 8000)** and **React Frontend (Port 5173)** simultaneously using any of the following options:
+
+### 🔹 Option A: Double-Click Batch File (Windows)
+Double-click `start.bat` in File Explorer, or run in terminal:
+```cmd
+start.bat
+```
+
+### 🔹 Option B: PowerShell Script
+Run in PowerShell:
+```powershell
+.\start.ps1
+```
+
+### 🔹 Option C: npm Command (Cross-Platform)
+Run in terminal:
+```bash
+npm start
+```
+
+---
+
+## 🛠️ Manual Step-by-Step Setup
 
 ### Prerequisites
 - **Node.js** (v18.0 or higher)
@@ -77,8 +101,8 @@ DigiLand processes all 4 key revenue document schemas (**Record of Rights / Khat
 
 ### 1. Clone the Repository
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd SIH-2026
+git clone https://github.com/AnandhaKaarthick/SIH-Digiland.git
+cd SIH-Digiland
 ```
 
 ### 2. Frontend Setup (React + Vite)
@@ -86,19 +110,16 @@ cd SIH-2026
 # Install frontend dependencies
 npm install
 
-# Start Vite Development Server (runs on http://localhost:5175 or 5173)
+# Start Vite Development Server
 npm run dev
 ```
 
 ### 3. Backend Setup (FastAPI + Python)
 ```bash
-# Navigate to project root directory
-cd SIH-2026
-
-# Install Python dependencies (FastAPI, Uvicorn, SQLAlchemy, Pydantic)
+# Install Python dependencies
 pip install fastapi uvicorn sqlalchemy pydantic
 
-# Start FastAPI ASGI Backend Server (runs on http://localhost:8000)
+# Start FastAPI ASGI Backend Server
 python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
