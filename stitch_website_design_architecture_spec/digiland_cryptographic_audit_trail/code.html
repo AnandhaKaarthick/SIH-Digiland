@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Poppins:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary-fixed":"#ffdcbc","on-tertiary-container":"#97ccff","dark-text-primary":"#EDEFEC","tertiary-fixed-dim":"#96ccff","dark-status-info":"#6FB1E0","surface-dim":"#cdded3","surface-container-low":"#e6f8ec","dark-secondary":"#E0A94D","surface-variant":"#d5e7db","surface-container":"#e1f2e7","on-primary":"#ffffff","inverse-primary":"#92d5a8","on-tertiary-fixed":"#001d32","on-error-container":"#93000a","dark-surface-card":"#1B2224","primary":"#004526","on-surface":"#101e18","error-container":"#ffdad6","primary-fixed-dim":"#92d5a8","on-error":"#ffffff","on-surface-variant":"#404942","text-secondary":"#5B6B62","dark-canvas-bg":"#12181A","surface-container-highest":"#d5e7db","secondary":"#895100","text-primary":"#1F2A24","on-secondary-fixed":"#2c1700","status-warning":"#ED8936","primary-fixed":"#aef2c2","on-secondary-container":"#6e4000","status-error":"#C0392B","on-primary-container":"#92d5a8","status-info":"#1B6FA8","primary-container":"#1b5e3a","on-secondary-fixed-variant":"#683d00","tertiary":"#003f65","dark-border-structural":"#2D3A34","tertiary-container":"#005789","on-tertiary-fixed-variant":"#004a76","on-tertiary":"#ffffff","dark-status-success":"#6FCF97","tertiary-fixed":"#cee5ff","border-structural":"#E0DED5","background":"#ecfef2","dark-primary":"#5FBE8A","on-primary-fixed-variant":"#09522f","surface-tint":"#296a45","error":"#ba1a1a","on-secondary":"#ffffff","dark-status-warning":"#F0B860","dark-status-error":"#E57373","inverse-surface":"#25342c","surface-card":"#FFFFFF","outline":"#707971","canvas-bg":"#F7F5F0","surface-container-lowest":"#ffffff","surface-bright":"#ecfef2","dark-text-secondary":"#A9B3AC","status-success":"#2E7D32","inverse-on-surface":"#e3f5e9","on-primary-fixed":"#00210f","outline-variant":"#c0c9bf","secondary-fixed-dim":"#ffb86b","on-background":"#101e18","secondary-container":"#fdaa48","surface":"#ecfef2","surface-container-high":"#dbece1"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"sidebar-width":"16rem","space-xl":"1.5rem","splitview-split":"50%","space-2xl":"2rem","gutter-grid":"1rem","space-base":"1rem","space-4xl":"3rem","topbar-height":"4rem","space-lg":"1.25rem","space-md":"0.75rem","margin-screen":"1.5rem","space-sm":"0.5rem","space-2xs":"0.125rem","space-xs":"0.25rem","space-3xl":"2.5rem"},fontFamily:{"headline-lg-mobile":["Poppins"],"body-sm":["Inter"],"code-sm":["JetBrains Mono"],"code-md":["JetBrains Mono"],"headline-md":["Poppins"],"display-lg":["Poppins"],"label-sm":["Poppins"],"body-md":["Inter"],"headline-lg":["Poppins"],"body-lg":["Inter"],"label-md":["Poppins"],"headline-sm":["Poppins"],"display-lg-mobile":["Poppins"]},fontSize:{"headline-lg-mobile":["22px",{lineHeight:"28px",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"code-sm":["11px",{lineHeight:"16px",fontWeight:"500"}],"code-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"display-lg":["36px",{lineHeight:"44px",fontWeight:"600"}],"label-sm":["10px",{lineHeight:"14px",fontWeight:"500"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"500"}],"headline-sm":["16px",{lineHeight:"24px",fontWeight:"600"}],"display-lg-mobile":["28px",{lineHeight:"36px",fontWeight:"600"}]}}}};</script></head><body class="bg-canvas-bg font-body-md text-text-primary min-h-screen"><aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-card shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="p-space-base flex items-start gap-space-sm bg-surface-container-lowest"><img alt="DigiLand Official Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYBurNLPtPNHeD5djSN2UmKCWCf-L8XEednYv_C1PWN1uUt9frVUp_WC1mW6DU3Yu4RFbm9dPjCCetm9ZF4w_VkXB8Ee0wqfPwx7JCIqWAtgJ_k3VAUKeS0v4061tlznL_sTtrS0EFuhj6tMp1gdv9y5FVNf9kEnbHrVfPcSUX7i2rYfTUFcK4DzppJ34m1AVN99ypoGdwb1OhJ8dcDOjO2cBfOLMod1kjxMT0GzQXAragtyE16NegJw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">DigiLand</span><span class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider mt-space-2xs leading-tight">GovTech Platform</span><span class="font-code-sm text-code-sm text-text-secondary mt-space-2xs leading-tight opacity-75">SIH 2026 PS 26018</span></div></div><div class="px-space-base py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary opacity-70">Cadastral Operations</span></div><nav class="flex flex-col px-space-sm gap-space-2xs" data-active-classes="bg-primary-container text-on-primary font-headline-sm shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="document-upload" href="#"><span class="material-symbols-outlined text-[20px]">upload_file</span><span class="font-body-md text-body-md">Document Upload</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="verification-queue" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="font-body-md text-body-md flex-1">Verification Queue</span><span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container-high text-on-surface">14</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="records" href="#"><span class="material-symbols-outlined text-[20px]">folder_shared</span><span class="font-body-md text-body-md">Records Registry</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-all duration-150 bg-primary-container text-on-primary font-headline-sm shadow-sm" data-path="audit-trail" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="font-body-md text-body-md">Audit Trail</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="gis-map" href="#"><span class="material-symbols-outlined text-[20px]">map</span><span class="font-body-md text-body-md">GIS Cadastral Map</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="admin-rbac" href="#"><span class="material-symbols-outlined text-[20px]">admin_panel_settings</span><span class="font-body-md text-body-md">Admin &amp; RBAC</span></a></nav></div><div class="p-space-base bg-surface-container-low m-space-sm rounded-xl"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span><span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">DILRMP Verified</span></div><p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs">National Land Records Modernization Pipeline</p></div></aside><div class="pl-sidebar-width flex flex-col min-h-screen"><header class="fixed top-0 left-sidebar-width right-0 h-topbar-height bg-surface-card/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl gap-space-lg"><div class="flex items-center flex-1 max-w-2xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full pl-10 pr-space-md py-space-sm rounded-lg bg-canvas-bg font-body-sm text-body-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search by Khasra, Khata, ULPIN, Village, or Deed #..." type="text"/></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-low text-primary"><span class="w-2 h-2 rounded-full bg-status-success"></span><span class="font-code-sm text-code-sm font-medium">Gov Gateway: Connected • DILRMP Sync Active</span></div><button aria-label="Notifications" class="relative p-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-status-warning"></span></button><div class="h-6 w-[1px] bg-border-structural/60"></div><div class="flex items-center gap-space-md"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-tight">Rajesh Sharma, IRS</span><div class="flex items-center justify-end gap-space-xs mt-space-2xs"><span class="px-space-xs py-space-2xs rounded font-label-sm text-label-sm bg-primary-container text-on-primary font-medium leading-none">Tehsildar / Admin</span></div></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-J9ajm6QnO8VpvfGOd7AlS40LFMZeibmXKFQqDjNSQV4cMvlwy4BNM3JgnmcbBOB7-xIwJ7FERZ-2EtI4TwtFCxOvBDkregL1pQY583KQ5zNBnO82YGHz4utXd6vbQmH1Clpc8evsU6qYBFv6diz7uLpZA1EfSbVNQ0u0ePUwNFE-UQk4cBwUbZ9HQZlCFJx1SYuNwqg_W2tgHW2xGjTHwpPg3W-IfGwR_OQJYLn49A6fXBIuHATW-A"/></div></div></header><main class="w-full pt-topbar-height bg-canvas-bg flex-1"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow Element -->
+<div class="relative w-full overflow-hidden px-space-xl py-space-xl">
+<div class="absolute -top-32 right-12 w-96 h-96 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="absolute top-48 left-1/4 w-80 h-80 rounded-full bg-secondary-fixed/20 blur-3xl pointer-events-none"></div>
+<!-- Header Section: Typographic Texture & Technical Pedigree -->
+<div class="relative flex flex-col md:flex-row md:items-end justify-between gap-space-lg mb-space-2xl">
+<div class="flex flex-col max-w-3xl">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="font-code-sm text-code-sm text-primary uppercase tracking-widest font-semibold bg-surface-container-low px-space-sm py-space-2xs rounded">LEDGER://BLOCK-SEQUENCE.STP</span>
+<span class="text-text-secondary font-code-sm text-code-sm">•</span>
+<span class="font-code-sm text-code-sm text-text-secondary">RFC 6962 AUDIT LOG COMPLIANT</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-text-primary tracking-tight">Cryptographic Audit Trail &amp; Tamper-Evident Ledger</h1>
+<p class="font-body-lg text-body-lg text-text-secondary mt-space-xs">Deterministic SHA-256 Hash Chain • Non-Repudiation for Revenue Officers • Legal Admissibility Tier-1 (Sec 65B Indian Evidence Act)</p>
+</div>
+<!-- Quick Hash Recompute CTA -->
+<div class="flex items-center gap-space-md self-start md:self-auto">
+<button class="flex items-center gap-space-sm px-space-lg py-space-md rounded-lg bg-primary text-on-primary font-headline-sm text-headline-sm shadow-md hover:bg-primary-container active:scale-[0.98] transition-all" id="recompute-btn">
+<span class="material-symbols-outlined text-[20px]" id="recompute-icon">refresh</span>
+<span>Verify Hash Chain</span>
+</button>
+<button aria-label="Export Merkle Log" class="p-space-md rounded-lg bg-surface-card text-on-surface shadow-sm hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">download_for_offline</span>
+</button>
+</div>
+</div>
+<!-- Ledger Integrity Banner (Bento Metric Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-2xl">
+<!-- Status Card -->
+<div class="lg:col-span-6 bg-surface-card rounded-xl p-space-xl shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-status-success"></div>
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-status-success flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-md text-headline-md text-text-primary">Chain Integrity: VALID</span>
+<span class="w-2.5 h-2.5 rounded-full bg-status-success animate-pulse"></span>
+</div>
+<p class="font-body-md text-body-md text-text-secondary mt-space-2xs">All 14,892 blocks sequentially verified. Zero tampering, collision, or uncommitted mutation detected.</p>
+</div>
+</div>
+<span class="font-code-sm text-code-sm text-primary font-semibold bg-surface-container-low px-space-sm py-space-2xs rounded">0 FORKS</span>
+</div>
+<!-- Inline Visual Merkle Tree Segment Graphic -->
+<div class="mt-space-lg pt-space-md bg-canvas-bg rounded-lg p-space-md flex items-center justify-between overflow-x-auto">
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-text-secondary">GENESIS:</span>
+<span class="font-code-sm text-code-sm text-primary font-medium bg-surface-card px-space-xs py-space-2xs rounded">4a5e12...99bc</span>
+</div>
+<svg class="w-24 h-5 text-status-success opacity-75 flex-shrink-0" fill="none" viewbox="0 0 100 20">
+<path d="M0 10 H20 L30 3 H50 L60 17 H80 L90 10 H100" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-text-secondary">TIP BLOCK:</span>
+<span class="font-code-sm text-code-sm text-primary font-medium bg-surface-card px-space-xs py-space-2xs rounded">#84924 (Synchronized)</span>
+</div>
+</div>
+</div>
+<!-- Live Cryptographic Metrics -->
+<div class="lg:col-span-3 bg-surface-card rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Latest Merkle Root</span>
+<div class="mt-space-sm flex items-center gap-space-xs font-code-md text-code-md text-tertiary font-semibold truncate bg-surface-container-lowest p-space-sm rounded">
+<span class="material-symbols-outlined text-status-info text-[18px]">key</span>
+<span class="truncate">f0a1c32b84e19...c01487da</span>
+</div>
+</div>
+<div class="mt-space-md flex justify-between items-center text-text-secondary">
+<span class="font-body-sm text-body-sm">Block Mining/Commit Latency</span>
+<span class="font-code-sm text-code-sm text-text-primary font-medium">142ms • Ed25519</span>
+</div>
+</div>
+<div class="lg:col-span-3 bg-surface-card rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Last Attestation Stamp</span>
+<div class="mt-space-xs font-headline-md text-headline-md text-text-primary">14:32:18 IST</div>
+<span class="font-body-sm text-body-sm text-status-success font-medium flex items-center gap-space-2xs mt-space-2xs">
+<span class="material-symbols-outlined text-[16px]">done_all</span>
+            NIC Cadastral Trust Service Sync OK
+          </span>
+</div>
+<div class="mt-space-md flex justify-between items-center text-text-secondary">
+<span class="font-body-sm text-body-sm">DSC SmartCard HW Tokens</span>
+<span class="font-code-sm text-code-sm text-text-primary font-medium">4 Active Signers</span>
+</div>
+</div>
+</div>
+<!-- Filter & Precision Search Bar -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm mb-space-xl flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-sm flex-1 min-w-[320px]">
+<!-- Search Input -->
+<div class="relative min-w-[240px] flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-text-secondary text-[18px]">search</span>
+<input class="w-full pl-9 pr-space-md py-space-xs rounded-lg bg-canvas-bg font-body-sm text-body-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:bg-surface-container-lowest" placeholder="Filter by Block #, SHA-256, or ULPIN..." type="text"/>
+</div>
+<!-- Officer Role Dropdown Mock -->
+<div class="relative">
+<select class="appearance-none pl-space-md pr-space-xl py-space-xs rounded-lg bg-canvas-bg font-body-sm text-body-sm text-text-primary cursor-pointer focus:outline-none focus:bg-surface-container-lowest">
+<option>All Actors / Roles</option>
+<option>Tehsildar (DSC Authorized)</option>
+<option>Revenue Clerk (Amit Verma)</option>
+<option>System / OCR Engine (Auto-STP)</option>
+<option>DILRMP Central Registry Service</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-1/2 -translate-y-1/2 text-text-secondary text-[18px] pointer-events-none">expand_more</span>
+</div>
+<!-- Event Action Dropdown -->
+<div class="relative">
+<select class="appearance-none pl-space-md pr-space-xl py-space-xs rounded-lg bg-canvas-bg font-body-sm text-body-sm text-text-primary cursor-pointer focus:outline-none focus:bg-surface-container-lowest">
+<option>All Event Types</option>
+<option>Field Delta Correction</option>
+<option>Ed25519 DSC Signature Appended</option>
+<option>Auto-Validated via STP</option>
+<option>LRMS National Push Committed</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-sm top-1/2 -translate-y-1/2 text-text-secondary text-[18px] pointer-events-none">expand_more</span>
+</div>
+<!-- Date Range Filter -->
+<div class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-canvas-bg text-text-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-text-secondary">calendar_today</span>
+<span>24 Oct 2026</span>
+<span class="text-text-secondary">-</span>
+<span>Today (Live)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-text-secondary">Showing 5 of 14,892 events</span>
+<button aria-label="Filter Options" class="p-space-xs rounded bg-surface-container-low text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Main Content Dual Architecture: Immutable Ledger Stream & Inspection Drawer -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl">
+<!-- Left Column: Chronological Audit Timeline Table -->
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<!-- Table Header Bar -->
+<div class="px-space-md py-space-xs flex items-center justify-between text-text-secondary font-label-md text-label-md uppercase tracking-wider">
+<span>Cryptographic Hash Ledger (L-1)</span>
+<span class="flex items-center gap-space-xs font-code-sm text-code-sm capitalize text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-status-success"></span> WebSocket Realtime Active
+          </span>
+</div>
+<!-- Row 1: Active Inspected Row -->
+<div class="bg-surface-card rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-space-md cursor-pointer border-l-4 border-l-status-warning" onclick="selectAuditBlock('84920')">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-code-md text-code-md text-text-primary font-bold bg-surface-container-high px-space-sm py-space-2xs rounded">BLOCK #84920</span>
+<span class="font-code-sm text-code-sm text-text-secondary">24 Oct 2026 • 14:32:18 IST</span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-low font-label-sm text-label-sm text-status-warning font-semibold uppercase">Review Override</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-status-success text-[18px]">verified</span>
+<span class="font-code-sm text-code-sm text-status-success font-medium">ECDSA Certified</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md py-space-xs bg-canvas-bg/60 p-space-sm rounded-lg">
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Target Record / ULPIN</span>
+<div class="font-code-md text-code-md text-text-primary font-semibold truncate mt-space-2xs">UP-AGR-402-9842</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Mauza: Rampur Khurd (Khata 114)</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Action Executed</span>
+<div class="font-headline-sm text-headline-sm text-text-primary mt-space-2xs flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-status-warning">edit_note</span>
+                Field Corrected (Plot Area)
+              </div>
+<span class="font-body-sm text-body-sm text-text-secondary">Adjusted 0.45 Ha → 0.52 Ha</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Actor / Authority</span>
+<div class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm">RS</span>
+                Rajesh Sharma, IRS
+              </div>
+<span class="font-code-sm text-code-sm text-text-secondary">DSC Token: #NIC-UP-99321</span>
+</div>
+</div>
+<!-- Hash Comparison Row -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm pt-space-xs font-code-sm text-code-sm">
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-secondary">H_(n-1):</span>
+<span class="text-text-secondary truncate max-w-[120px] sm:max-w-[160px]">e3b0c44298fc1c149afbf4c8...a91f</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary text-[16px]">arrow_forward</span>
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-primary font-semibold">H_n (SHA-256):</span>
+<span class="text-tertiary font-bold underline cursor-pointer truncate max-w-[140px] sm:max-w-[200px]">8f4c219aa409b8e...b78e</span>
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+</div>
+<button class="px-space-md py-space-xs rounded bg-surface-container-high text-primary font-label-md text-label-md font-semibold hover:bg-surface-container-highest transition-colors">
+              Inspect Diff →
+            </button>
+</div>
+</div>
+<!-- Row 2: Digital Signature Attachment -->
+<div class="bg-surface-card rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-space-md cursor-pointer border-l-4 border-l-status-success" onclick="selectAuditBlock('84919')">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-code-md text-code-md text-text-primary font-bold bg-surface-container-high px-space-sm py-space-2xs rounded">BLOCK #84919</span>
+<span class="font-code-sm text-code-sm text-text-secondary">24 Oct 2026 • 14:30:02 IST</span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-low font-label-sm text-label-sm text-status-success font-semibold uppercase">Legal Sign-Off</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-status-success text-[18px]">gavel</span>
+<span class="font-code-sm text-code-sm text-status-success font-medium">Ed25519 Sealed</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md py-space-xs bg-canvas-bg/60 p-space-sm rounded-lg">
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Target Record / ULPIN</span>
+<div class="font-code-md text-code-md text-text-primary font-semibold truncate mt-space-2xs">UP-AGR-402-9842</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Sale Deed Jamabandi Endorsement</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Action Executed</span>
+<div class="font-headline-sm text-headline-sm text-text-primary mt-space-2xs flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-status-success">draw</span>
+                Officer Approval &amp; Sealed
+              </div>
+<span class="font-body-sm text-body-sm text-text-secondary">Tehsildar Mutated Final Status</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Actor / Authority</span>
+<div class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm">RS</span>
+                Rajesh Sharma (Tehsildar)
+              </div>
+<span class="font-code-sm text-code-sm text-text-secondary">Sub-Divisional Revenue Court #02</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm pt-space-xs font-code-sm text-code-sm">
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-secondary">H_(n-1):</span>
+<span class="text-text-secondary truncate max-w-[120px] sm:max-w-[160px]">77d9c124ab831201fa1209b...c184</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary text-[16px]">arrow_forward</span>
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-primary font-semibold">H_n (SHA-256):</span>
+<span class="text-tertiary font-bold underline cursor-pointer truncate max-w-[140px] sm:max-w-[200px]">e3b0c44298fc1c1...a91f</span>
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+</div>
+<button class="px-space-md py-space-xs rounded bg-surface-container-high text-primary font-label-md text-label-md font-semibold hover:bg-surface-container-highest transition-colors">
+              Inspect Diff →
+            </button>
+</div>
+</div>
+<!-- Row 3: Automated STP Ingestion -->
+<div class="bg-surface-card rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-space-md cursor-pointer border-l-4 border-l-status-info" onclick="selectAuditBlock('84918')">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-code-md text-code-md text-text-primary font-bold bg-surface-container-high px-space-sm py-space-2xs rounded">BLOCK #84918</span>
+<span class="font-code-sm text-code-sm text-text-secondary">24 Oct 2026 • 14:15:40 IST</span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-low font-label-sm text-label-sm text-status-info font-semibold uppercase">Automated Pipeline</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-status-info text-[18px]">smart_toy</span>
+<span class="font-code-sm text-code-sm text-status-info font-medium">STP Ingestion Check</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md py-space-xs bg-canvas-bg/60 p-space-sm rounded-lg">
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Target Record / ULPIN</span>
+<div class="font-code-md text-code-md text-text-primary font-semibold truncate mt-space-2xs">UP-AGR-402-9842</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Land Parcel 142/1 Cadastral</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Action Executed</span>
+<div class="font-headline-sm text-headline-sm text-text-primary mt-space-2xs flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-status-info">auto_awesome</span>
+                Auto-Validated via STP
+              </div>
+<span class="font-body-sm text-body-sm text-text-secondary">Confidence 96.8% • Bounding Box Match</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Actor / Authority</span>
+<div class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center font-label-sm text-label-sm">AI</span>
+                DigiLand Vision NLP Engine
+              </div>
+<span class="font-code-sm text-code-sm text-text-secondary">Pipeline v4.2.1 Core Worker</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm pt-space-xs font-code-sm text-code-sm">
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-secondary">H_(n-1):</span>
+<span class="text-text-secondary truncate max-w-[120px] sm:max-w-[160px]">11a8820c74b12399...912f</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary text-[16px]">arrow_forward</span>
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-primary font-semibold">H_n (SHA-256):</span>
+<span class="text-tertiary font-bold underline cursor-pointer truncate max-w-[140px] sm:max-w-[200px]">77d9c124ab83120...c184</span>
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+</div>
+<button class="px-space-md py-space-xs rounded bg-surface-container-high text-primary font-label-md text-label-md font-semibold hover:bg-surface-container-highest transition-colors">
+              Inspect Diff →
+            </button>
+</div>
+</div>
+<!-- Row 4: LRMS Sync Event -->
+<div class="bg-surface-card rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-space-md cursor-pointer border-l-4 border-l-status-success" onclick="selectAuditBlock('84917')">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-code-md text-code-md text-text-primary font-bold bg-surface-container-high px-space-sm py-space-2xs rounded">BLOCK #84917</span>
+<span class="font-code-sm text-code-sm text-text-secondary">24 Oct 2026 • 13:58:11 IST</span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-low font-label-sm text-label-sm text-status-success font-semibold uppercase">National Sync</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-status-success text-[18px]">cloud_sync</span>
+<span class="font-code-sm text-code-sm text-status-success font-medium">LRMS Committed</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md py-space-xs bg-canvas-bg/60 p-space-sm rounded-lg">
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Target Record / ULPIN</span>
+<div class="font-code-md text-code-md text-text-primary font-semibold truncate mt-space-2xs">UP-AGR-402-9842</div>
+<span class="font-body-sm text-body-sm text-text-secondary">DILRMP Central Replica</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Action Executed</span>
+<div class="font-headline-sm text-headline-sm text-text-primary mt-space-2xs flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-status-success">cloud_done</span>
+                LRMS Push Committed
+              </div>
+<span class="font-body-sm text-body-sm text-text-secondary">Ack: #NIC-CENTRAL-TX-88410</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Actor / Authority</span>
+<div class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-status-info text-on-primary flex items-center justify-center font-label-sm text-label-sm">GW</span>
+                Gov Gateway Gateway Adapter
+              </div>
+<span class="font-code-sm text-code-sm text-text-secondary">Cert: National Informatics Centre</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm pt-space-xs font-code-sm text-code-sm">
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-secondary">H_(n-1):</span>
+<span class="text-text-secondary truncate max-w-[120px] sm:max-w-[160px]">09ca71a39f1122...0012</span>
+</div>
+<span class="material-symbols-outlined text-text-secondary text-[16px]">arrow_forward</span>
+<div class="flex items-center gap-space-xs truncate">
+<span class="text-text-primary font-semibold">H_n (SHA-256):</span>
+<span class="text-tertiary font-bold underline cursor-pointer truncate max-w-[140px] sm:max-w-[200px]">11a8820c74b1239...912f</span>
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+</div>
+<button class="px-space-md py-space-xs rounded bg-surface-container-high text-primary font-label-md text-label-md font-semibold hover:bg-surface-container-highest transition-colors">
+              Inspect Diff →
+            </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Backtracking Inspector & Forensic Delta Drawer -->
+<div class="xl:col-span-4 flex flex-col gap-space-lg">
+<div class="sticky top-20 bg-surface-card rounded-xl p-space-xl shadow-md flex flex-col gap-space-lg">
+<!-- Inspection Header -->
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-primary tracking-wider bg-surface-container-low px-space-xs py-space-2xs rounded">Forensic Node Inspector</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-text-primary mt-space-xs" id="inspected-block-title">Payload Diff • Block #84920</h2>
+</div>
+<span class="material-symbols-outlined text-text-secondary text-[24px]">terminal</span>
+</div>
+<!-- Cryptographic Metadata Card -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex justify-between items-center text-body-sm">
+<span class="font-body-sm text-body-sm text-text-secondary">Deterministic Formula</span>
+<span class="font-code-sm text-code-sm text-primary font-semibold">H_n = SHA256(H_n-1 + Delta)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="font-body-sm text-body-sm text-text-secondary">Merkle Verification Path</span>
+<span class="font-code-sm text-code-sm text-status-success font-medium">Valid (12 Leaves)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="font-body-sm text-body-sm text-text-secondary">Signer Hardware Token</span>
+<span class="font-code-sm text-code-sm text-text-primary font-semibold">FIPS 140-2 Level 3</span>
+</div>
+</div>
+<!-- Visual Cadastral Document Extract Context -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Historical Scanned Source Extract</span>
+<div class="relative rounded-lg overflow-hidden h-36 bg-canvas-bg group">
+<img class="w-full h-full object-cover" data-alt="High resolution archival cadastral land deed document showing revenue stamps, Devanagari calligraphy script, and faint surveyor geometric parcel boundary coordinates with official government seal in sepia tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6XgaTEo3m5mvHhXj4EGL8-jOovsRK4kreOpjK7fsKPb_5VqniiOfutA36UVARElOG-Wxbvsye2Hw8X3d7jwehgCLsTh1wNR-IWeaXx2W9iIn1_Y6dGg0YpoYm9HhKjZeHdbCiNJ1PEk92jq2aNzE0jBPl5_XdWOQ1pupRdteRH9Gh9d5kgXuFqtLex9rY0Q4Wwis-cyE9Zqpm9DVLyFmnN_4J39JU9TDY9TPtYVtsez5U9mDd63W7aQ"/>
+<!-- Coordinate Bounding Box Overlay -->
+<div class="absolute inset-0 bg-primary/10 flex items-center justify-center">
+<div class="border-2 border-dashed border-status-warning bg-status-warning/20 p-space-xs rounded text-center">
+<span class="font-code-sm text-code-sm text-text-primary font-bold bg-surface-card/90 px-space-xs py-space-2xs rounded shadow-sm">Token [X: 842, Y: 1190, W: 64, H: 22]</span>
+</div>
+</div>
+</div>
+<span class="font-code-sm text-code-sm text-text-secondary mt-space-2xs">Deed Volume #884/2021 • Khasra 402/1</span>
+</div>
+<!-- Field Mutation Delta (Before vs After) -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Field Mutation Audit Log</span>
+<div class="bg-canvas-bg rounded-lg p-space-md flex flex-col gap-space-sm">
+<div class="flex justify-between items-center">
+<span class="font-code-sm text-code-sm font-semibold text-text-primary">Attribute: plot_area_hectares</span>
+<span class="font-label-sm text-label-sm px-space-xs py-space-2xs rounded bg-surface-container-high text-on-surface">Cadastral Area</span>
+</div>
+<!-- Old vs New Delta Box -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm rounded bg-error-container/40 flex flex-col">
+<span class="font-label-sm text-label-sm text-status-error uppercase font-medium">Original (OCR Engine)</span>
+<span class="font-code-md text-code-md text-status-error font-bold line-through mt-space-2xs">0.4500 Ha</span>
+<span class="font-code-sm text-code-sm text-text-secondary mt-space-2xs">Conf: 68.2%</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col">
+<span class="font-label-sm text-label-sm text-status-success uppercase font-medium">New (Officer Verified)</span>
+<span class="font-code-md text-code-md text-status-success font-bold mt-space-2xs">0.5200 Ha</span>
+<span class="font-code-sm text-code-sm text-primary font-semibold mt-space-2xs">Survey Map Recalculated</span>
+</div>
+</div>
+</div>
+<div class="bg-canvas-bg rounded-lg p-space-md flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Officer Justification / Order Reference</span>
+<p class="font-body-sm text-body-sm text-text-primary">
+                “Rectified typo discrepancy in handwritten Patwari Naksha field note vs Jamabandi deed. Verified against G-Schedule Field Book.”
+              </p>
+</div>
+</div>
+<!-- Officer Biometric / DSC Cryptographic Proof Footnote -->
+<div class="pt-space-md bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-status-success">
+<span class="material-symbols-outlined text-[20px]">fingerprint</span>
+<span class="font-headline-sm text-headline-sm font-semibold">DSC Token Certificate Verified</span>
+</div>
+<div class="font-code-sm text-code-sm text-text-secondary break-all">
+              Sig: <span class="text-tertiary">3045022100e4ab912f...c084920fe14a</span>
+</div>
+<div class="flex justify-between items-center mt-space-xs text-text-secondary">
+<span class="font-code-sm text-code-sm">CA: eMudhra Sub-CA 2024</span>
+<span class="font-code-sm text-code-sm">Timestamp: RFC 3161 TSP</span>
+</div>
+</div>
+<!-- Action Button Inside Inspector -->
+<button class="w-full py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary font-headline-sm text-headline-sm flex items-center justify-center gap-space-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+            Generate Legal Certificate (Sec 65B)
+          </button>
+</div>
+</div>
+</div>
+<!-- Architectural Secondary Verification Ledger Pipeline Info -->
+<div class="mt-space-2xl bg-surface-card rounded-xl p-space-xl shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<h3 class="font-headline-md text-headline-md text-text-primary">DigiLand Dual-Hash Ledger Integrity Architecture</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-space-2xs">How revenue modifications achieve absolute court-admissible non-repudiation.</p>
+</div>
+<span class="font-code-sm text-code-sm text-status-success bg-surface-container-low px-space-md py-space-xs rounded-full font-semibold">
+          Current Engine: SHA-256 / Ed25519 Hardware Mod
+        </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-lg">
+<div class="p-space-md bg-canvas-bg rounded-xl flex flex-col gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary">01 / Scanned Ingestion</span>
+<p class="font-body-sm text-body-sm text-text-secondary">High-DPI TIFF/PDF scanned document generates an initial unalterable SHA-256 payload hash at the moment of Patwari upload.</p>
+</div>
+<div class="p-space-md bg-canvas-bg rounded-xl flex flex-col gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary">02 / OCR Bounding Tokens</span>
+<p class="font-body-sm text-body-sm text-text-secondary">Every extracted field is mapped with strict pixel coordinates. AI confidence metrics are permanently pinned into the block payload.</p>
+</div>
+<div class="p-space-md bg-canvas-bg rounded-xl flex flex-col gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary">03 / Human Intervention</span>
+<p class="font-body-sm text-body-sm text-text-secondary">Any edit by a revenue officer requires a hardware DSC token pin, recording old vs new values deterministically into the chain.</p>
+</div>
+<div class="p-space-md bg-canvas-bg rounded-xl flex flex-col gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary">04 / National Registry Sync</span>
+<p class="font-body-sm text-body-sm text-text-secondary">Periodic Merkle tree roots are published and cross-anchored with the DILRMP central registry for immutable archival permanence.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for verifying hash chain recomputation
+  const recomputeBtn = document.getElementById('recompute-btn');
+  const recomputeIcon = document.getElementById('recompute-icon');
+
+  if (recomputeBtn && recomputeIcon) {
+    recomputeBtn.addEventListener('click', () => {
+      recomputeIcon.classList.add('animate-spin');
+      recomputeBtn.disabled = true;
+      const originalText = recomputeBtn.querySelector('span:not(.material-symbols-outlined)').textContent;
+      recomputeBtn.querySelector('span:not(.material-symbols-outlined)').textContent = 'Traversing 14,892 Blocks...';
+      
+      setTimeout(() => {
+        recomputeIcon.classList.remove('animate-spin');
+        recomputeBtn.disabled = false;
+        recomputeBtn.querySelector('span:not(.material-symbols-outlined)').textContent = 'Chain 100% Intact';
+        
+        setTimeout(() => {
+          recomputeBtn.querySelector('span:not(.material-symbols-outlined)').textContent = originalText;
+        }, 3000);
+      }, 1200);
+    });
+  }
+
+  // Interactive block switching for inspector panel
+  function selectAuditBlock(blockId) {
+    const titleEl = document.getElementById('inspected-block-title');
+    if (titleEl) {
+      titleEl.textContent = 'Payload Diff • Block #' + blockId;
+    }
+  }
+</script></main></div></body></html>

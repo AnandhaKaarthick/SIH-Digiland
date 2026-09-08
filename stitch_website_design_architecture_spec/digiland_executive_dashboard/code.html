@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Poppins:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary-fixed":"#ffdcbc","on-tertiary-container":"#97ccff","dark-text-primary":"#EDEFEC","tertiary-fixed-dim":"#96ccff","dark-status-info":"#6FB1E0","surface-dim":"#cdded3","surface-container-low":"#e6f8ec","dark-secondary":"#E0A94D","surface-variant":"#d5e7db","surface-container":"#e1f2e7","on-primary":"#ffffff","inverse-primary":"#92d5a8","on-tertiary-fixed":"#001d32","on-error-container":"#93000a","dark-surface-card":"#1B2224","primary":"#004526","on-surface":"#101e18","error-container":"#ffdad6","primary-fixed-dim":"#92d5a8","on-error":"#ffffff","on-surface-variant":"#404942","text-secondary":"#5B6B62","dark-canvas-bg":"#12181A","surface-container-highest":"#d5e7db","secondary":"#895100","text-primary":"#1F2A24","on-secondary-fixed":"#2c1700","status-warning":"#ED8936","primary-fixed":"#aef2c2","on-secondary-container":"#6e4000","status-error":"#C0392B","on-primary-container":"#92d5a8","status-info":"#1B6FA8","primary-container":"#1b5e3a","on-secondary-fixed-variant":"#683d00","tertiary":"#003f65","dark-border-structural":"#2D3A34","tertiary-container":"#005789","on-tertiary-fixed-variant":"#004a76","on-tertiary":"#ffffff","dark-status-success":"#6FCF97","tertiary-fixed":"#cee5ff","border-structural":"#E0DED5","background":"#ecfef2","dark-primary":"#5FBE8A","on-primary-fixed-variant":"#09522f","surface-tint":"#296a45","error":"#ba1a1a","on-secondary":"#ffffff","dark-status-warning":"#F0B860","dark-status-error":"#E57373","inverse-surface":"#25342c","surface-card":"#FFFFFF","outline":"#707971","canvas-bg":"#F7F5F0","surface-container-lowest":"#ffffff","surface-bright":"#ecfef2","dark-text-secondary":"#A9B3AC","status-success":"#2E7D32","inverse-on-surface":"#e3f5e9","on-primary-fixed":"#00210f","outline-variant":"#c0c9bf","secondary-fixed-dim":"#ffb86b","on-background":"#101e18","secondary-container":"#fdaa48","surface":"#ecfef2","surface-container-high":"#dbece1"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"sidebar-width":"16rem","space-xl":"1.5rem","splitview-split":"50%","space-2xl":"2rem","gutter-grid":"1rem","space-base":"1rem","space-4xl":"3rem","topbar-height":"4rem","space-lg":"1.25rem","space-md":"0.75rem","margin-screen":"1.5rem","space-sm":"0.5rem","space-2xs":"0.125rem","space-xs":"0.25rem","space-3xl":"2.5rem"},fontFamily:{"headline-lg-mobile":["Poppins"],"body-sm":["Inter"],"code-sm":["JetBrains Mono"],"code-md":["JetBrains Mono"],"headline-md":["Poppins"],"display-lg":["Poppins"],"label-sm":["Poppins"],"body-md":["Inter"],"headline-lg":["Poppins"],"body-lg":["Inter"],"label-md":["Poppins"],"headline-sm":["Poppins"],"display-lg-mobile":["Poppins"]},fontSize:{"headline-lg-mobile":["22px",{lineHeight:"28px",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"code-sm":["11px",{lineHeight:"16px",fontWeight:"500"}],"code-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"display-lg":["36px",{lineHeight:"44px",fontWeight:"600"}],"label-sm":["10px",{lineHeight:"14px",fontWeight:"500"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"500"}],"headline-sm":["16px",{lineHeight:"24px",fontWeight:"600"}],"display-lg-mobile":["28px",{lineHeight:"36px",fontWeight:"600"}]}}}};</script></head><body class="bg-canvas-bg font-body-md text-text-primary min-h-screen"><aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-card shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="p-space-base flex items-start gap-space-sm bg-surface-container-lowest"><img alt="DigiLand Official Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYBurNLPtPNHeD5djSN2UmKCWCf-L8XEednYv_C1PWN1uUt9frVUp_WC1mW6DU3Yu4RFbm9dPjCCetm9ZF4w_VkXB8Ee0wqfPwx7JCIqWAtgJ_k3VAUKeS0v4061tlznL_sTtrS0EFuhj6tMp1gdv9y5FVNf9kEnbHrVfPcSUX7i2rYfTUFcK4DzppJ34m1AVN99ypoGdwb1OhJ8dcDOjO2cBfOLMod1kjxMT0GzQXAragtyE16NegJw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">DigiLand</span><span class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider mt-space-2xs leading-tight">GovTech Platform</span><span class="font-code-sm text-code-sm text-text-secondary mt-space-2xs leading-tight opacity-75">SIH 2026 PS 26018</span></div></div><div class="px-space-base py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary opacity-70">Cadastral Operations</span></div><nav class="flex flex-col px-space-sm gap-space-2xs" data-active-classes="bg-primary-container text-on-primary font-headline-sm shadow-sm"><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-all duration-150 bg-primary-container text-on-primary font-headline-sm shadow-sm" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="document-upload" href="#"><span class="material-symbols-outlined text-[20px]">upload_file</span><span class="font-body-md text-body-md">Document Upload</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="verification-queue" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="font-body-md text-body-md flex-1">Verification Queue</span><span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container-high text-on-surface">14</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="records" href="#"><span class="material-symbols-outlined text-[20px]">folder_shared</span><span class="font-body-md text-body-md">Records Registry</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="audit-trail" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="font-body-md text-body-md">Audit Trail</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="gis-map" href="#"><span class="material-symbols-outlined text-[20px]">map</span><span class="font-body-md text-body-md">GIS Cadastral Map</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="admin-rbac" href="#"><span class="material-symbols-outlined text-[20px]">admin_panel_settings</span><span class="font-body-md text-body-md">Admin &amp; RBAC</span></a></nav></div><div class="p-space-base bg-surface-container-low m-space-sm rounded-xl"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span><span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">DILRMP Verified</span></div><p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs">National Land Records Modernization Pipeline</p></div></aside><div class="pl-sidebar-width flex flex-col min-h-screen"><header class="fixed top-0 left-sidebar-width right-0 h-topbar-height bg-surface-card/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl gap-space-lg"><div class="flex items-center flex-1 max-w-2xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full pl-10 pr-space-md py-space-sm rounded-lg bg-canvas-bg font-body-sm text-body-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search by Khasra, Khata, ULPIN, Village, or Deed #..." type="text"/></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-low text-primary"><span class="w-2 h-2 rounded-full bg-status-success"></span><span class="font-code-sm text-code-sm font-medium">Gov Gateway: Connected • DILRMP Sync Active</span></div><button aria-label="Notifications" class="relative p-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-status-warning"></span></button><div class="h-6 w-[1px] bg-border-structural/60"></div><div class="flex items-center gap-space-md"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-tight">Rajesh Sharma, IRS</span><div class="flex items-center justify-end gap-space-xs mt-space-2xs"><span class="px-space-xs py-space-2xs rounded font-label-sm text-label-sm bg-primary-container text-on-primary font-medium leading-none">Tehsildar / Admin</span></div></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-J9ajm6QnO8VpvfGOd7AlS40LFMZeibmXKFQqDjNSQV4cMvlwy4BNM3JgnmcbBOB7-xIwJ7FERZ-2EtI4TwtFCxOvBDkregL1pQY583KQ5zNBnO82YGHz4utXd6vbQmH1Clpc8evsU6qYBFv6diz7uLpZA1EfSbVNQ0u0ePUwNFE-UQk4cBwUbZ9HQZlCFJx1SYuNwqg_W2tgHW2xGjTHwpPg3W-IfGwR_OQJYLn49A6fXBIuHATW-A"/></div></div></header><main class="w-full pt-topbar-height bg-canvas-bg flex-1"><div class="flex flex-col w-full">
+<div class="px-space-xl py-space-lg flex flex-col gap-space-xl max-w-[1720px] mx-auto w-full">
+<!-- Telemetry & Gateway Health Marquee Bar -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm uppercase tracking-wider text-text-secondary font-medium">Core Gateways</span>
+<span class="text-text-secondary opacity-40">/</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-low">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span>
+<span class="font-code-sm text-code-sm text-primary font-medium">LGD Master: Active</span>
+<span class="font-code-sm text-code-sm text-text-secondary opacity-60">24ms</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-low">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+<span class="font-code-sm text-code-sm text-primary font-medium">NGDRS / SRO API: v4.1 Sync</span>
+<span class="font-code-sm text-code-sm text-text-secondary opacity-60">99.98%</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-low">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+<span class="font-code-sm text-code-sm text-primary font-medium">PostGIS &amp; Bhu-Naksha: Online</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-low">
+<span class="material-symbols-outlined text-[15px] text-primary">verified_user</span>
+<span class="font-code-sm text-code-sm text-primary font-medium">SHA-256 Ledger: Block #819,420 Verified</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-body-sm text-body-sm text-text-secondary">Patwari Zone:</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container-high text-on-surface font-semibold">UP-LKO-CENTRAL-04</span>
+<button class="p-space-xs rounded-lg hover:bg-surface-container text-text-secondary transition-colors" title="Refresh Telemetry" type="button">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+</button>
+</div>
+</div>
+<!-- Administrative Operational Overview Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-text-secondary">Cadastral Intelligence Platform</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container text-primary font-medium">DILRMP-2026-v2</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Executive Cadastral Operations</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-space-2xs">
+          District real-time extraction throughput, automated validation metrics, and pending Patwari verification queues.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="inline-flex rounded-lg bg-surface-container p-space-2xs">
+<button class="px-space-md py-space-xs rounded-lg font-label-md text-label-md bg-surface-card text-text-primary shadow-sm font-semibold transition-all">Today</button>
+<button class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-text-secondary hover:text-text-primary transition-all">Past 7 Days</button>
+<button class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-text-secondary hover:text-text-primary transition-all">Q1 2026</button>
+</div>
+<button class="flex items-center gap-space-xs px-space-md py-space-sm rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+          Export DILRMP Report
+        </button>
+</div>
+</div>
+<!-- Top Metric Row: 4 Specialized Governance Metric Cards (Muted Tints) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-lg">
+<!-- Metric 1: Soft Green -->
+<div class="rounded-xl p-space-lg bg-surface-container-low shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-primary/5 pointer-events-none transition-transform group-hover:scale-125"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary">Archival Digitization</span>
+<span class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs">Documents Processed</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">document_scanner</span>
+</div>
+</div>
+<div class="mt-space-lg">
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-display-lg text-text-primary leading-none">14,892</span>
+<span class="font-code-sm text-code-sm text-status-success flex items-center font-semibold">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>12.4%
+            </span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs text-text-secondary">
+<span class="font-body-sm text-body-sm">Weekly increment: +1,640</span>
+<span class="font-code-sm text-code-sm opacity-75">Target: 15.2k</span>
+</div>
+</div>
+</div>
+<!-- Metric 2: Soft Blue Tint -->
+<div class="rounded-xl p-space-lg bg-surface-card shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 left-0 h-1 bg-status-info/40"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary">OCR &amp; NLP Confidence</span>
+<span class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs">Extraction Accuracy %</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-status-info shadow-sm">
+<span class="material-symbols-outlined text-[22px]">spellcheck</span>
+</div>
+</div>
+<div class="mt-space-lg">
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-display-lg text-text-primary leading-none">96.8%</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container text-status-info font-medium">
+              Target &gt;95.0%
+            </span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs text-text-secondary">
+<span class="font-body-sm text-body-sm">Word Error Rate: 1.12%</span>
+<span class="font-code-sm text-code-sm text-status-success font-medium">Compliant</span>
+</div>
+</div>
+</div>
+<!-- Metric 3: Soft Amber Tint -->
+<div class="rounded-xl p-space-lg bg-surface-card shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 left-0 h-1 bg-status-warning/40"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary">Human-in-the-Loop</span>
+<span class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs">Pending Verification</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-status-warning shadow-sm">
+<span class="material-symbols-outlined text-[22px]">rule</span>
+</div>
+</div>
+<div class="mt-space-lg">
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-display-lg text-text-primary leading-none">142</span>
+<span class="font-label-sm text-label-sm text-text-secondary font-medium uppercase">Records</span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs text-text-secondary">
+<span class="font-body-sm text-body-sm">STP (Straight-Through):</span>
+<span class="font-code-sm text-code-sm font-semibold text-text-primary">78.4%</span>
+</div>
+</div>
+</div>
+<!-- Metric 4: Soft Ochre / Secondary Tint -->
+<div class="rounded-xl p-space-lg bg-surface-card shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 left-0 h-1 bg-secondary/40"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary">Statewide Milestone</span>
+<span class="font-body-md text-body-md text-text-primary font-medium mt-space-2xs">District-wise Progress</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">public</span>
+</div>
+</div>
+<div class="mt-space-lg">
+<div class="flex items-baseline gap-space-sm">
+<span class="font-display-lg text-display-lg text-text-primary leading-none">84.2%</span>
+<span class="font-code-sm text-code-sm text-status-success font-medium">+3.1% MoM</span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs text-text-secondary">
+<span class="font-body-sm text-body-sm">18 Districts Audited</span>
+<span class="font-code-sm text-code-sm font-medium text-text-primary">1.4M Khatas</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Bento Section: Verification Queue + Spatial GIS & Quality Donut -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Pending Verification Queue Table (8 cols) -->
+<div class="lg:col-span-8 flex flex-col bg-surface-card rounded-xl p-space-lg shadow-sm gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-xs">
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Pending Verification Queue</h2>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded-full bg-surface-container font-semibold text-text-primary">3 Urgent</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs">
+              High-priority RoR records requiring Tehsildar / Patwari adjudication prior to immutable ledger write.
+            </p>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-space-xs rounded-lg font-label-md text-label-md bg-canvas-bg hover:bg-surface-container text-text-primary transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filter
+            </button>
+<a class="px-space-sm py-space-xs rounded-lg font-label-md text-label-md text-primary hover:bg-surface-container-low transition-colors font-medium" data-path="verification-queue" href="#">
+              View All (142) →
+            </a>
+</div>
+</div>
+<!-- Verification Record Cards with 4px Left-Border Semantic Elevation -->
+<div class="flex flex-col gap-space-sm">
+<!-- Row 1: Valid Status (Green border) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-success"></div>
+<div class="flex items-start gap-space-md pl-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-md text-code-md font-semibold text-text-primary">Khasra 42/1</span>
+<span class="text-text-secondary opacity-40">•</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Khata #884</span>
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container-low text-status-success font-code-sm text-code-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span> 94% VALID
+                  </span>
+</div>
+<div class="flex items-center gap-space-md mt-space-2xs text-text-secondary flex-wrap">
+<span class="font-body-sm text-body-sm text-text-primary font-medium">Ram Kumar Verma</span>
+<span class="font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Mauza Rampur, Tehsil Sadar
+                  </span>
+<span class="font-code-sm text-code-sm text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 14 mins ago
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-end md:self-center pl-space-xs">
+<div class="hidden sm:flex flex-col text-right">
+<span class="font-label-sm text-label-sm text-status-success uppercase font-semibold">Ready for Write</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Area: 1.240 Ha</span>
+</div>
+<button class="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center gap-space-xs">
+<span>Verify</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Row 2: Flagged Status (Amber border) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-warning"></div>
+<div class="flex items-start gap-space-md pl-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-status-warning flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-md text-code-md font-semibold text-text-primary">Khasra 108/3</span>
+<span class="text-text-secondary opacity-40">•</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Khata #412</span>
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container text-secondary font-code-sm text-code-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span> 74% FLAGGED
+                  </span>
+</div>
+<div class="flex items-center gap-space-md mt-space-2xs text-text-secondary flex-wrap">
+<span class="font-body-sm text-body-sm text-text-primary font-medium">Savitri Devi &amp; 2 others</span>
+<span class="font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Sultanpur Dehat, Pargana 3
+                  </span>
+<span class="font-code-sm text-code-sm text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 38 mins ago
+                  </span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm px-space-xs py-space-2xs rounded bg-surface-container text-status-error font-medium">
+                    Flag: Owner share sum != 1.0 (Sum: 0.875)
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-end md:self-center pl-space-xs">
+<div class="hidden sm:flex flex-col text-right">
+<span class="font-label-sm text-label-sm text-status-warning uppercase font-semibold">Manual Share Split</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Area: 0.620 Ha</span>
+</div>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-text-primary font-label-md text-label-md transition-colors shadow-sm flex items-center gap-space-xs">
+<span>Resolve</span>
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Row 3: Failed Critical Status (Red border) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-error"></div>
+<div class="flex items-start gap-space-md pl-space-xs">
+<div class="w-9 h-9 rounded-lg bg-error-container/40 text-status-error flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">gpp_bad</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-md text-code-md font-semibold text-text-primary">Khasra 19/A</span>
+<span class="text-text-secondary opacity-40">•</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Khata #019</span>
+<span class="px-space-xs py-space-2xs rounded-full bg-error-container/40 text-status-error font-code-sm text-code-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-error"></span> 52% FAILED_CRITICAL
+                  </span>
+</div>
+<div class="flex items-center gap-space-md mt-space-2xs text-text-secondary flex-wrap">
+<span class="font-body-sm text-body-sm text-text-primary font-medium">Brijesh Chandra Mishra</span>
+<span class="font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Bilaspur Chak, Sector 12
+                  </span>
+<span class="font-code-sm text-code-sm text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 1 hr ago
+                  </span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm px-space-xs py-space-2xs rounded bg-error-container/60 text-on-error-container font-medium">
+                    Anomaly: Cadastral area mismatch &gt; 8% vs Bhu-Naksha GIS polygon
+                  </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-end md:self-center pl-space-xs">
+<div class="hidden sm:flex flex-col text-right">
+<span class="font-label-sm text-label-sm text-status-error uppercase font-semibold">Boundary Survey Req.</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Delta: -0.19 Ha</span>
+</div>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-status-error font-label-md text-label-md transition-colors shadow-sm flex items-center gap-space-xs">
+<span>Audit</span>
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pipeline Status Banner -->
+<div class="mt-space-xs p-space-md rounded-lg bg-surface-container-low flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">neurology</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-text-primary font-semibold">Multilingual OCR Pipeline (Hindi / Kaithi / English)</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Batch #2026-B81 running • Next automated sync in 08m:42s</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm font-semibold text-primary">6,240 tokens/sec</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Validation Status Breakdown (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-xl">
+<!-- Donut & Validation Accuracy Widget -->
+<div class="bg-surface-card rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Validation Breakdown</h3>
+<span class="font-code-sm text-code-sm text-text-secondary font-medium">N = 14,892</span>
+</div>
+<!-- Minimal High-Impact Donut Chart SVG -->
+<div class="flex items-center justify-center my-space-xs">
+<div class="relative w-44 h-44 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<!-- Track background -->
+<circle class="text-surface-container" cx="50" cy="50" fill="transparent" r="38" stroke="currentColor" stroke-width="12"></circle>
+<!-- VALID (76.8% = 183.3 / 238.7 circumference) -->
+<circle class="text-primary" cx="50" cy="50" fill="transparent" r="38" stroke="currentColor" stroke-dasharray="183.3 238.7" stroke-dashoffset="0" stroke-width="12"></circle>
+<!-- FLAGGED (16.2% = 38.6 / 238.7 circumference) -->
+<circle class="text-status-warning" cx="50" cy="50" fill="transparent" r="38" stroke="currentColor" stroke-dasharray="38.6 238.7" stroke-dashoffset="-183.3" stroke-width="12"></circle>
+<!-- FAILED_CRITICAL (7.0% = 16.7 / 238.7 circumference) -->
+<circle class="text-status-error" cx="50" cy="50" fill="transparent" r="38" stroke="currentColor" stroke-dasharray="16.7 238.7" stroke-dashoffset="-221.9" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-display-lg text-display-lg font-bold text-text-primary leading-none">93.0%</span>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase tracking-widest mt-1">First-Pass STP</span>
+</div>
+</div>
+</div>
+<!-- Legend with Exact Metrics -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="font-body-sm text-body-sm font-medium text-text-primary">Auto-Validated (≥85%)</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-code-sm text-text-secondary">11,437</span>
+<span class="font-code-sm text-code-sm font-semibold text-primary">76.8%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-status-warning"></span>
+<span class="font-body-sm text-body-sm font-medium text-text-primary">Flagged Review (60-84%)</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-code-sm text-text-secondary">2,412</span>
+<span class="font-code-sm text-code-sm font-semibold text-secondary">16.2%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-status-error"></span>
+<span class="font-body-sm text-body-sm font-medium text-text-primary">Critical Failure (&lt;60%)</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-code-sm text-text-secondary">1,043</span>
+<span class="font-code-sm text-code-sm font-semibold text-status-error">7.0%</span>
+</div>
+</div>
+</div>
+<!-- Verification Tip -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-xs mt-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] flex-shrink-0 mt-0.5">verified</span>
+<p class="font-body-sm text-body-sm text-text-secondary">
+              Records marked <strong class="text-primary font-semibold">Auto-Validated</strong> commit to the ledger automatically after a 24-hour public dispute window.
+            </p>
+</div>
+</div>
+<!-- Patwari Field App Ingestion Status -->
+<div class="bg-surface-card rounded-xl p-space-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">Field Sync Telemetry</span>
+<span class="font-code-sm text-code-sm text-status-success font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span> LIVE
+            </span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex-1">
+<div class="flex justify-between font-body-sm text-body-sm mb-space-2xs">
+<span class="text-text-primary font-medium">Patwari Mobile Submissions</span>
+<span class="font-code-sm text-code-sm text-text-secondary">428 / 500 villages</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85.6%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: District-Wise Digitization Choropleth Progress -->
+<div class="bg-surface-card rounded-xl p-space-lg shadow-sm flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-xs">
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-text-primary">District-wise Digitization Progress</h2>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container text-text-secondary">18 Districts Monitored</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs">
+            Cadastral boundary reconciliation against State Geographic Registry (UP Bhu-Lekh / Bhu-Naksha).
+          </p>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-space-xs rounded-lg font-label-md text-label-md bg-canvas-bg hover:bg-surface-container text-text-primary transition-colors">
+            Sort: Highest Completion
+          </button>
+<a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md bg-surface-container text-text-primary hover:bg-surface-container-high transition-colors font-medium" data-path="records" href="#">
+            Registry View →
+          </a>
+</div>
+</div>
+<!-- District Metrics Grid & Progress Bars -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- District 1: Lucknow -->
+<div class="rounded-xl p-space-md bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Lucknow</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container-low text-primary font-medium">Zone 1</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Tehsils: Sadar, Mohanlalganj, Bakshi Ka Talab</span>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">94.2%</span>
+<span class="block font-label-sm text-label-sm text-text-secondary uppercase">Digitized</span>
+</div>
+</div>
+<div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 94.2%"></div>
+</div>
+<div class="flex items-center justify-between mt-space-xs font-code-sm text-code-sm text-text-secondary">
+<span>Total: 218,400 Khatas</span>
+<span class="text-status-warning font-medium">18 Pending Flags</span>
+</div>
+</div>
+</div>
+<!-- District 2: Varanasi -->
+<div class="rounded-xl p-space-md bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Varanasi</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container-low text-primary font-medium">Zone 4</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Tehsils: Pindra, Sadar, Raja Talab</span>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">89.6%</span>
+<span class="block font-label-sm text-label-sm text-text-secondary uppercase">Digitized</span>
+</div>
+</div>
+<div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 89.6%"></div>
+</div>
+<div class="flex items-center justify-between mt-space-xs font-code-sm text-code-sm text-text-secondary">
+<span>Total: 174,120 Khatas</span>
+<span class="text-status-warning font-medium">24 Pending Flags</span>
+</div>
+</div>
+</div>
+<!-- District 3: Kanpur Nagar -->
+<div class="rounded-xl p-space-md bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Kanpur Nagar</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container text-text-secondary font-medium">Zone 2</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Tehsils: Ghatampur, Bilhaur, Sadar</span>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-semibold text-text-primary">82.1%</span>
+<span class="block font-label-sm text-label-sm text-text-secondary uppercase">Digitized</span>
+</div>
+</div>
+<div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 82.1%"></div>
+</div>
+<div class="flex items-center justify-between mt-space-xs font-code-sm text-code-sm text-text-secondary">
+<span>Total: 242,900 Khatas</span>
+<span class="text-status-warning font-medium">41 Pending Flags</span>
+</div>
+</div>
+</div>
+<!-- District 4: Agra -->
+<div class="rounded-xl p-space-md bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Agra</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container text-text-secondary font-medium">Zone 3</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Tehsils: Etmadpur, Fatehabad, Kheragarh</span>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-semibold text-text-primary">78.5%</span>
+<span class="block font-label-sm text-label-sm text-text-secondary uppercase">Digitized</span>
+</div>
+</div>
+<div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 78.5%"></div>
+</div>
+<div class="flex items-center justify-between mt-space-xs font-code-sm text-code-sm text-text-secondary">
+<span>Total: 198,340 Khatas</span>
+<span class="text-status-warning font-medium">32 Pending Flags</span>
+</div>
+</div>
+</div>
+<!-- District 5: Prayagraj -->
+<div class="rounded-xl p-space-md bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Prayagraj</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container text-text-secondary font-medium">Zone 5</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Tehsils: Phulpur, Soraon, Karchhana</span>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-semibold text-text-primary">76.0%</span>
+<span class="block font-label-sm text-label-sm text-text-secondary uppercase">Digitized</span>
+</div>
+</div>
+<div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 76.0%"></div>
+</div>
+<div class="flex items-center justify-between mt-space-xs font-code-sm text-code-sm text-text-secondary">
+<span>Total: 285,110 Khatas</span>
+<span class="text-status-error font-medium">56 Pending Flags</span>
+</div>
+</div>
+</div>
+<!-- District 6: Gorakhpur -->
+<div class="rounded-xl p-space-md bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Gorakhpur</span>
+<span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container text-text-secondary font-medium">Zone 6</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-secondary">Tehsils: Campierganj, Bansgaon, Khajni</span>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-semibold text-text-primary">71.8%</span>
+<span class="block font-label-sm text-label-sm text-text-secondary uppercase">Digitized</span>
+</div>
+</div>
+<div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 71.8%"></div>
+</div>
+<div class="flex items-center justify-between mt-space-xs font-code-sm text-code-sm text-text-secondary">
+<span>Total: 162,050 Khatas</span>
+<span class="text-status-error font-medium">67 Pending Flags</span>
+</div>
+</div>
+</div>
+</div>
+<!-- District Spatial Map Preview Banner with data-location -->
+<div class="relative rounded-xl overflow-hidden bg-surface-container p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md max-w-xl z-10">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">layers</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Open GIS Cadastral Geospatial Layer</h4>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs">
+              Directly cross-reference digitized polygon vectors against ISRO Bhuvan satellite basemaps with automated boundary overlap detection.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm z-10">
+<a class="px-space-lg py-space-sm rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm flex items-center gap-space-xs" data-path="gis-map" href="#">
+<span class="material-symbols-outlined text-[18px]">map</span>
+            Launch GIS Vector Viewer
+          </a>
+</div>
+</div>
+</div>
+<!-- Cryptographic Audit Mini-Feed Footer -->
+<div class="bg-surface-card rounded-xl p-space-md shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm text-text-secondary">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">lock_clock</span>
+<span class="font-code-sm text-code-sm font-medium text-text-primary">Latest Audit Commit:</span>
+<span class="font-code-sm text-code-sm text-status-info">7f04c81a...e2d9</span>
+<span class="text-text-secondary opacity-40">•</span>
+<span class="font-body-sm text-body-sm">Tehsildar Rajesh Sharma signed Khasra 41/2</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-code-sm text-code-sm">Ledger Height: 1,842,912</span>
+<a class="font-label-md text-label-md text-primary hover:underline font-semibold" data-path="audit-trail" href="#">Audit Trail →</a>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

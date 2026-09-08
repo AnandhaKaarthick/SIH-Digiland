@@ -1,0 +1,1247 @@
+[
+  {
+    "record_id": "DL-0001",
+    "location": {
+      "state_lgd_code": "18",
+      "district": "Kanchipuram",
+      "district_lgd_code": "599",
+      "tehsil": "Fatehpur",
+      "pargana": "Tirumakudalu",
+      "village": "Kondhali",
+      "village_lgd_code": "445987"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1425-1433",
+      "khata_no": "00229",
+      "khasra_no": "117/2",
+      "ulpin": "75QA02657Q4428",
+      "date_of_issue": "13/02/2023",
+      "owners": [
+        {
+          "name": "Kavita Naidu",
+          "father_name": "Raman Naidu",
+          "share": "1/2",
+          "residence": "Village Kondhali"
+        },
+        {
+          "name": "Arumugam Kumar",
+          "father_name": "Raman Naidu",
+          "share": "1/2",
+          "residence": "Village Kondhali"
+        }
+      ],
+      "area_hectare": 1.9091,
+      "land_revenue_rs": 164.92,
+      "land_classification": "Agricultural (Irrigated)"
+    },
+    "deed": {
+      "document_no": "204 of 2018",
+      "registration_date": "20/11/2018",
+      "sro_office": "Sub-Registrar Office, Fatehpur",
+      "vendor_name": "Kavita Naidu",
+      "vendee_name": "Arumugam Kumar",
+      "survey_no": "117/2",
+      "extent_acre": 4.72,
+      "sale_consideration_rs": 6860408,
+      "stamp_duty_rs": 480200.0,
+      "boundaries": {
+        "north": "Survey No. 146 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 117/4A",
+        "west": "Survey No. 190 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2018-2584",
+      "filing_date": "22/01/2018",
+      "order_date": "03/05/2018",
+      "nature": "Inheritance",
+      "transferor": "Kavita Naidu",
+      "transferee": "Arumugam Kumar",
+      "old_khata_no": "00888",
+      "new_khata_no": "00229"
+    },
+    "cadastral": {
+      "sheet_no": "04",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 16.74367,
+        "longitude": 78.75165
+      },
+      "calculated_area_sqm": 19091.0,
+      "boundaries": {
+        "north": "Survey No. 148 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 117/5A",
+        "west": "Survey No. 158 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.83,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0002",
+    "location": {
+      "state_lgd_code": "33",
+      "district": "Cuttack",
+      "district_lgd_code": "331",
+      "tehsil": "Danapur",
+      "pargana": "Baramba",
+      "village": "Baideswar",
+      "village_lgd_code": "331550"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1429-1432",
+      "khata_no": "00215",
+      "khasra_no": "185/5",
+      "ulpin": "96QE71396Q2370",
+      "date_of_issue": "12/07/2023",
+      "owners": [
+        {
+          "name": "Sunita Reddy",
+          "father_name": "Vinod Singh",
+          "share": "1/2",
+          "residence": "Village Baideswar"
+        },
+        {
+          "name": "Mahesh Singh",
+          "father_name": "Vinod Singh",
+          "share": "1/2",
+          "residence": "Village Baideswar"
+        }
+      ],
+      "area_hectare": 2.0634,
+      "land_revenue_rs": 231.52,
+      "land_classification": "Agricultural (Nanja/Wet)"
+    },
+    "deed": {
+      "document_no": "771 of 2021",
+      "registration_date": "16/09/2021",
+      "sro_office": "Sub-Registrar Office, Danapur",
+      "vendor_name": "Sunita Reddy",
+      "vendee_name": "Mahesh Singh",
+      "survey_no": "185/5",
+      "extent_acre": 5.1,
+      "sale_consideration_rs": 7550805,
+      "stamp_duty_rs": 528600.0,
+      "boundaries": {
+        "north": "Survey No. 111 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 185/1A",
+        "west": "Survey No. 114 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2021-8517",
+      "filing_date": "06/11/2021",
+      "order_date": "03/10/2022",
+      "nature": "Court Decree Partition",
+      "transferor": "Sunita Reddy",
+      "transferee": "Mahesh Singh",
+      "old_khata_no": "00391",
+      "new_khata_no": "00215"
+    },
+    "cadastral": {
+      "sheet_no": "20",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 13.28595,
+        "longitude": 77.11704
+      },
+      "calculated_area_sqm": 20634.0,
+      "boundaries": {
+        "north": "Survey No. 159 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 185/9A",
+        "west": "Survey No. 132 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.98,
+      "status": "VALID"
+    }
+  },
+  {
+    "record_id": "DL-0003",
+    "location": {
+      "state_lgd_code": "28",
+      "district": "Barabanki",
+      "district_lgd_code": "214",
+      "tehsil": "Sriperumbudur",
+      "pargana": "Tirumakudalu",
+      "village": "Baideswar",
+      "village_lgd_code": "331550"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1426-1427",
+      "khata_no": "00115",
+      "khasra_no": "137/7A",
+      "ulpin": "49XG51982Q6175",
+      "date_of_issue": "27/08/2023",
+      "owners": [
+        {
+          "name": "Ramesh Nair",
+          "father_name": "Ramesh Lal",
+          "share": "1/2",
+          "residence": "Village Baideswar"
+        },
+        {
+          "name": "Vinod Sharma",
+          "father_name": "Ramesh Lal",
+          "share": "1/2",
+          "residence": "Village Baideswar"
+        }
+      ],
+      "area_hectare": 1.9576,
+      "land_revenue_rs": 198.14,
+      "land_classification": "Agricultural (Irrigated)"
+    },
+    "deed": {
+      "document_no": "471 of 2024",
+      "registration_date": "22/03/2024",
+      "sro_office": "Sub-Registrar Office, Sriperumbudur",
+      "vendor_name": "Ramesh Nair",
+      "vendee_name": "Vinod Sharma",
+      "survey_no": "137/7A",
+      "extent_acre": 4.84,
+      "sale_consideration_rs": 10539440,
+      "stamp_duty_rs": 737800.0,
+      "boundaries": {
+        "north": "Survey No. 160 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 137/9A",
+        "west": "Survey No. 121 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2024-6038",
+      "filing_date": "28/09/2025",
+      "order_date": "18/04/2025",
+      "nature": "Inheritance",
+      "transferor": "Ramesh Nair",
+      "transferee": "Vinod Sharma",
+      "old_khata_no": "00731",
+      "new_khata_no": "00115"
+    },
+    "cadastral": {
+      "sheet_no": "10",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 14.83124,
+        "longitude": 77.92697
+      },
+      "calculated_area_sqm": 19576.0,
+      "boundaries": {
+        "north": "Survey No. 151 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 137/6A",
+        "west": "Survey No. 156 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.95,
+      "status": "VALID"
+    }
+  },
+  {
+    "record_id": "DL-0004",
+    "location": {
+      "state_lgd_code": "31",
+      "district": "Hooghly",
+      "district_lgd_code": "271",
+      "tehsil": "Sriperumbudur",
+      "pargana": "Saoner",
+      "village": "Kondhali",
+      "village_lgd_code": "445987"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1426-1426",
+      "khata_no": "00066",
+      "khasra_no": "143/1",
+      "ulpin": "55AS00035N6219",
+      "date_of_issue": "11/12/2022",
+      "owners": [
+        {
+          "name": "Meena Verma",
+          "father_name": "Ganesh Pillai",
+          "share": "1/2",
+          "residence": "Village Kondhali"
+        },
+        {
+          "name": "Raman Lal",
+          "father_name": "Ganesh Pillai",
+          "share": "1/2",
+          "residence": "Village Kondhali"
+        }
+      ],
+      "area_hectare": 1.4491,
+      "land_revenue_rs": 143.33,
+      "land_classification": "Agricultural (Irrigated)"
+    },
+    "deed": {
+      "document_no": "541 of 2020",
+      "registration_date": "07/04/2020",
+      "sro_office": "Sub-Registrar Office, Sriperumbudur",
+      "vendor_name": "Meena Verma",
+      "vendee_name": "Raman Lal",
+      "survey_no": "143/1",
+      "extent_acre": 3.58,
+      "sale_consideration_rs": 5472695,
+      "stamp_duty_rs": 383100.0,
+      "boundaries": {
+        "north": "Survey No. 168 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 143/8A",
+        "west": "Survey No. 117 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2020-7735",
+      "filing_date": "09/03/2021",
+      "order_date": "28/04/2021",
+      "nature": "Transfer by Registered Sale Deed",
+      "transferor": "Meena Verma",
+      "transferee": "Raman Lal",
+      "old_khata_no": "00454",
+      "new_khata_no": "00066"
+    },
+    "cadastral": {
+      "sheet_no": "18",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 18.47239,
+        "longitude": 81.83261
+      },
+      "calculated_area_sqm": 14491.0,
+      "boundaries": {
+        "north": "Survey No. 112 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 143/1A",
+        "west": "Survey No. 183 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.99,
+      "status": "VALID"
+    }
+  },
+  {
+    "record_id": "DL-0005",
+    "location": {
+      "state_lgd_code": "12",
+      "district": "Barabanki",
+      "district_lgd_code": "214",
+      "tehsil": "Sriperumbudur",
+      "pargana": "Saoner",
+      "village": "Rampur",
+      "village_lgd_code": "331201"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1427-1427",
+      "khata_no": "00417",
+      "khasra_no": "162/8A",
+      "ulpin": "89DA39726Q6412",
+      "date_of_issue": "22/02/2023",
+      "owners": [
+        {
+          "name": "Suresh Rao",
+          "father_name": "Suresh Nair",
+          "share": "1/2",
+          "residence": "Village Rampur"
+        },
+        {
+          "name": "Vinod Chand",
+          "father_name": "Suresh Nair",
+          "share": "1/2",
+          "residence": "Village Rampur"
+        }
+      ],
+      "area_hectare": 0.1933,
+      "land_revenue_rs": 21.15,
+      "land_classification": "Agricultural (Nanja/Wet)"
+    },
+    "deed": {
+      "document_no": "588 of 2022",
+      "registration_date": "19/02/2022",
+      "sro_office": "Sub-Registrar Office, Sriperumbudur",
+      "vendor_name": "Suresh Rao",
+      "vendee_name": "Vinod Chand",
+      "survey_no": "162/8A",
+      "extent_acre": 0.48,
+      "sale_consideration_rs": 1132001,
+      "stamp_duty_rs": 79200.0,
+      "boundaries": {
+        "north": "Survey No. 131 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 162/1A",
+        "west": "Survey No. 179 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2022-9701",
+      "filing_date": "22/07/2022",
+      "order_date": "07/05/2023",
+      "nature": "Gift Deed",
+      "transferor": "Suresh Rao",
+      "transferee": "Vinod Chand",
+      "old_khata_no": "00245",
+      "new_khata_no": "00417"
+    },
+    "cadastral": {
+      "sheet_no": "09",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 13.51892,
+        "longitude": 83.68623
+      },
+      "calculated_area_sqm": 1933.0,
+      "boundaries": {
+        "north": "Survey No. 150 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 162/3A",
+        "west": "Survey No. 185 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.83,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0006",
+    "location": {
+      "state_lgd_code": "16",
+      "district": "Hooghly",
+      "district_lgd_code": "271",
+      "tehsil": "Athagarh",
+      "pargana": "Walajabad",
+      "village": "Nemili",
+      "village_lgd_code": "629142"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1429-1433",
+      "khata_no": "00470",
+      "khasra_no": "179/2A",
+      "ulpin": "55DJ02245N6960",
+      "date_of_issue": "03/01/2022",
+      "owners": [
+        {
+          "name": "Ganesh Kumar",
+          "father_name": "Ganesh Rao",
+          "share": "1/2",
+          "residence": "Village Nemili"
+        },
+        {
+          "name": "Arumugam Lal",
+          "father_name": "Ganesh Rao",
+          "share": "1/2",
+          "residence": "Village Nemili"
+        }
+      ],
+      "area_hectare": 2.0519,
+      "land_revenue_rs": 188.72,
+      "land_classification": "Barren/Uncultivable"
+    },
+    "deed": {
+      "document_no": "666 of 2019",
+      "registration_date": "02/05/2019",
+      "sro_office": "Sub-Registrar Office, Athagarh",
+      "vendor_name": "Ganesh Kumar",
+      "vendee_name": "Arumugam Lal",
+      "survey_no": "179/2A",
+      "extent_acre": 5.07,
+      "sale_consideration_rs": 6447707,
+      "stamp_duty_rs": 451300.0,
+      "boundaries": {
+        "north": "Survey No. 100 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 179/6A",
+        "west": "Survey No. 198 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2019-5616",
+      "filing_date": "09/11/2019",
+      "order_date": "15/12/2019",
+      "nature": "Court Decree Partition",
+      "transferor": "Ganesh Kumar",
+      "transferee": "Arumugam Lal",
+      "old_khata_no": "00575",
+      "new_khata_no": "00470"
+    },
+    "cadastral": {
+      "sheet_no": "01",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 20.67728,
+        "longitude": 81.7409
+      },
+      "calculated_area_sqm": 20519.0,
+      "boundaries": {
+        "north": "Survey No. 114 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 179/2A",
+        "west": "Survey No. 188 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.95,
+      "status": "VALID"
+    }
+  },
+  {
+    "record_id": "DL-0007",
+    "location": {
+      "state_lgd_code": "13",
+      "district": "Barabanki",
+      "district_lgd_code": "214",
+      "tehsil": "Athagarh",
+      "pargana": "Bikram",
+      "village": "Roopangarh",
+      "village_lgd_code": "104330"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1431-1426",
+      "khata_no": "00131",
+      "khasra_no": "105/5B",
+      "ulpin": "87WX22178P9792",
+      "date_of_issue": "07/04/2022",
+      "owners": [
+        {
+          "name": "Murugan Verma",
+          "father_name": "Vinod Verma",
+          "share": "1/2",
+          "residence": "Village Roopangarh"
+        },
+        {
+          "name": "Ramesh Kumar",
+          "father_name": "Vinod Verma",
+          "share": "1/2",
+          "residence": "Village Roopangarh"
+        }
+      ],
+      "area_hectare": 0.4481,
+      "land_revenue_rs": 50.19,
+      "land_classification": "Residential"
+    },
+    "deed": {
+      "document_no": "921 of 2023",
+      "registration_date": "27/05/2023",
+      "sro_office": "Sub-Registrar Office, Athagarh",
+      "vendor_name": "Murugan Verma",
+      "vendee_name": "Ramesh Kumar",
+      "survey_no": "105/5B",
+      "extent_acre": 1.11,
+      "sale_consideration_rs": 2520180,
+      "stamp_duty_rs": 176400.0,
+      "boundaries": {
+        "north": "Survey No. 129 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 105/4A",
+        "west": "Survey No. 103 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2023-5065",
+      "filing_date": "11/07/2023",
+      "order_date": "25/02/2024",
+      "nature": "Gift Deed",
+      "transferor": "Murugan Verma",
+      "transferee": "Ramesh Kumar",
+      "old_khata_no": "00360",
+      "new_khata_no": "00131"
+    },
+    "cadastral": {
+      "sheet_no": "17",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 15.26889,
+        "longitude": 82.299
+      },
+      "calculated_area_sqm": 4481.0,
+      "boundaries": {
+        "north": "Survey No. 151 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 105/9A",
+        "west": "Survey No. 142 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.96,
+      "status": "VALID"
+    }
+  },
+  {
+    "record_id": "DL-0008",
+    "location": {
+      "state_lgd_code": "27",
+      "district": "Kanchipuram",
+      "district_lgd_code": "599",
+      "tehsil": "Nanjangud",
+      "pargana": "Bikram",
+      "village": "Hadinaru",
+      "village_lgd_code": "556210"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1427-1429",
+      "khata_no": "00040",
+      "khasra_no": "113/7B",
+      "ulpin": "73QN35270Q6971",
+      "date_of_issue": "13/11/2022",
+      "owners": [
+        {
+          "name": "Vinod Nair",
+          "father_name": "Ganesh Rao",
+          "share": "1/2",
+          "residence": "Village Hadinaru"
+        },
+        {
+          "name": "Vinod Pillai",
+          "father_name": "Ganesh Rao",
+          "share": "1/2",
+          "residence": "Village Hadinaru"
+        }
+      ],
+      "area_hectare": 1.1067,
+      "land_revenue_rs": 130.54,
+      "land_classification": "Barren/Uncultivable"
+    },
+    "deed": {
+      "document_no": "407 of 2022",
+      "registration_date": "19/10/2022",
+      "sro_office": "Sub-Registrar Office, Nanjangud",
+      "vendor_name": "Vinod Nair",
+      "vendee_name": "Vinod Pillai",
+      "survey_no": "113/7B",
+      "extent_acre": 2.73,
+      "sale_consideration_rs": 3649047,
+      "stamp_duty_rs": 255400.0,
+      "boundaries": {
+        "north": "Survey No. 138 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 113/7A",
+        "west": "Survey No. 170 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2022-7691",
+      "filing_date": "10/05/2022",
+      "order_date": "26/07/2022",
+      "nature": "Gift Deed",
+      "transferor": "Vinod Nair",
+      "transferee": "Vinod Pillai",
+      "old_khata_no": "00477",
+      "new_khata_no": "00040"
+    },
+    "cadastral": {
+      "sheet_no": "15",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 16.21893,
+        "longitude": 81.57767
+      },
+      "calculated_area_sqm": 11067.0,
+      "boundaries": {
+        "north": "Survey No. 156 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 113/4A",
+        "west": "Survey No. 165 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.76,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0009",
+    "location": {
+      "state_lgd_code": "31",
+      "district": "Patna",
+      "district_lgd_code": "021",
+      "tehsil": "Sriperumbudur",
+      "pargana": "Tirumakudalu",
+      "village": "Baideswar",
+      "village_lgd_code": "331550"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1430-1433",
+      "khata_no": "00096",
+      "khasra_no": "196/4",
+      "ulpin": "38DB96748Q1642",
+      "date_of_issue": "17/12/2023",
+      "owners": [
+        {
+          "name": "Ganesh Verma",
+          "father_name": "Radha Sharma",
+          "share": "1/2",
+          "residence": "Village Baideswar"
+        },
+        {
+          "name": "Selvam Kumar",
+          "father_name": "Radha Sharma",
+          "share": "1/2",
+          "residence": "Village Baideswar"
+        }
+      ],
+      "area_hectare": 1.6573,
+      "land_revenue_rs": 132.95,
+      "land_classification": "Residential"
+    },
+    "deed": {
+      "document_no": "151 of 2022",
+      "registration_date": "24/03/2022",
+      "sro_office": "Sub-Registrar Office, Sriperumbudur",
+      "vendor_name": "Ganesh Verma",
+      "vendee_name": "Selvam Kumar",
+      "survey_no": "196/4",
+      "extent_acre": 4.1,
+      "sale_consideration_rs": 5046831,
+      "stamp_duty_rs": 353300.0,
+      "boundaries": {
+        "north": "Survey No. 160 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 196/8A",
+        "west": "Survey No. 133 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2022-2988",
+      "filing_date": "09/11/2022",
+      "order_date": "08/11/2023",
+      "nature": "Gift Deed",
+      "transferor": "Ganesh Verma",
+      "transferee": "Selvam Kumar",
+      "old_khata_no": "00451",
+      "new_khata_no": "00096"
+    },
+    "cadastral": {
+      "sheet_no": "03",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 18.30339,
+        "longitude": 82.41133
+      },
+      "calculated_area_sqm": 16573.0,
+      "boundaries": {
+        "north": "Survey No. 191 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 196/5A",
+        "west": "Survey No. 130 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.67,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0010",
+    "location": {
+      "state_lgd_code": "31",
+      "district": "Cuttack",
+      "district_lgd_code": "331",
+      "tehsil": "Sriperumbudur",
+      "pargana": "Bikram",
+      "village": "Rampur",
+      "village_lgd_code": "331201"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1431-1428",
+      "khata_no": "00237",
+      "khasra_no": "149/3",
+      "ulpin": "24HM08379L8730",
+      "date_of_issue": "20/03/2022",
+      "owners": [
+        {
+          "name": "Kavita Gupta",
+          "father_name": "Selvam Sharma",
+          "share": "1/2",
+          "residence": "Village Rampur"
+        },
+        {
+          "name": "Geeta Nair",
+          "father_name": "Selvam Sharma",
+          "share": "1/2",
+          "residence": "Village Rampur"
+        }
+      ],
+      "area_hectare": 0.9118,
+      "land_revenue_rs": 100.42,
+      "land_classification": "Village Commons"
+    },
+    "deed": {
+      "document_no": "324 of 2020",
+      "registration_date": "19/07/2020",
+      "sro_office": "Sub-Registrar Office, Sriperumbudur",
+      "vendor_name": "Kavita Gupta",
+      "vendee_name": "Geeta Nair",
+      "survey_no": "149/3",
+      "extent_acre": 2.25,
+      "sale_consideration_rs": 3490395,
+      "stamp_duty_rs": 244300.0,
+      "boundaries": {
+        "north": "Survey No. 172 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 149/1A",
+        "west": "Survey No. 110 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2020-8956",
+      "filing_date": "28/03/2021",
+      "order_date": "02/03/2021",
+      "nature": "Gift Deed",
+      "transferor": "Kavita Gupta",
+      "transferee": "Geeta Nair",
+      "old_khata_no": "00389",
+      "new_khata_no": "00237"
+    },
+    "cadastral": {
+      "sheet_no": "11",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 11.4644,
+        "longitude": 78.68904
+      },
+      "calculated_area_sqm": 9118.0,
+      "boundaries": {
+        "north": "Survey No. 127 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 149/8A",
+        "west": "Survey No. 141 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.7,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0011",
+    "location": {
+      "state_lgd_code": "22",
+      "district": "Ajmer",
+      "district_lgd_code": "104",
+      "tehsil": "Nanjangud",
+      "pargana": "Pushkar",
+      "village": "Hadinaru",
+      "village_lgd_code": "556210"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1431-1429",
+      "khata_no": "00855",
+      "khasra_no": "110/8A",
+      "ulpin": "70YF09002L6241",
+      "date_of_issue": "23/10/2021",
+      "owners": [
+        {
+          "name": "Arumugam Naidu",
+          "father_name": "Ganesh Kumar",
+          "share": "1/2",
+          "residence": "Village Hadinaru"
+        },
+        {
+          "name": "Murugan Nair",
+          "father_name": "Ganesh Kumar",
+          "share": "1/2",
+          "residence": "Village Hadinaru"
+        }
+      ],
+      "area_hectare": 2.372,
+      "land_revenue_rs": 233.88,
+      "land_classification": "Barren/Uncultivable"
+    },
+    "deed": {
+      "document_no": "418 of 2018",
+      "registration_date": "23/02/2018",
+      "sro_office": "Sub-Registrar Office, Nanjangud",
+      "vendor_name": "Arumugam Naidu",
+      "vendee_name": "Murugan Nair",
+      "survey_no": "110/8A",
+      "extent_acre": 5.86,
+      "sale_consideration_rs": 10501268,
+      "stamp_duty_rs": 735100.0,
+      "boundaries": {
+        "north": "Survey No. 198 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 110/5A",
+        "west": "Survey No. 187 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2018-1420",
+      "filing_date": "26/10/2018",
+      "order_date": "18/06/2018",
+      "nature": "Court Decree Partition",
+      "transferor": "Arumugam Naidu",
+      "transferee": "Murugan Nair",
+      "old_khata_no": "00678",
+      "new_khata_no": "00855"
+    },
+    "cadastral": {
+      "sheet_no": "12",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 25.86219,
+        "longitude": 80.60637
+      },
+      "calculated_area_sqm": 23720.0,
+      "boundaries": {
+        "north": "Survey No. 108 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 110/9A",
+        "west": "Survey No. 182 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.7,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0012",
+    "location": {
+      "state_lgd_code": "20",
+      "district": "Ajmer",
+      "district_lgd_code": "104",
+      "tehsil": "Chinsurah",
+      "pargana": "Walajabad",
+      "village": "Roopangarh",
+      "village_lgd_code": "104330"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1429-1430",
+      "khata_no": "00984",
+      "khasra_no": "146/8",
+      "ulpin": "11NR69748Q2880",
+      "date_of_issue": "17/01/2023",
+      "owners": [
+        {
+          "name": "Lakshmi Nair",
+          "father_name": "Ramesh Sharma",
+          "share": "1/2",
+          "residence": "Village Roopangarh"
+        },
+        {
+          "name": "Sunita Naidu",
+          "father_name": "Ramesh Sharma",
+          "share": "1/2",
+          "residence": "Village Roopangarh"
+        }
+      ],
+      "area_hectare": 2.21,
+      "land_revenue_rs": 198.36,
+      "land_classification": "Agricultural (Nanja/Wet)"
+    },
+    "deed": {
+      "document_no": "971 of 2020",
+      "registration_date": "24/04/2020",
+      "sro_office": "Sub-Registrar Office, Chinsurah",
+      "vendor_name": "Lakshmi Nair",
+      "vendee_name": "Sunita Naidu",
+      "survey_no": "146/8",
+      "extent_acre": 5.46,
+      "sale_consideration_rs": 6105547,
+      "stamp_duty_rs": 427400.0,
+      "boundaries": {
+        "north": "Survey No. 152 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 146/8A",
+        "west": "Survey No. 171 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2020-8988",
+      "filing_date": "16/12/2020",
+      "order_date": "26/08/2021",
+      "nature": "Transfer by Registered Sale Deed",
+      "transferor": "Lakshmi Nair",
+      "transferee": "Sunita Naidu",
+      "old_khata_no": "00096",
+      "new_khata_no": "00984"
+    },
+    "cadastral": {
+      "sheet_no": "10",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 14.39392,
+        "longitude": 82.38266
+      },
+      "calculated_area_sqm": 22100.0,
+      "boundaries": {
+        "north": "Survey No. 128 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 146/7A",
+        "west": "Survey No. 188 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.66,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0013",
+    "location": {
+      "state_lgd_code": "27",
+      "district": "Cuttack",
+      "district_lgd_code": "331",
+      "tehsil": "Chinsurah",
+      "pargana": "Baramba",
+      "village": "Roopangarh",
+      "village_lgd_code": "104330"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1429-1428",
+      "khata_no": "00764",
+      "khasra_no": "170/6B",
+      "ulpin": "72GC11571M7257",
+      "date_of_issue": "04/08/2023",
+      "owners": [
+        {
+          "name": "Raman Reddy",
+          "father_name": "Murugan Reddy",
+          "share": "1/2",
+          "residence": "Village Roopangarh"
+        },
+        {
+          "name": "Selvam Naidu",
+          "father_name": "Murugan Reddy",
+          "share": "1/2",
+          "residence": "Village Roopangarh"
+        }
+      ],
+      "area_hectare": 1.5121,
+      "land_revenue_rs": 180.27,
+      "land_classification": "Agricultural (Irrigated)"
+    },
+    "deed": {
+      "document_no": "114 of 2023",
+      "registration_date": "16/08/2023",
+      "sro_office": "Sub-Registrar Office, Chinsurah",
+      "vendor_name": "Raman Reddy",
+      "vendee_name": "Selvam Naidu",
+      "survey_no": "170/6B",
+      "extent_acre": 3.74,
+      "sale_consideration_rs": 6411793,
+      "stamp_duty_rs": 448800.0,
+      "boundaries": {
+        "north": "Survey No. 156 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 170/6A",
+        "west": "Survey No. 123 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2023-3073",
+      "filing_date": "28/05/2023",
+      "order_date": "27/02/2024",
+      "nature": "Transfer by Registered Sale Deed",
+      "transferor": "Raman Reddy",
+      "transferee": "Selvam Naidu",
+      "old_khata_no": "00411",
+      "new_khata_no": "00764"
+    },
+    "cadastral": {
+      "sheet_no": "16",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 15.38898,
+        "longitude": 83.79436
+      },
+      "calculated_area_sqm": 15121.0,
+      "boundaries": {
+        "north": "Survey No. 109 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 170/1A",
+        "west": "Survey No. 119 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.62,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0014",
+    "location": {
+      "state_lgd_code": "32",
+      "district": "Mysuru",
+      "district_lgd_code": "556",
+      "tehsil": "Sriperumbudur",
+      "pargana": "Saoner",
+      "village": "Bhitargaon",
+      "village_lgd_code": "128456"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1429-1433",
+      "khata_no": "00572",
+      "khasra_no": "197/7",
+      "ulpin": "56UK92545L6792",
+      "date_of_issue": "08/11/2021",
+      "owners": [
+        {
+          "name": "Murugan Singh",
+          "father_name": "Mahesh Kumar",
+          "share": "1/2",
+          "residence": "Village Bhitargaon"
+        },
+        {
+          "name": "Murugan Gupta",
+          "father_name": "Mahesh Kumar",
+          "share": "1/2",
+          "residence": "Village Bhitargaon"
+        }
+      ],
+      "area_hectare": 0.567,
+      "land_revenue_rs": 60.34,
+      "land_classification": "Agricultural (Dry)"
+    },
+    "deed": {
+      "document_no": "102 of 2021",
+      "registration_date": "04/07/2021",
+      "sro_office": "Sub-Registrar Office, Sriperumbudur",
+      "vendor_name": "Murugan Singh",
+      "vendee_name": "Murugan Gupta",
+      "survey_no": "197/7",
+      "extent_acre": 1.4,
+      "sale_consideration_rs": 2205374,
+      "stamp_duty_rs": 154400.0,
+      "boundaries": {
+        "north": "Survey No. 169 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 197/4A",
+        "west": "Survey No. 182 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2021-8699",
+      "filing_date": "27/05/2021",
+      "order_date": "02/02/2021",
+      "nature": "Inheritance",
+      "transferor": "Murugan Singh",
+      "transferee": "Murugan Gupta",
+      "old_khata_no": "00812",
+      "new_khata_no": "00572"
+    },
+    "cadastral": {
+      "sheet_no": "10",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 15.66015,
+        "longitude": 77.85181
+      },
+      "calculated_area_sqm": 5670.0,
+      "boundaries": {
+        "north": "Survey No. 176 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 197/5A",
+        "west": "Survey No. 156 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.6,
+      "status": "FLAGGED"
+    }
+  },
+  {
+    "record_id": "DL-0015",
+    "location": {
+      "state_lgd_code": "32",
+      "district": "Mysuru",
+      "district_lgd_code": "556",
+      "tehsil": "Kishangarh",
+      "pargana": "Tirumakudalu",
+      "village": "Balitikuri",
+      "village_lgd_code": "271044"
+    },
+    "ror": {
+      "form_no": "CH-41 / KHATAUNI",
+      "fasli_year": "1432-1430",
+      "khata_no": "00449",
+      "khasra_no": "110/1B",
+      "ulpin": "76AF68507N5715",
+      "date_of_issue": "27/07/2023",
+      "owners": [
+        {
+          "name": "Kavita Pillai",
+          "father_name": "Meena Naidu",
+          "share": "1/2",
+          "residence": "Village Balitikuri"
+        },
+        {
+          "name": "Meena Lal",
+          "father_name": "Meena Naidu",
+          "share": "1/2",
+          "residence": "Village Balitikuri"
+        }
+      ],
+      "area_hectare": 1.1335,
+      "land_revenue_rs": 103.29,
+      "land_classification": "Village Commons"
+    },
+    "deed": {
+      "document_no": "518 of 2020",
+      "registration_date": "03/08/2020",
+      "sro_office": "Sub-Registrar Office, Kishangarh",
+      "vendor_name": "Kavita Pillai",
+      "vendee_name": "Meena Lal",
+      "survey_no": "110/1B",
+      "extent_acre": 2.8,
+      "sale_consideration_rs": 3793388,
+      "stamp_duty_rs": 265500.0,
+      "boundaries": {
+        "north": "Survey No. 140 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 110/5A",
+        "west": "Survey No. 141 (Village Commons)"
+      }
+    },
+    "mutation": {
+      "mutation_case_no": "MUT-2020-2713",
+      "filing_date": "28/07/2020",
+      "order_date": "28/11/2020",
+      "nature": "Court Decree Partition",
+      "transferor": "Kavita Pillai",
+      "transferee": "Meena Lal",
+      "old_khata_no": "00424",
+      "new_khata_no": "00449"
+    },
+    "cadastral": {
+      "sheet_no": "02",
+      "scale": "1:1,000",
+      "centroid": {
+        "latitude": 24.72373,
+        "longitude": 78.63843
+      },
+      "calculated_area_sqm": 11335.0,
+      "boundaries": {
+        "north": "Survey No. 124 (Canal)",
+        "south": "Village Panchayat Road",
+        "east": "Survey No. 110/9A",
+        "west": "Survey No. 146 (Village Commons)"
+      }
+    },
+    "validation": {
+      "confidence_score": 0.82,
+      "status": "FLAGGED"
+    }
+  }
+]

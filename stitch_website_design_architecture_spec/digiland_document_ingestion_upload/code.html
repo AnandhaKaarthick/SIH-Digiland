@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Poppins:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"secondary-fixed":"#ffdcbc","on-tertiary-container":"#97ccff","dark-text-primary":"#EDEFEC","tertiary-fixed-dim":"#96ccff","dark-status-info":"#6FB1E0","surface-dim":"#cdded3","surface-container-low":"#e6f8ec","dark-secondary":"#E0A94D","surface-variant":"#d5e7db","surface-container":"#e1f2e7","on-primary":"#ffffff","inverse-primary":"#92d5a8","on-tertiary-fixed":"#001d32","on-error-container":"#93000a","dark-surface-card":"#1B2224","primary":"#004526","on-surface":"#101e18","error-container":"#ffdad6","primary-fixed-dim":"#92d5a8","on-error":"#ffffff","on-surface-variant":"#404942","text-secondary":"#5B6B62","dark-canvas-bg":"#12181A","surface-container-highest":"#d5e7db","secondary":"#895100","text-primary":"#1F2A24","on-secondary-fixed":"#2c1700","status-warning":"#ED8936","primary-fixed":"#aef2c2","on-secondary-container":"#6e4000","status-error":"#C0392B","on-primary-container":"#92d5a8","status-info":"#1B6FA8","primary-container":"#1b5e3a","on-secondary-fixed-variant":"#683d00","tertiary":"#003f65","dark-border-structural":"#2D3A34","tertiary-container":"#005789","on-tertiary-fixed-variant":"#004a76","on-tertiary":"#ffffff","dark-status-success":"#6FCF97","tertiary-fixed":"#cee5ff","border-structural":"#E0DED5","background":"#ecfef2","dark-primary":"#5FBE8A","on-primary-fixed-variant":"#09522f","surface-tint":"#296a45","error":"#ba1a1a","on-secondary":"#ffffff","dark-status-warning":"#F0B860","dark-status-error":"#E57373","inverse-surface":"#25342c","surface-card":"#FFFFFF","outline":"#707971","canvas-bg":"#F7F5F0","surface-container-lowest":"#ffffff","surface-bright":"#ecfef2","dark-text-secondary":"#A9B3AC","status-success":"#2E7D32","inverse-on-surface":"#e3f5e9","on-primary-fixed":"#00210f","outline-variant":"#c0c9bf","secondary-fixed-dim":"#ffb86b","on-background":"#101e18","secondary-container":"#fdaa48","surface":"#ecfef2","surface-container-high":"#dbece1"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"sidebar-width":"16rem","space-xl":"1.5rem","splitview-split":"50%","space-2xl":"2rem","gutter-grid":"1rem","space-base":"1rem","space-4xl":"3rem","topbar-height":"4rem","space-lg":"1.25rem","space-md":"0.75rem","margin-screen":"1.5rem","space-sm":"0.5rem","space-2xs":"0.125rem","space-xs":"0.25rem","space-3xl":"2.5rem"},fontFamily:{"headline-lg-mobile":["Poppins"],"body-sm":["Inter"],"code-sm":["JetBrains Mono"],"code-md":["JetBrains Mono"],"headline-md":["Poppins"],"display-lg":["Poppins"],"label-sm":["Poppins"],"body-md":["Inter"],"headline-lg":["Poppins"],"body-lg":["Inter"],"label-md":["Poppins"],"headline-sm":["Poppins"],"display-lg-mobile":["Poppins"]},fontSize:{"headline-lg-mobile":["22px",{lineHeight:"28px",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"code-sm":["11px",{lineHeight:"16px",fontWeight:"500"}],"code-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"display-lg":["36px",{lineHeight:"44px",fontWeight:"600"}],"label-sm":["10px",{lineHeight:"14px",fontWeight:"500"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"500"}],"headline-sm":["16px",{lineHeight:"24px",fontWeight:"600"}],"display-lg-mobile":["28px",{lineHeight:"36px",fontWeight:"600"}]}}}};</script></head><body class="bg-canvas-bg font-body-md text-text-primary min-h-screen"><aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-card shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="p-space-base flex items-start gap-space-sm bg-surface-container-lowest"><img alt="DigiLand Official Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYBurNLPtPNHeD5djSN2UmKCWCf-L8XEednYv_C1PWN1uUt9frVUp_WC1mW6DU3Yu4RFbm9dPjCCetm9ZF4w_VkXB8Ee0wqfPwx7JCIqWAtgJ_k3VAUKeS0v4061tlznL_sTtrS0EFuhj6tMp1gdv9y5FVNf9kEnbHrVfPcSUX7i2rYfTUFcK4DzppJ34m1AVN99ypoGdwb1OhJ8dcDOjO2cBfOLMod1kjxMT0GzQXAragtyE16NegJw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">DigiLand</span><span class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider mt-space-2xs leading-tight">GovTech Platform</span><span class="font-code-sm text-code-sm text-text-secondary mt-space-2xs leading-tight opacity-75">SIH 2026 PS 26018</span></div></div><div class="px-space-base py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-text-secondary opacity-70">Cadastral Operations</span></div><nav class="flex flex-col px-space-sm gap-space-2xs" data-active-classes="bg-primary-container text-on-primary font-headline-sm shadow-sm"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-md text-body-md">Dashboard</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-all duration-150 bg-primary-container text-on-primary font-headline-sm shadow-sm" data-path="document-upload" href="#"><span class="material-symbols-outlined text-[20px]">upload_file</span><span class="font-body-md text-body-md">Document Upload</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="verification-queue" href="#"><span class="material-symbols-outlined text-[20px]">fact_check</span><span class="font-body-md text-body-md flex-1">Verification Queue</span><span class="font-code-sm text-code-sm px-space-xs py-space-2xs rounded bg-surface-container-high text-on-surface">14</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="records" href="#"><span class="material-symbols-outlined text-[20px]">folder_shared</span><span class="font-body-md text-body-md">Records Registry</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="audit-trail" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="font-body-md text-body-md">Audit Trail</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="gis-map" href="#"><span class="material-symbols-outlined text-[20px]">map</span><span class="font-body-md text-body-md">GIS Cadastral Map</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-150" data-path="admin-rbac" href="#"><span class="material-symbols-outlined text-[20px]">admin_panel_settings</span><span class="font-body-md text-body-md">Admin &amp; RBAC</span></a></nav></div><div class="p-space-base bg-surface-container-low m-space-sm rounded-xl"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span><span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">DILRMP Verified</span></div><p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs">National Land Records Modernization Pipeline</p></div></aside><div class="pl-sidebar-width flex flex-col min-h-screen"><header class="fixed top-0 left-sidebar-width right-0 h-topbar-height bg-surface-card/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl gap-space-lg"><div class="flex items-center flex-1 max-w-2xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full pl-10 pr-space-md py-space-sm rounded-lg bg-canvas-bg font-body-sm text-body-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search by Khasra, Khata, ULPIN, Village, or Deed #..." type="text"/></div></div><div class="flex items-center gap-space-lg"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-low text-primary"><span class="w-2 h-2 rounded-full bg-status-success"></span><span class="font-code-sm text-code-sm font-medium">Gov Gateway: Connected • DILRMP Sync Active</span></div><button aria-label="Notifications" class="relative p-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-status-warning"></span></button><div class="h-6 w-[1px] bg-border-structural/60"></div><div class="flex items-center gap-space-md"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-tight">Rajesh Sharma, IRS</span><div class="flex items-center justify-end gap-space-xs mt-space-2xs"><span class="px-space-xs py-space-2xs rounded font-label-sm text-label-sm bg-primary-container text-on-primary font-medium leading-none">Tehsildar / Admin</span></div></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-J9ajm6QnO8VpvfGOd7AlS40LFMZeibmXKFQqDjNSQV4cMvlwy4BNM3JgnmcbBOB7-xIwJ7FERZ-2EtI4TwtFCxOvBDkregL1pQY583KQ5zNBnO82YGHz4utXd6vbQmH1Clpc8evsU6qYBFv6diz7uLpZA1EfSbVNQ0u0ePUwNFE-UQk4cBwUbZ9HQZlCFJx1SYuNwqg_W2tgHW2xGjTHwpPg3W-IfGwR_OQJYLn49A6fXBIuHATW-A"/></div></div></header><main class="w-full pt-topbar-height bg-canvas-bg flex-1"><div class="flex flex-col w-full">
+<!-- Subtle Gradient Ambient Backdrop Backdrop Glow -->
+<div class="relative w-full px-space-xl py-space-lg flex flex-col gap-space-xl">
+<div class="absolute top-0 right-1/4 w-96 h-96 bg-primary-fixed-dim/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-48 left-12 w-80 h-80 bg-secondary-fixed/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Top Breadcrumbs & Page Metadata Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col">
+<!-- Breadcrumb Pill Row -->
+<nav aria-label="Breadcrumbs" class="flex items-center gap-space-xs text-text-secondary font-label-md text-label-md mb-space-xs">
+<span class="hover:text-primary transition-colors cursor-pointer flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[16px]">home</span>
+            DigiLand
+          </span>
+<span class="material-symbols-outlined text-[14px] opacity-40">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Cadastral Operations</span>
+<span class="material-symbols-outlined text-[14px] opacity-40">chevron_right</span>
+<span class="text-primary font-semibold">Document Ingestion</span>
+</nav>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Document Ingestion &amp; Automated Pre-processing</h1>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-high text-primary font-code-sm text-code-sm uppercase tracking-wide">DILRMP v4.2</span>
+</div>
+<p class="font-body-md text-body-md text-text-secondary mt-space-2xs max-w-3xl">
+          High-throughput multi-format document parser with real-time CV deskewing, binarization, TrOCR layout analysis, and cryptographic record attestation.
+        </p>
+</div>
+<!-- Quick Telemetry Strip -->
+<div class="flex items-center gap-space-sm bg-surface-card p-space-sm rounded-xl shadow-sm">
+<div class="flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-[20px]">memory</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">GPU Cluster</span>
+<span class="font-code-sm text-code-sm text-primary font-semibold">Triton-A100 • 98.2%</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-status-success text-[20px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">Ledger State</span>
+<span class="font-code-sm text-code-sm text-status-success font-semibold">SHA256 Chained</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Ingestion Mode Tabs & Ingestion Zone Area -->
+<div class="flex flex-col bg-surface-card rounded-2xl shadow-sm p-space-xl gap-space-lg">
+<!-- Ingestion Mode Tabs -->
+<div class="flex flex-wrap items-center justify-between gap-space-md border-b-0 pb-space-xs">
+<div class="flex items-center gap-space-xs bg-surface-container-low p-space-2xs rounded-xl" role="tablist">
+<button class="tab-btn active px-space-md py-space-xs rounded-lg font-headline-sm text-headline-sm transition-all duration-200 bg-primary-container text-on-primary shadow-sm flex items-center gap-space-xs" id="tab-single" type="button">
+<span class="material-symbols-outlined text-[18px]">document_scanner</span>
+            Single Record
+          </button>
+<button class="tab-btn px-space-md py-space-xs rounded-lg font-headline-sm text-headline-sm transition-all duration-200 text-on-surface-variant hover:text-text-primary hover:bg-surface-container flex items-center gap-space-xs" id="tab-batch" type="button">
+<span class="material-symbols-outlined text-[18px]">folder_zip</span>
+            Batch Upload (ZIP/PDF)
+            <span class="font-code-sm text-code-sm bg-surface-card px-space-xs py-space-2xs rounded text-primary">Max 50</span>
+</button>
+<button class="tab-btn px-space-md py-space-xs rounded-lg font-headline-sm text-headline-sm transition-all duration-200 text-on-surface-variant hover:text-text-primary hover:bg-surface-container flex items-center gap-space-xs" id="tab-mobile" type="button">
+<span class="material-symbols-outlined text-[18px]">phonelink_setup</span>
+            Mobile / Camera Scanner Sync
+            <span class="w-2 h-2 rounded-full bg-status-success animate-ping"></span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs text-text-secondary font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">security</span>
+<span>End-to-End GovCloud Vault Storage</span>
+</div>
+</div>
+<!-- Drag & Drop Ingestion Zone with warm ochre border-like effect using background styling -->
+<div class="relative group cursor-pointer transition-all duration-200 rounded-2xl p-space-3xl flex flex-col items-center justify-center text-center overflow-hidden bg-surface-container-low hover:bg-surface-container hover:shadow-md" id="drop-zone">
+<!-- Dashed Ochre SVG Border Frame -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<rect class="group-hover:opacity-100 transition-opacity" fill="none" height="calc(100% - 4px)" opacity="0.65" rx="16" stroke="#895100" stroke-dasharray="10 8" stroke-width="2" width="calc(100% - 4px)" x="2" y="2"></rect>
+</svg>
+<input accept=".pdf,.tiff,.tif,.jpeg,.jpg,.png" class="hidden" id="cadastral-file-input" multiple="" type="file"/>
+<!-- Icon Stack with Animated Glow -->
+<div class="relative flex items-center justify-center mb-space-base">
+<div class="w-20 h-20 rounded-2xl bg-secondary-container/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform duration-300 shadow-sm">
+<span class="material-symbols-outlined text-[44px]">cloud_upload</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</div>
+</div>
+<!-- Prompts & Text -->
+<h2 class="font-headline-md text-headline-md text-text-primary mb-space-xs">
+          Drag &amp; drop scanned records (Jamabandi, 7/12, Khatauni, Cadastral Maps)
+        </h2>
+<p class="font-body-md text-body-md text-text-secondary max-w-xl mb-space-base">
+          or <span class="text-primary font-semibold underline decoration-2 underline-offset-4 hover:text-primary-container">click to browse</span> from your verified workstation storage.
+        </p>
+<!-- Formats and Size Specification Pills -->
+<div class="flex flex-wrap items-center justify-center gap-space-xs">
+<span class="px-space-sm py-space-2xs rounded-full bg-surface-card text-text-primary font-code-sm text-code-sm shadow-sm flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px] text-status-info">picture_as_pdf</span>
+            PDF (Multi-page)
+          </span>
+<span class="px-space-sm py-space-2xs rounded-full bg-surface-card text-text-primary font-code-sm text-code-sm shadow-sm flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px] text-status-warning">image</span>
+            TIFF (GeoTIFF Cadastral)
+          </span>
+<span class="px-space-sm py-space-2xs rounded-full bg-surface-card text-text-primary font-code-sm text-code-sm shadow-sm flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px] text-primary">photo_library</span>
+            JPEG / PNG (300+ DPI)
+          </span>
+<span class="px-space-sm py-space-2xs rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md">
+            Up to 50 MB per file
+          </span>
+</div>
+<!-- Auto-Extraction Guarantee Banner Inside Zone -->
+<div class="mt-space-lg flex items-center gap-space-sm px-space-md py-space-xs rounded-lg bg-surface-card/80 text-text-secondary text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">auto_fix_high</span>
+<span>Automatic CV Skew Correction (±15°), Stain Removal, and Indic Script Recognition (Devanagari, Gurmukhi, Telugu)</span>
+</div>
+</div>
+<!-- Quick Action Buttons Below Upload Area -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-xs">
+<button class="group flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-left shadow-sm" type="button">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-text-primary">Camera Capture</span>
+<span class="font-body-sm text-body-sm text-text-secondary">High-res document camera &amp; mobile tether</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="group flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-left shadow-sm" type="button">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-secondary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">inventory_2</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-text-primary">Batch Upload</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Bulk CSV Manifest &amp; Zip Cadastral bundle</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="group flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all text-left shadow-sm" type="button">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">cloud_sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-text-primary">Upload via API / S3 Link</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Direct ingress from NIC or State Land Repos</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Processing Pipeline Visualization Stepper Strip -->
+<div class="bg-surface-card rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">linear_scale</span>
+<span class="font-headline-sm text-headline-sm text-text-primary">Automated Cadastral Ingestion Pipeline Stages</span>
+</div>
+<span class="font-code-sm text-code-sm text-text-secondary">Average Latency: 2.4s per record sheet</span>
+</div>
+<!-- 6-Phase Pipeline Stepper -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-space-sm pt-space-xs">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center p-space-sm bg-surface-container-low rounded-xl">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-code-sm text-code-sm mb-space-xs font-bold">1</div>
+<span class="font-label-md text-label-md text-text-primary">Document Upload</span>
+<span class="font-code-sm text-code-sm text-status-success mt-space-2xs">Virus &amp; MIME OK</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center p-space-sm bg-surface-container-low rounded-xl">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-code-sm text-code-sm mb-space-xs font-bold">2</div>
+<span class="font-label-md text-label-md text-text-primary">CV Deskew / Clean</span>
+<span class="font-code-sm text-code-sm text-status-success mt-space-2xs">Binarized 300DPI</span>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center p-space-sm bg-surface-container-low rounded-xl">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-code-sm text-code-sm mb-space-xs font-bold">3</div>
+<span class="font-label-md text-label-md text-text-primary">OCR / TrOCR</span>
+<span class="font-code-sm text-code-sm text-status-info mt-space-2xs">Indic Multi-Script</span>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center text-center p-space-sm bg-surface-container-low rounded-xl">
+<div class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-code-sm text-code-sm mb-space-xs font-bold ring-4 ring-secondary/20 animate-pulse">4</div>
+<span class="font-label-md text-label-md text-secondary font-semibold">NLP Key-Entity</span>
+<span class="font-code-sm text-code-sm text-secondary mt-space-2xs">Khasra/Khata Parsed</span>
+</div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center text-center p-space-sm bg-surface-container rounded-xl opacity-80">
+<div class="w-7 h-7 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-code-sm text-code-sm mb-space-xs font-bold">5</div>
+<span class="font-label-md text-label-md text-text-secondary">Spatial Cross-Check</span>
+<span class="font-code-sm text-code-sm text-text-secondary mt-space-2xs">Cadastral Vector Match</span>
+</div>
+<!-- Step 6 -->
+<div class="flex flex-col items-center text-center p-space-sm bg-surface-container rounded-xl opacity-80">
+<div class="w-7 h-7 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-code-sm text-code-sm mb-space-xs font-bold">6</div>
+<span class="font-label-md text-label-md text-text-secondary">Verification Queue</span>
+<span class="font-code-sm text-code-sm text-text-secondary mt-space-2xs">Confidence &gt; 85%</span>
+</div>
+</div>
+</div>
+<!-- Live Processing Pipeline & Recent Uploads Table -->
+<section class="flex flex-col bg-surface-card rounded-2xl shadow-sm overflow-hidden mb-space-xl">
+<!-- Table Filter Header Bar -->
+<div class="p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-card">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<h3 class="font-headline-md text-headline-md text-text-primary">Recent Ingestion Queue &amp; OCR Engine Pipeline</h3>
+<span class="px-space-xs py-space-2xs rounded-full bg-primary-container text-on-primary font-code-sm text-code-sm">5 Active Files</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary mt-space-2xs">Real-time status updates from microservice extraction workers.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-[18px] text-text-secondary">filter_list</span>
+<select class="pl-8 pr-space-lg py-space-xs rounded-lg bg-surface-container-low font-body-sm text-body-sm text-text-primary focus:outline-none cursor-pointer">
+<option>All Document Classes</option>
+<option>Jamabandi (RoR)</option>
+<option>Khatauni Extract</option>
+<option>Mutation Deed</option>
+<option>Cadastral Map Sheet</option>
+</select>
+</div>
+<button class="p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-text-primary transition-colors flex items-center gap-space-2xs font-label-md text-label-md" onclick="location.reload()" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+            Refresh Feeds
+          </button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-text-secondary font-label-md text-label-md uppercase tracking-wider">
+<th class="py-space-md px-space-lg">Document / File Name</th>
+<th class="py-space-md px-space-md">Doc Type</th>
+<th class="py-space-md px-space-md">SHA-256 Stamp</th>
+<th class="py-space-md px-space-md">Ingested By &amp; Time</th>
+<th class="py-space-md px-space-md">Size</th>
+<th class="py-space-md px-space-lg">Live Processing Pipeline</th>
+<th class="py-space-md px-space-lg text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm">
+<!-- Row 1: Completed Validation -->
+<tr class="group hover:bg-surface-container-low/60 transition-colors bg-surface-card">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-1 rounded-full h-10 bg-status-success flex-shrink-0"></div>
+<div class="p-space-xs bg-surface-container rounded-lg text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-text-primary truncate font-medium">Jamabandi_Rampur_Khasra_42_1.pdf</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Tehsil: Rampur • Dist: Bilaspur</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-primary font-label-md text-label-md font-semibold">
+                  Jamabandi / RoR
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs group/hash">
+<span class="font-code-sm text-code-sm text-tertiary bg-surface-container-low px-space-xs py-space-2xs rounded">e8f4...b912</span>
+<button class="opacity-0 group-hover/hash:opacity-100 p-space-2xs hover:text-primary transition-opacity" onclick="navigator.clipboard.writeText('e8f407b819f70d24ca95924719001b912ad58b19')" title="Copy full SHA-256" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-text-primary font-medium">S. Verma (Patwari)</span>
+<span class="text-text-secondary font-code-sm text-code-sm">Today, 11:42 AM</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-code-sm text-code-sm text-text-secondary">4.2 MB</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col gap-space-2xs min-w-[200px]">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-space-2xs font-label-md text-label-md text-status-success font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+                      Completed (Ready for Review)
+                    </span>
+<span class="font-code-sm text-code-sm text-status-success font-bold">100%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-status-success h-full rounded-full w-full"></div>
+</div>
+<span class="font-code-sm text-code-sm text-text-secondary">Confidence: 96.4% • 18 fields parsed</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-headline-sm text-headline-sm hover:bg-primary-container transition-all shadow-sm" type="button">
+                  Verify Record
+                </button>
+</td>
+</tr>
+<!-- Row 2: Validation Engine Stage -->
+<tr class="group hover:bg-surface-container-low/60 transition-colors bg-surface-card">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-1 rounded-full h-10 bg-status-warning flex-shrink-0"></div>
+<div class="p-space-xs bg-secondary-fixed/30 rounded-lg text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">image</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-text-primary truncate font-medium">Khatauni_Tahsil_Sadar_1998.tiff</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Historic Archive • Cadastral Sheet 14</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-secondary font-label-md text-label-md font-semibold">
+                  Khatauni Extract
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs group/hash">
+<span class="font-code-sm text-code-sm text-tertiary bg-surface-container-low px-space-xs py-space-2xs rounded">3a19...77ca</span>
+<button class="opacity-0 group-hover/hash:opacity-100 p-space-2xs hover:text-primary transition-opacity" onclick="navigator.clipboard.writeText('3a19ff290812bd243761821034bc981277ca8901')" title="Copy full SHA-256" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-text-primary font-medium">R. K. Meena (Kanungo)</span>
+<span class="text-text-secondary font-code-sm text-code-sm">Today, 11:36 AM</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-code-sm text-code-sm text-text-secondary">18.7 MB</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col gap-space-2xs min-w-[200px]">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-space-2xs font-label-md text-label-md text-status-warning font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-warning animate-pulse"></span>
+                      Validation Engine
+                    </span>
+<span class="font-code-sm text-code-sm text-status-warning font-bold">78%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-status-warning h-full rounded-full w-[78%] transition-all duration-500"></div>
+</div>
+<span class="font-code-sm text-code-sm text-text-secondary">Cross-referencing ULPIN with NIC GeoPortal</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-text-primary font-headline-sm text-headline-sm transition-all" type="button">
+                  Inspect Stage
+                </button>
+</td>
+</tr>
+<!-- Row 3: OCR / TrOCR Stage -->
+<tr class="group hover:bg-surface-container-low/60 transition-colors bg-surface-card">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-1 rounded-full h-10 bg-status-info flex-shrink-0"></div>
+<div class="p-space-xs bg-surface-container rounded-lg text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-text-primary truncate font-medium">RoR_Extract_Basti_Pargana.pdf</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Pargana: 04 • Revenue Circle 12</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-primary font-label-md text-label-md font-semibold">
+                  RoR Record
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs group/hash">
+<span class="font-code-sm text-code-sm text-tertiary bg-surface-container-low px-space-xs py-space-2xs rounded">7c20...9da4</span>
+<button class="opacity-0 group-hover/hash:opacity-100 p-space-2xs hover:text-primary transition-opacity" onclick="navigator.clipboard.writeText('7c20092bfda9872145ac998246fa12049da42167')" title="Copy full SHA-256" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-text-primary font-medium">Rajesh Sharma, IRS</span>
+<span class="text-text-secondary font-code-sm text-code-sm">Today, 11:28 AM</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-code-sm text-code-sm text-text-secondary">6.1 MB</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col gap-space-2xs min-w-[200px]">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-space-2xs font-label-md text-label-md text-status-info font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-info animate-pulse"></span>
+                      OCR / TrOCR Transformer
+                    </span>
+<span class="font-code-sm text-code-sm text-status-info font-bold">54%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-status-info h-full rounded-full w-[54%] transition-all duration-500"></div>
+</div>
+<span class="font-code-sm text-code-sm text-text-secondary">Transcribing Hindi Devanagari Columns</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-text-primary font-headline-sm text-headline-sm transition-all" type="button">
+                  View Raw Stream
+                </button>
+</td>
+</tr>
+<!-- Row 4: CV Deskew & Binarization -->
+<tr class="group hover:bg-surface-container-low/60 transition-colors bg-surface-card">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-1 rounded-full h-10 bg-status-warning flex-shrink-0"></div>
+<div class="p-space-xs bg-surface-container rounded-lg text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">map</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-text-primary truncate font-medium">Cadastral_Plot_Map_Khasra_881_B.png</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Settlement Map • Sector 9</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-tertiary font-label-md text-label-md font-semibold">
+                  Cadastral Map
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-2xs group/hash">
+<span class="font-code-sm text-code-sm text-tertiary bg-surface-container-low px-space-xs py-space-2xs rounded">99d2...11ef</span>
+<button class="opacity-0 group-hover/hash:opacity-100 p-space-2xs hover:text-primary transition-opacity" onclick="navigator.clipboard.writeText('99d2bbfa847210940348aebcf01938ac11ef9321')" title="Copy full SHA-256" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-text-primary font-medium">A. Saxena (GIS Analyst)</span>
+<span class="text-text-secondary font-code-sm text-code-sm">Today, 11:15 AM</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-code-sm text-code-sm text-text-secondary">24.5 MB</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col gap-space-2xs min-w-[200px]">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-space-2xs font-label-md text-label-md text-status-warning font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-warning animate-spin"></span>
+                      CV Deskew &amp; Binarization
+                    </span>
+<span class="font-code-sm text-code-sm text-status-warning font-bold">28%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-status-warning h-full rounded-full w-[28%] transition-all duration-500"></div>
+</div>
+<span class="font-code-sm text-code-sm text-text-secondary">Adaptive Otsu Thresholding • Deskew 4.2°</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-text-primary font-headline-sm text-headline-sm transition-all" type="button">
+                  Cancel
+                </button>
+</td>
+</tr>
+<!-- Row 5: Ingesting / Uploading Stage -->
+<tr class="group hover:bg-surface-container-low/60 transition-colors bg-surface-card">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-1 rounded-full h-10 bg-primary flex-shrink-0"></div>
+<div class="p-space-xs bg-surface-container rounded-lg text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">description</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-text-primary truncate font-medium">Mutation_Extract_Registry_2024_091.pdf</span>
+<span class="font-code-sm text-code-sm text-text-secondary">Sub-Registrar Office Rampur</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-space-2xs rounded bg-surface-container text-primary font-label-md text-label-md font-semibold">
+                  Mutation Extract
+                </span>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-code-sm text-code-sm text-text-secondary italic">Generating...</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col">
+<span class="text-text-primary font-medium">System API Sync</span>
+<span class="text-text-secondary font-code-sm text-code-sm">Just now</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-code-sm text-code-sm text-text-secondary">8.9 MB</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col gap-space-2xs min-w-[200px]">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-space-2xs font-label-md text-label-md text-primary font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                      Uploading Chunk (3/8)
+                    </span>
+<span class="font-code-sm text-code-sm text-primary font-bold">12%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[12%] transition-all duration-300"></div>
+</div>
+<span class="font-code-sm text-code-sm text-text-secondary">Multipart TLS 1.3 Ingress</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<button class="p-space-xs rounded-lg text-text-secondary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Metadata & Pagination -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-md text-text-secondary font-body-sm text-body-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-code-sm">5 of 142 cadastral documents processed in current session</span>
+<span class="w-1 h-1 rounded-full bg-text-secondary opacity-40"></span>
+<span class="font-label-md text-label-md text-primary">All cryptographic checksums anchored to state land block</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-space-xs rounded bg-surface-card text-text-primary font-label-md text-label-md shadow-sm hover:bg-surface-container transition-colors" type="button">Previous</button>
+<span class="px-space-sm font-code-sm text-code-sm font-semibold text-text-primary">1 / 29</span>
+<button class="px-space-sm py-space-xs rounded bg-surface-card text-text-primary font-label-md text-label-md shadow-sm hover:bg-surface-container transition-colors" type="button">Next</button>
+</div>
+</div>
+</section>
+<!-- Side-by-Side Architectural Assurance Cards (Visual Richness with Real Prompts) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg mb-space-xl">
+<!-- Card 1: Visual Sample of Digitized Cadastral Map -->
+<div class="bg-surface-card rounded-2xl p-space-lg shadow-sm flex flex-col sm:flex-row items-center gap-space-lg">
+<div class="w-full sm:w-44 h-36 rounded-xl overflow-hidden flex-shrink-0 relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="High quality archival antique Indian cadastral land map with intricate revenue parcel boundaries, Khasra plot numbers in clear Devanagari script, topographic elevation contours, warm parchment paper texture, modern digital bounding box coordinates overlaid in clean forest green and amber lines, professional government archive digitization." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWu7-tQiPIc0EMIXTXV9xH98OawSIl3WYU3vu3AEVsCrXU2wDhk314LcSBF5jBX5mRuVIhTAPwvyv4aqNDE9OCeTRLSs0ltEFI_LBGLa_iI83ucH5Y63Vr1567m6uJOPf9HJZ3RSLOzMIqbO1ezVgmZrTAk7H-Mstm7JyWqN7XoT9dyTyzsxuUm71hBsS_ZHiMe5F2AE-vZYQLQpRIM8KWrnKkPpA5QUfK23_xzy4WvqJbb8ScF5qozA"/>
+<div class="absolute top-2 left-2 px-space-xs py-space-2xs rounded bg-primary text-on-primary font-label-sm text-label-sm">
+            AI Coordinate Fix
+          </div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs text-primary mb-space-2xs">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+<span class="font-headline-sm text-headline-sm">Geometric Cadastral Align</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary mb-space-sm">
+            Automatic corner pinning &amp; projective transformation reconciles 100-year-old cloth maps (Shajra) with modern WGS84 and Indian Terrestrial Reference Frame.
+          </p>
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-code-sm text-text-primary bg-surface-container px-space-xs py-space-2xs rounded">GeoTIFF 1.2 Compliant</span>
+<span class="font-label-md text-label-md text-status-success font-semibold">Ready for BhuNaksha</span>
+</div>
+</div>
+</div>
+<!-- Card 2: AI Multi-Lingual OCR Engine Overview -->
+<div class="bg-surface-card rounded-2xl p-space-lg shadow-sm flex flex-col sm:flex-row items-center gap-space-lg">
+<div class="w-full sm:w-44 h-36 rounded-xl overflow-hidden flex-shrink-0 relative shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close-up macro of official government revenue ledger book, Jamabandi document in Hindi Devanagari and Urdu Modi cursive script, scanned under crisp warm studio lighting with digital green augmented reality bounding boxes detecting owner names, Khata numbers, and area in bigha biswa, ultra high definition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfbQpvM5MEqa3vihg85FESA7gW6J7rp-1ym6IeJnfZSRDvK4_QVFy9v3p_yR1-54T94JdXyvbUkzlx1pI9Vbwih8na3-T1KfogXbddUnHwKDjGH0Dy_3cPwtJfcGiPw76M_NF0czzyU5FBenzh8RUT4WeUy3qlfN4js47YCVbWT9RSYY4YC6YHmwT3bEr6kLrAmHuiTvMTZfWkbJidR1q9CDidgL9sABeV-r9NxpIp4lNPfxpcK_N1OA"/>
+<div class="absolute top-2 left-2 px-space-xs py-space-2xs rounded bg-secondary text-on-secondary font-label-sm text-label-sm">
+            Indic TrOCR v3
+          </div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs text-secondary mb-space-2xs">
+<span class="material-symbols-outlined text-[20px]">translate</span>
+<span class="font-headline-sm text-headline-sm">Dialect &amp; Script Normalization</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary mb-space-sm">
+            Extracts archaic Urdu, Modi, and regional Devanagari revenue vocabulary directly into structured JSON-LD aligned with DILRMP data dictionaries.
+          </p>
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-code-sm text-text-primary bg-surface-container px-space-xs py-space-2xs rounded">CER &lt; 2.1% across 14 dialects</span>
+<span class="font-label-md text-label-md text-primary font-semibold">Verified Model</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Client-side Logic for Tabs and Drag-and-Drop Simulation -->
+<script>
+    (function initDocumentIngestion() {
+      const dropZone = document.getElementById('drop-zone');
+      const fileInput = document.getElementById('cadastral-file-input');
+      const tabs = document.querySelectorAll('.tab-btn');
+
+      // Tab switcher
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm', 'active');
+            t.classList.add('text-on-surface-variant');
+          });
+          tab.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm', 'active');
+          tab.classList.remove('text-on-surface-variant');
+        });
+      });
+
+      // Drop zone click triggers file browse
+      dropZone.addEventListener('click', () => {
+        fileInput.click();
+      });
+
+      // Drag and drop event styling
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.add('bg-surface-container-high', 'scale-[1.01]');
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.remove('bg-surface-container-high', 'scale-[1.01]');
+        }, false);
+      });
+
+      // File input handler simulation
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          const count = e.target.files.length;
+          const fileName = e.target.files[0].name;
+          alert(`Successfully received ${count} cadastral file(s). Automated CV & TrOCR pipeline initialized for: ${fileName}`);
+        }
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files && files.length > 0) {
+          alert(`Ingesting ${files.length} record(s) directly into DILRMP preprocessing cluster.`);
+        }
+      });
+    })();
+  </script>
+</div></main></div></body></html>
