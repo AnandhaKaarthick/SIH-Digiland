@@ -144,7 +144,7 @@ export default function DocumentUpload({ onProcessComplete, liveRecords = [], pu
 
       itemsToAdd.push(itemObj);
 
-      // Support JSON dataset files
+      // Support JSON dataset files and read images/PDFs as permanent Base64 Data URLs
       if (file.name.endsWith('.json') || file.type.includes('json')) {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -169,6 +169,15 @@ export default function DocumentUpload({ onProcessComplete, liveRecords = [], pu
           }
         };
         reader.readAsText(file);
+      } else if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64DataUrl = e.target.result;
+          if (base64DataUrl) {
+            setStagedBatch(prev => prev.map(p => p.id === itemId ? { ...p, dataUrl: base64DataUrl } : p));
+          }
+        };
+        reader.readAsDataURL(file);
       }
     });
 

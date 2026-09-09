@@ -26,23 +26,36 @@ export default function RecordDetailsView({ record, onBack }) {
   const { t } = useLanguage();
 
   const defaultSvg = getDocumentSvgForRecord(record || {});
+
+  const pagePreviews = record?.batch_page_previews && record.batch_page_previews.length > 0
+    ? record.batch_page_previews
+    : [record?.scanned_image_url || defaultSvg];
+
+  const [currentPage, setCurrentPage] = useState(0);
+
   const [imgSrc, setImgSrc] = useState(() => {
-    const url = record?.scanned_image_url;
+    const url = pagePreviews[0] || record?.scanned_image_url;
     if (!url || typeof url !== 'string' || url.startsWith('blob:')) return defaultSvg;
     return url;
   });
 
   useEffect(() => {
     const fallback = getDocumentSvgForRecord(record || {});
-    const url = record?.scanned_image_url;
+    const url = pagePreviews[currentPage] || record?.scanned_image_url;
     if (!url || typeof url !== 'string' || url.startsWith('blob:')) {
       setImgSrc(fallback);
     } else {
       setImgSrc(url);
     }
-  }, [record]);
+  }, [record, currentPage]);
 
   if (!record) return null;
+
+  const currentSrc = imgSrc || defaultSvg;
+
+  const isPdf = record.file_type?.includes('pdf') || 
+                record.file_name?.toLowerCase().endsWith('.pdf') || 
+                (typeof currentSrc === 'string' && (currentSrc.toLowerCase().includes('.pdf') || currentSrc.startsWith('data:application/pdf')));
 
   const docType = (record.doc_type || 'RECORD_OF_RIGHTS').toUpperCase();
   const breakdown = record.scoring_breakdown || {};
@@ -492,16 +505,55 @@ export default function RecordDetailsView({ record, onBack }) {
           
           <div className="bg-surface-card rounded-xl border border-border-structural overflow-hidden shadow-sm flex flex-col">
             <div className="p-3 bg-surface-container-low border-b border-border-structural flex items-center justify-between">
-              <span className="font-heading font-semibold text-xs text-text-primary">Source Document Image ({docType})</span>
-              <span className="font-mono text-[11px] text-text-secondary">Doc Ref: {record.document_id || 'DOC-001'}</span>
+              <div className="flex items-center gap-2">
+                <span className="font-heading font-semibold text-xs text-text-primary">Source Document Preview ({docType})</span>
+                {pagePreviews.length > 1 && (
+                  <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-primary-container text-on-primary">
+                    Page {currentPage + 1} of {pagePreviews.length}
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                {pagePreviews.length > 1 && (
+                  <div className="flex items-center gap-1 bg-surface-card border border-border-structural rounded-lg p-0.5">
+                    <button
+                      onClick={() => setCurrentPage(p => Math.max(0, p - 1))}
+                      disabled={currentPage === 0}
+                      className="px-1.5 py-0.5 rounded text-xs hover:bg-surface-container disabled:opacity-30 text-text-primary"
+                    >
+                      ‹
+                    </button>
+                    <span className="font-mono text-[11px] px-1 font-semibold text-text-primary">
+                      {currentPage + 1}/{pagePreviews.length}
+                    </span>
+                    <button
+                      onClick={() => setCurrentPage(p => Math.min(pagePreviews.length - 1, p + 1))}
+                      disabled={currentPage === pagePreviews.length - 1}
+                      className="px-1.5 py-0.5 rounded text-xs hover:bg-surface-container disabled:opacity-30 text-text-primary"
+                    >
+                      ›
+                    </button>
+                  </div>
+                )}
+                <span className="font-mono text-[11px] text-text-secondary">Doc Ref: {record.document_id || 'DOC-001'}</span>
+              </div>
             </div>
-            <div className="p-4 bg-gray-900 flex items-center justify-center min-h-[420px]">
-              <img 
-                src={imgSrc} 
-                onError={() => setImgSrc(getDocumentSvgForRecord(record))}
-                alt="Land Record Scan" 
-                className="max-w-full h-auto rounded border border-gray-700 shadow-xl" 
-              />
+
+            <div className="p-4 bg-gray-900 flex items-center justify-center min-h-[460px]">
+              {isPdf ? (
+                <iframe 
+                  src={currentSrc} 
+                  title={record.file_name || "Source Document PDF"} 
+                  className="w-full h-full min-h-[460px] rounded border border-gray-700 bg-white"
+                />
+              ) : (
+                <img 
+                  src={currentSrc} 
+                  onError={() => setImgSrc(defaultSvg)}
+                  alt="Land Record Scan" 
+                  className="max-w-full h-auto rounded border border-gray-700 shadow-xl" 
+                />
+              )}
             </div>
           </div>
 
