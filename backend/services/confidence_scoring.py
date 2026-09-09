@@ -104,8 +104,14 @@ def auto_detect_document_type(text_content: str, filename: str = "") -> str:
     if any(k in text for k in ["mutation", "dakhil-kharij", "dakhil kharij", "vf-6", "vf6", "case reference", "nature of mutation", "transferor", "transferee", "sanctioned date", "succession"]):
         return "MUTATION_REGISTER"
         
-    # 3. Spatial Cadastral Map
-    if any(k in text for k in ["cadastral", "bhu-naksha", "bhu naksha", "fmb", "field measurement", "sheet number", "projection system", "epsg", "centroid", "tie line", "geometry_type"]):
+    # 3. Spatial Cadastral Map & Field Measurement Book (FMB) Sketches
+    cadastral_keywords = [
+        "cadastral", "bhu-naksha", "bhu naksha", "fmb", "field measurement", "sheet number", 
+        "projection system", "epsg", "centroid", "tie line", "geometry_type", "scale",
+        "survey and settlement", "digitally signed by", "pulan en", "survey no", "survey number",
+        "புல எண்", "பரப்பளவு", "அளவு", "கிராமம்", "மாவட்டம்", "வட்டம்", "ஹெக்டர்", "ஏர்", "உட்பிரிவு"
+    ]
+    if any(k in text for k in cadastral_keywords):
         return "CADASTRAL_MAP"
         
     # 4. Record of Rights (Default / RoR)
