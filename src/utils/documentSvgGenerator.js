@@ -1,5 +1,13 @@
-// Utility to generate authentic Indian Land Record SVG Data URIs for all 4 schemas
-// Matches coordinates for bounding box backtracking
+function svgToDataUrl(svg) {
+  try {
+    const encoded = typeof window !== 'undefined' && window.btoa 
+      ? window.btoa(unescape(encodeURIComponent(svg)))
+      : Buffer.from(svg).toString('base64');
+    return `data:image/svg+xml;base64,${encoded}`;
+  } catch (e) {
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  }
+}
 
 export function generateJamabandiSvgDataUrl(record = {}) {
   const svg = `
@@ -151,7 +159,7 @@ export function generateJamabandiSvgDataUrl(record = {}) {
     </g>
   </svg>
   `;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  return svgToDataUrl(svg);
 }
 
 export function generateSaleDeedSvgDataUrl(record = {}) {
@@ -196,7 +204,7 @@ export function generateSaleDeedSvgDataUrl(record = {}) {
     </g>
   </svg>
   `;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  return svgToDataUrl(svg);
 }
 
 export function generateMutationSvgDataUrl(record = {}) {
@@ -234,7 +242,7 @@ export function generateMutationSvgDataUrl(record = {}) {
     </g>
   </svg>
   `;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  return svgToDataUrl(svg);
 }
 
 export function generateCadastralMapSvgDataUrl(record = {}) {
@@ -266,7 +274,7 @@ export function generateCadastralMapSvgDataUrl(record = {}) {
     </g>
   </svg>
   `;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  return svgToDataUrl(svg);
 }
 
 export function getDocumentSvgForRecord(record = {}) {

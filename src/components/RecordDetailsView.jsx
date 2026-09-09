@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, 
   ShieldCheck, 
@@ -24,10 +24,27 @@ import { useLanguage } from '../context/LanguageContext';
 
 export default function RecordDetailsView({ record, onBack }) {
   const { t } = useLanguage();
+
+  const defaultSvg = getDocumentSvgForRecord(record || {});
+  const [imgSrc, setImgSrc] = useState(() => {
+    const url = record?.scanned_image_url;
+    if (!url || typeof url !== 'string' || url.startsWith('blob:')) return defaultSvg;
+    return url;
+  });
+
+  useEffect(() => {
+    const fallback = getDocumentSvgForRecord(record || {});
+    const url = record?.scanned_image_url;
+    if (!url || typeof url !== 'string' || url.startsWith('blob:')) {
+      setImgSrc(fallback);
+    } else {
+      setImgSrc(url);
+    }
+  }, [record]);
+
   if (!record) return null;
 
   const docType = (record.doc_type || 'RECORD_OF_RIGHTS').toUpperCase();
-  const scannedUrl = record.scanned_image_url || getDocumentSvgForRecord(record);
   const breakdown = record.scoring_breakdown || {};
   const payload = record.raw_payload || record.payload || {};
 
@@ -480,7 +497,8 @@ export default function RecordDetailsView({ record, onBack }) {
             </div>
             <div className="p-4 bg-gray-900 flex items-center justify-center min-h-[420px]">
               <img 
-                src={scannedUrl} 
+                src={imgSrc} 
+                onError={() => setImgSrc(getDocumentSvgForRecord(record))}
                 alt="Land Record Scan" 
                 className="max-w-full h-auto rounded border border-gray-700 shadow-xl" 
               />

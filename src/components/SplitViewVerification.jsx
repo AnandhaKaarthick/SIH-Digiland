@@ -522,6 +522,9 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
               ) : (
                 <img 
                   src={currentImageSrc} 
+                  onError={(e) => {
+                    e.currentTarget.src = getDocumentSvgForRecord(record);
+                  }}
                   alt={`Scanned Land Record - Page ${currentPage + 1}`} 
                   className="max-w-full h-auto rounded border border-gray-700 select-none group-hover:ring-2 group-hover:ring-primary/60 transition-all"
                 />
