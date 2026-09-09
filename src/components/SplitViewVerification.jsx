@@ -69,35 +69,35 @@ export default function SplitViewVerification({ record: initialRecord, onApprove
   };
 
   // RoR Fields
-  const [khasraNo, setKhasraNo] = useState(() => getField('ror.khasra_no', record?.khasra_no || '117/2'));
-  const [khataNo, setKhataNo] = useState(() => getField('ror.khata_no', record?.khata_no || '00229'));
+  const [khasraNo, setKhasraNo] = useState(() => initialRecord?.khasra_no || getField('ror.khasra_no', record?.khasra_no || '117/2'));
+  const [khataNo, setKhataNo] = useState(() => initialRecord?.khata_no || getField('ror.khata_no', record?.khata_no || '00229'));
   const [ownerNames, setOwnerNames] = useState(() => {
-    if (record?.ror?.owners) return record.ror.owners.map(o => typeof o === 'string' ? o : o.name).join(', ');
-    if (Array.isArray(record?.owner_names)) return record.owner_names.join(', ');
+    if (Array.isArray(initialRecord?.owner_names)) return initialRecord.owner_names.join(', ');
+    if (initialRecord?.ror?.owners) return initialRecord.ror.owners.map(o => typeof o === 'string' ? o : o.name).join(', ');
     return record?.owner_names || 'Kavita Naidu, Arumugam Kumar';
   });
   const [ownerShares, setOwnerShares] = useState(() => {
-    if (record?.ror?.owners) return record.ror.owners.map(o => typeof o === 'string' ? '1/2' : (o.share || '1/2')).join(', ');
-    if (Array.isArray(record?.owner_shares)) return record.owner_shares.join(', ');
+    if (Array.isArray(initialRecord?.owner_shares)) return initialRecord.owner_shares.join(', ');
+    if (initialRecord?.ror?.owners) return initialRecord.ror.owners.map(o => typeof o === 'string' ? '1/2' : (o.share || '1/2')).join(', ');
     return record?.owner_shares !== undefined ? String(record.owner_shares) : '0.5, 0.5';
   });
-  const [plotArea, setPlotArea] = useState(() => record?.ror?.area_hectare ? (record.ror.area_hectare * 10000).toFixed(2) : (record?.plot_area || 19091));
-  const [ulpin, setUlpin] = useState(() => getField('ror.ulpin', record?.ulpin || '75QA02657Q4428'));
+  const [plotArea, setPlotArea] = useState(() => initialRecord?.plot_area || (initialRecord?.ror?.area_hectare ? (initialRecord.ror.area_hectare * 10000).toFixed(2) : (record?.plot_area || 19091)));
+  const [ulpin, setUlpin] = useState(() => initialRecord?.ulpin || getField('ror.ulpin', record?.ulpin || '75QA02657Q4428'));
 
   // Sale Deed Fields
-  const [regNo, setRegNo] = useState(() => getField('deed.document_no', record.registration_number || '204 of 2018'));
-  const [sellerName, setSellerName] = useState(() => getField('deed.vendor_name', record.seller_name || 'Kavita Naidu'));
-  const [buyerName, setBuyerName] = useState(() => getField('deed.vendee_name', record.buyer_name || 'Arumugam Kumar'));
-  const [saleValue, setSaleValue] = useState(() => getField('deed.sale_consideration_rs', record.sale_value_inr || 6860408));
+  const [regNo, setRegNo] = useState(() => initialRecord?.registration_number || getField('deed.document_no', record.registration_number || '204 of 2018'));
+  const [sellerName, setSellerName] = useState(() => initialRecord?.seller_name || getField('deed.vendor_name', record.seller_name || 'Kavita Naidu'));
+  const [buyerName, setBuyerName] = useState(() => initialRecord?.buyer_name || getField('deed.vendee_name', record.buyer_name || 'Arumugam Kumar'));
+  const [saleValue, setSaleValue] = useState(() => initialRecord?.sale_value_inr || getField('deed.sale_consideration_rs', record.sale_value_inr || 6860408));
 
   // Mutation Fields
-  const [mutSerial, setMutSerial] = useState(() => getField('mutation.mutation_case_no', record.mutation_serial_number || 'MUT-2018-2584'));
-  const [priorOwner, setPriorOwner] = useState(() => getField('mutation.transferor', record.transferor_prior_owner || 'Kavita Naidu'));
-  const [newOwner, setNewOwner] = useState(() => getField('mutation.transferee', record.transferee_new_owner || 'Arumugam Kumar'));
+  const [mutSerial, setMutSerial] = useState(() => initialRecord?.mutation_serial_number || getField('mutation.mutation_case_no', record.mutation_serial_number || 'MUT-2018-2584'));
+  const [priorOwner, setPriorOwner] = useState(() => initialRecord?.transferor_prior_owner || getField('mutation.transferor', record.transferor_prior_owner || 'Kavita Naidu'));
+  const [newOwner, setNewOwner] = useState(() => initialRecord?.transferee_new_owner || getField('mutation.transferee', record.transferee_new_owner || 'Arumugam Kumar'));
 
   // Cadastral Map Fields
-  const [mapSheet, setMapSheet] = useState(() => getField('cadastral.sheet_no', record.map_sheet_number || 'Sheet-04'));
-  const [epsg, setEpsg] = useState(() => getField('cadastral.projection_system', record.projection_system || 'EPSG:4326'));
+  const [mapSheet, setMapSheet] = useState(() => initialRecord?.map_sheet_number || getField('cadastral.sheet_no', record.map_sheet_number || 'Sheet-04'));
+  const [epsg, setEpsg] = useState(() => initialRecord?.projection_system || getField('cadastral.projection_system', record.projection_system || 'EPSG:4326'));
 
   // SYNC STATE WHEN PROPS CHANGE
   useEffect(() => {
@@ -105,9 +105,9 @@ export default function SplitViewVerification({ record: initialRecord, onApprove
       setRecord(initialRecord);
       setIsSigned(false);
       
-      const rorKhasra = initialRecord.ror?.khasra_no || initialRecord.khasra_no || '117/2';
-      const rorKhata = initialRecord.ror?.khata_no || initialRecord.khata_no || '00229';
-      const rorUlpin = initialRecord.ror?.ulpin || initialRecord.ulpin || '75QA02657Q4428';
+      const rorKhasra = initialRecord.khasra_no || initialRecord.ror?.khasra_no || '117/2';
+      const rorKhata = initialRecord.khata_no || initialRecord.ror?.khata_no || '00229';
+      const rorUlpin = initialRecord.ulpin || initialRecord.ror?.ulpin || '75QA02657Q4428';
       
       let names = initialRecord.owner_names;
       if (initialRecord.ror?.owners) {

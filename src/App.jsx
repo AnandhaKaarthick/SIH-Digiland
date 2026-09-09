@@ -264,8 +264,30 @@ export default function App() {
           <SplitViewVerification 
             record={selectedRecord} 
             onApproveComplete={(approvedRec) => {
-              setRecordsList(prev => prev.map(r => r.id === approvedRec.id ? { ...r, ...approvedRec, status_flag: 'VALID', routing: 'AUTO_APPROVED', priority_level: 'LOW_PRIORITY' } : r));
-              setSelectedRecord(approvedRec);
+              // Ensure approved record is never hidden by stale purgedIds
+              const updatedPurged = purgedIds.filter(id => id !== approvedRec.id);
+              savePurgedIds(updatedPurged);
+
+              const formattedApproved = {
+                ...approvedRec,
+                status_flag: 'VALID',
+                routing: 'AUTO_APPROVED',
+                priority_level: 'LOW_PRIORITY'
+              };
+
+              setUploadedRecords(prev => [formattedApproved, ...prev.filter(r => r.id !== approvedRec.id)]);
+              setRecordsList(prev => {
+                const exists = prev.some(r => r.id === approvedRec.id);
+                if (exists) {
+                  return prev.map(r => r.id === approvedRec.id ? { ...r, ...formattedApproved } : r);
+                } else {
+                  return [formattedApproved, ...prev];
+                }
+              });
+
+              setSelectedRecord(formattedApproved);
+              setToastMessage(`Record "${approvedRec.id}" approved & committed to Land Records Registry!`);
+              setTimeout(() => setToastMessage(null), 4000);
               setCurrentTab('records');
             }} 
           />

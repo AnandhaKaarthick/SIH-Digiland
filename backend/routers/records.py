@@ -79,15 +79,18 @@ def commit_human_review(req: CommitReviewRequest, db: Session = Depends(get_db))
     last_block = db.query(DBAuditTrail).order_by(DBAuditTrail.history_id.desc()).first()
     prev_hash = last_block.current_hash if last_block else "0000000000000000000000000000000000000000000000000000000000000000"
 
-    # Update record status & corrected fields in DB if found
-    if rec:
-        if req.action == "APPROVE":
-            rec.status_flag = "VALID"
-            rec.routing = "AUTO_APPROVED"
-            rec.confidence_score = max(rec.confidence_score, 98.0)
-        elif req.action == "REJECT":
-            rec.status_flag = "FAILED_CRITICAL"
-            rec.routing = "REJECTED_CRITICAL"
+    # Update record status & corrected fields in DB if found or create if new
+    if not rec:
+        rec = DBLandRecord(id=req.record_id)
+        db.add(rec)
+
+    if req.action == "APPROVE":
+        rec.status_flag = "VALID"
+        rec.routing = "AUTO_APPROVED"
+        rec.confidence_score = max(rec.confidence_score or 95.0, 98.0)
+    elif req.action == "REJECT":
+        rec.status_flag = "FAILED_CRITICAL"
+        rec.routing = "REJECTED_CRITICAL"
 
         if req.corrected_fields:
             cf = req.corrected_fields
