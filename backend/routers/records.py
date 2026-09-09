@@ -92,55 +92,61 @@ def commit_human_review(req: CommitReviewRequest, db: Session = Depends(get_db))
         rec.status_flag = "FAILED_CRITICAL"
         rec.routing = "REJECTED_CRITICAL"
 
-        if req.corrected_fields:
-            cf = req.corrected_fields
-            if "khasra_no" in cf and cf["khasra_no"]:
-                rec.khasra_no = cf["khasra_no"]
-            if "khata_no" in cf and cf["khata_no"]:
-                rec.khata_no = cf["khata_no"]
-            if "ulpin" in cf and cf["ulpin"]:
-                rec.ulpin = cf["ulpin"]
-            if "owner_names" in cf and cf["owner_names"]:
-                names = cf["owner_names"]
-                rec.owner_names = [s.strip() for s in names.split(",")] if isinstance(names, str) else names
-            if "owner_shares" in cf and cf["owner_shares"]:
-                shares = cf["owner_shares"]
-                rec.owner_shares = [s.strip() for s in shares.split(",")] if isinstance(shares, str) else shares
-            if "plot_area" in cf and cf["plot_area"]:
-                try:
-                    rec.plot_area = float(cf["plot_area"])
-                except:
-                    pass
-            if "registration_number" in cf and cf["registration_number"]:
-                rec.registration_number = cf["registration_number"]
-            if "seller_name" in cf and cf["seller_name"]:
-                rec.seller_name = cf["seller_name"]
-            if "buyer_name" in cf and cf["buyer_name"]:
-                rec.buyer_name = cf["buyer_name"]
-            if "sale_value_inr" in cf and cf["sale_value_inr"]:
-                try:
-                    rec.sale_value_inr = float(cf["sale_value_inr"])
-                except:
-                    pass
-            if "mutation_serial_number" in cf and cf["mutation_serial_number"]:
-                rec.mutation_serial_number = cf["mutation_serial_number"]
-            if "transferor_prior_owner" in cf and cf["transferor_prior_owner"]:
-                rec.transferor_prior_owner = cf["transferor_prior_owner"]
-            if "transferee_new_owner" in cf and cf["transferee_new_owner"]:
-                rec.transferee_new_owner = cf["transferee_new_owner"]
-            if "map_sheet_number" in cf and cf["map_sheet_number"]:
-                rec.map_sheet_number = cf["map_sheet_number"]
-            if "projection_system" in cf and cf["projection_system"]:
-                rec.projection_system = cf["projection_system"]
+    if req.corrected_fields:
+        cf = req.corrected_fields
+        if "khasra_no" in cf and cf["khasra_no"]:
+            rec.khasra_no = cf["khasra_no"]
+        if "khata_no" in cf and cf["khata_no"]:
+            rec.khata_no = cf["khata_no"]
+        if "ulpin" in cf and cf["ulpin"]:
+            rec.ulpin = cf["ulpin"]
+        if "village" in cf and cf["village"]:
+            rec.village = cf["village"]
+        if "tehsil" in cf and cf["tehsil"]:
+            rec.tehsil = cf["tehsil"]
+        if "district" in cf and cf["district"]:
+            rec.district = cf["district"]
+        if "owner_names" in cf and cf["owner_names"]:
+            names = cf["owner_names"]
+            rec.owner_names = [s.strip() for s in names.split(",")] if isinstance(names, str) else names
+        if "owner_shares" in cf and cf["owner_shares"]:
+            shares = cf["owner_shares"]
+            rec.owner_shares = [s.strip() for s in shares.split(",")] if isinstance(shares, str) else shares
+        if "plot_area" in cf and cf["plot_area"]:
+            try:
+                rec.plot_area = float(cf["plot_area"])
+            except:
+                pass
+        if "registration_number" in cf and cf["registration_number"]:
+            rec.registration_number = cf["registration_number"]
+        if "seller_name" in cf and cf["seller_name"]:
+            rec.seller_name = cf["seller_name"]
+        if "buyer_name" in cf and cf["buyer_name"]:
+            rec.buyer_name = cf["buyer_name"]
+        if "sale_value_inr" in cf and cf["sale_value_inr"]:
+            try:
+                rec.sale_value_inr = float(cf["sale_value_inr"])
+            except:
+                pass
+        if "mutation_serial_number" in cf and cf["mutation_serial_number"]:
+            rec.mutation_serial_number = cf["mutation_serial_number"]
+        if "transferor_prior_owner" in cf and cf["transferor_prior_owner"]:
+            rec.transferor_prior_owner = cf["transferor_prior_owner"]
+        if "transferee_new_owner" in cf and cf["transferee_new_owner"]:
+            rec.transferee_new_owner = cf["transferee_new_owner"]
+        if "map_sheet_number" in cf and cf["map_sheet_number"]:
+            rec.map_sheet_number = cf["map_sheet_number"]
+        if "projection_system" in cf and cf["projection_system"]:
+            rec.projection_system = cf["projection_system"]
 
-            # Sync raw_payload dictionary
-            payload = rec.raw_payload or {}
-            if isinstance(payload, dict):
-                payload.update(cf)
-                rec.raw_payload = payload
+        # Sync raw_payload dictionary
+        payload = rec.raw_payload or {}
+        if isinstance(payload, dict):
+            payload.update(cf)
+            rec.raw_payload = payload
 
-        rec.updated_at = datetime.datetime.utcnow()
-        db.commit()
+    rec.updated_at = datetime.datetime.utcnow()
+    db.commit()
 
     # Create payload for SHA-256 block hash
     payload = {

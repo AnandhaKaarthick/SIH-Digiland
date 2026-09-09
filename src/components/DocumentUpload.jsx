@@ -258,6 +258,12 @@ export default function DocumentUpload({ onProcessComplete, liveRecords = [], pu
       khasra_no: uniqueKhasra,
       khata_no: uniqueKhata,
       ulpin: uniqueUlpin,
+      village: baseRecord.village || 'Nemili',
+      tehsil: baseRecord.tehsil || 'Sriperumbudur',
+      district: baseRecord.district || 'Kanchipuram',
+      plot_area: baseRecord.plot_area || 1821.08,
+      owner_names: Array.isArray(baseRecord.owner_names) ? baseRecord.owner_names : [baseRecord.owner_names || 'K. Raman'],
+      owner_shares: baseRecord.owner_shares || [1.0],
       scanned_image_url: getDocumentSvgForRecord(baseRecord)
     };
   };
