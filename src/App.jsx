@@ -42,23 +42,25 @@ export default function App() {
     }
   };
 
-  const [recordsList, setRecordsList] = useState(() => {
-    const purgedSet = new Set(purgedIds);
-    return MOCK_LAND_RECORDS.filter(r => !purgedSet.has(r.id));
-  });
+  // Filter out invalid/empty blank records from display list
+  const validRecordsList = recordsList.filter(rec => 
+    rec && rec.id && (rec.ulpin || rec.khasra_no || (Array.isArray(rec.owner_names) ? rec.owner_names.length > 0 : rec.owner_names))
+  );
 
   // Analyze duplicates across central records list
   const duplicateCounts = {};
-  recordsList.forEach(rec => {
-    const key = rec.ulpin || `${rec.khasra_no}_${rec.khata_no}_${rec.village}`;
+  validRecordsList.forEach(rec => {
+    const key = (rec.ulpin && rec.ulpin.trim()) 
+      || (rec.khasra_no && rec.khata_no ? `${rec.khasra_no.trim()}_${rec.khata_no.trim()}_${(rec.village || '').trim()}` : null);
     if (key) {
       duplicateCounts[key] = (duplicateCounts[key] || 0) + 1;
     }
   });
 
   const duplicateRecordIds = new Set();
-  recordsList.forEach(rec => {
-    const key = rec.ulpin || `${rec.khasra_no}_${rec.khata_no}_${rec.village}`;
+  validRecordsList.forEach(rec => {
+    const key = (rec.ulpin && rec.ulpin.trim()) 
+      || (rec.khasra_no && rec.khata_no ? `${rec.khasra_no.trim()}_${rec.khata_no.trim()}_${(rec.village || '').trim()}` : null);
     if (key && duplicateCounts[key] > 1) {
       duplicateRecordIds.add(rec.id);
     }
@@ -263,6 +265,7 @@ export default function App() {
         return (
           <SplitViewVerification 
             record={selectedRecord} 
+            allRecords={validRecordsList}
             onApproveComplete={(approvedRec) => {
               // Ensure approved record is never hidden by stale purgedIds
               const updatedPurged = purgedIds.filter(id => id !== approvedRec.id);

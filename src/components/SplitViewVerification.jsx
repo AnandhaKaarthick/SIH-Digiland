@@ -27,7 +27,7 @@ import { getDocumentSvgForRecord } from '../utils/documentSvgGenerator';
 import { commitReviewApi } from '../services/api';
 import { useTranslation } from '../context/LanguageContext';
 
-export default function SplitViewVerification({ record: initialRecord, onApproveComplete }) {
+export default function SplitViewVerification({ record: initialRecord, allRecords = [], onApproveComplete }) {
   const { t } = useTranslation();
   const [record, setRecord] = useState(initialRecord || MOCK_LAND_RECORDS[0]);
   const [activeField, setActiveField] = useState('owner_shares');
@@ -410,12 +410,16 @@ export default function SplitViewVerification({ record: initialRecord, onApprove
       )}
 
       {/* Dynamic Duplicate Record Alert Banner */}
-      {(record.ulpin === '14BW89201L9842' || record.khasra_no === '142/3B' || record.status_flag === 'FLAGGED_WARNING') && (
+      {allRecords.some(r => r.id !== record.id && (
+        (r.ulpin && ulpin && r.ulpin.trim().toLowerCase() === ulpin.trim().toLowerCase()) ||
+        (r.khasra_no && khasraNo && r.khata_no && khataNo && r.khasra_no.trim() === khasraNo.trim() && r.khata_no.trim() === khataNo.trim()) ||
+        (r.file_name && record.file_name && r.file_name.trim().toLowerCase() === record.file_name.trim().toLowerCase())
+      )) && (
         <div className="bg-status-warning/15 border-l-4 border-status-warning p-3 rounded-r-lg flex items-center justify-between text-xs text-status-warning font-mono flex-shrink-0 shadow-sm">
           <div className="flex items-center gap-2.5">
             <AlertTriangle className="w-4 h-4 flex-shrink-0 text-status-warning" />
             <span>
-              <strong>Registry Duplicate Warning:</strong> Identical ULPIN <strong>{record.ulpin || '14BW89201L9842'}</strong> / Khasra <strong>{record.khasra_no || '142/3B'}</strong> detected in database queue.
+              <strong>Registry Duplicate Warning:</strong> Identical plot ULPIN <strong>{ulpin || record.ulpin}</strong> / Khasra <strong>{khasraNo || record.khasra_no}</strong> detected in database queue.
             </span>
           </div>
           <span className="bg-status-warning text-white font-mono text-[10px] px-2 py-0.5 rounded font-bold uppercase shadow-sm">
