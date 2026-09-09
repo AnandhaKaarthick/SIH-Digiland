@@ -26,7 +26,7 @@ import {
   AlertOctagon
 } from 'lucide-react';
 import { getDocumentSvgForRecord } from '../utils/documentSvgGenerator';
-import { commitReviewApi } from '../services/api';
+import { commitReviewApi, deleteRecordApi } from '../services/api';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function RecordDetailsView({ record, onBack, onDeleteRecord, onEditRecord, onUpdateRecord }) {
@@ -131,7 +131,12 @@ export default function RecordDetailsView({ record, onBack, onDeleteRecord, onEd
     setTimeout(() => setToastMsg(null), 4000);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteRecordApi(record.id);
+    } catch (err) {
+      console.warn("Backend delete record warning:", err);
+    }
     if (onDeleteRecord) {
       onDeleteRecord(record.id);
     }

@@ -150,7 +150,12 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
           }
         });
 
-        setAuditLogs(uniqueLogs);
+        // Filter out legacy DL-00 fake entries and reverse sort so latest activity is at the top
+        const cleanRealLogs = uniqueLogs
+          .filter(log => !((log.record_id || '').startsWith('DL-00') && (log.action || '').includes('INITIAL_SEED')))
+          .reverse();
+
+        setAuditLogs(cleanRealLogs);
       } catch (err) {
         console.warn("Audit log fetch error:", err);
       } finally {
