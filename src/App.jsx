@@ -334,6 +334,8 @@ export default function App() {
         );
 
       case 'records':
+        if (viewingRecordDetails) {
+          return (
             <RecordDetailsView 
               record={viewingRecordDetails} 
               onBack={() => setViewingRecordDetails(null)} 
@@ -352,6 +354,8 @@ export default function App() {
                 saveAccountUploadedRecords(newUploaded);
               }}
             />
+          );
+        }
 
         return (
           <div className="flex flex-col gap-space-lg max-w-[1400px] mx-auto w-full">
