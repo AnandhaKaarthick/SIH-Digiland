@@ -27,7 +27,7 @@ import { getDocumentSvgForRecord } from '../utils/documentSvgGenerator';
 import { commitReviewApi } from '../services/api';
 import { useTranslation } from '../context/LanguageContext';
 
-export default function SplitViewVerification({ record: initialRecord, allRecords = [], onApproveComplete }) {
+export default function SplitViewVerification({ record: initialRecord, allRecords = [], activeRole = 'tehsildar', onApproveComplete }) {
   const { t } = useTranslation();
   const [record, setRecord] = useState(initialRecord || MOCK_LAND_RECORDS[0]);
   const [activeField, setActiveField] = useState('owner_shares');
@@ -697,7 +697,14 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
           <div className="p-4 bg-surface-container-low border-t border-border-structural flex items-center justify-between gap-3 flex-shrink-0 flex-wrap">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-primary" />
-              <span className="text-xs font-heading font-semibold text-text-primary">Officer ECDSA Digital Sign &amp; Database Commit</span>
+              <div className="flex flex-col">
+                <span className="text-xs font-heading font-semibold text-text-primary">Officer ECDSA Digital Sign &amp; Database Commit</span>
+                {activeRole !== 'tehsildar' && activeRole !== 'admin' && (
+                  <span className="text-[10px] font-mono text-status-warning font-bold flex items-center gap-1">
+                    🔒 Sign-off Restricted: Tehsildar / Admin Approval Required
+                  </span>
+                )}
+              </div>
             </div>
 
             <div className="flex items-center gap-3">
@@ -723,24 +730,34 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
                 )}
               </button>
 
-              {/* Approve Button */}
-              <button 
-                onClick={handleApprove}
-                disabled={isSigned || isRejected}
-                className={`px-5 py-2 rounded-lg font-heading text-xs font-semibold text-on-primary transition-all shadow-sm flex items-center gap-2 ${
-                  isSigned ? 'bg-status-success' : 'bg-primary hover:bg-primary-container'
-                }`}
-              >
-                {isSigned ? (
-                  <>
-                    <CheckCircle2 className="w-4 h-4" /> Signed &amp; Committed to Database!
-                  </>
-                ) : (
-                  <>
-                    <ShieldCheck className="w-4 h-4" /> Approve &amp; Save to Database
-                  </>
-                )}
-              </button>
+              {/* Approve / HITL Save Draft Button */}
+              {activeRole === 'tehsildar' || activeRole === 'admin' ? (
+                <button 
+                  onClick={handleApprove}
+                  disabled={isSigned || isRejected}
+                  className={`px-5 py-2 rounded-lg font-heading text-xs font-semibold text-on-primary transition-all shadow-sm flex items-center gap-2 ${
+                    isSigned ? 'bg-status-success' : 'bg-primary hover:bg-primary-container'
+                  }`}
+                >
+                  {isSigned ? (
+                    <>
+                      <CheckCircle2 className="w-4 h-4" /> Signed &amp; Committed to Database!
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className="w-4 h-4" /> Approve &amp; Save to Database (Ed25519)
+                    </>
+                  )}
+                </button>
+              ) : (
+                <button 
+                  onClick={() => alert(`Review draft saved by ${activeRole.toUpperCase()}. Forwarded to Tehsildar for ECDSA Digital Sign-Off.`)}
+                  disabled={isSigned || isRejected}
+                  className="px-5 py-2 rounded-lg font-heading text-xs font-semibold bg-status-warning/20 text-status-warning border border-status-warning/40 hover:bg-status-warning/30 transition-all shadow-sm flex items-center gap-2"
+                >
+                  <FileCheck className="w-4 h-4" /> Save HITL Review Draft (Pending Tehsildar Sign-Off)
+                </button>
+              )}
             </div>
           </div>
         </div>

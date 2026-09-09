@@ -29,7 +29,7 @@ import { getDocumentSvgForRecord } from '../utils/documentSvgGenerator';
 import { commitReviewApi, deleteRecordApi } from '../services/api';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function RecordDetailsView({ record, onBack, onDeleteRecord, onEditRecord, onUpdateRecord }) {
+export default function RecordDetailsView({ record, activeRole = 'tehsildar', onBack, onDeleteRecord, onEditRecord, onUpdateRecord }) {
   const { t } = useLanguage();
 
   const defaultSvg = getDocumentSvgForRecord(record || {});
@@ -218,31 +218,35 @@ export default function RecordDetailsView({ record, onBack, onDeleteRecord, onEd
             Composite Score: {record.confidence_score}%
           </span>
 
-          {/* Action Buttons: Edit Record, Delete Record, Split View Editor */}
-          <button
-            onClick={() => setIsEditModalOpen(true)}
-            className="px-3.5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-heading text-xs font-bold shadow-sm transition-all flex items-center gap-1.5"
-            title="Edit record attributes & re-certify"
-          >
-            <Edit3 className="w-4 h-4" /> Edit Record
-          </button>
+          {/* Action Buttons: Edit Record, Delete Record, Split View Editor (Gated by RBAC) */}
+          {(activeRole === 'tehsildar' || activeRole === 'admin') && (
+            <>
+              <button
+                onClick={() => setIsEditModalOpen(true)}
+                className="px-3.5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-heading text-xs font-bold shadow-sm transition-all flex items-center gap-1.5"
+                title="Edit record attributes & re-certify"
+              >
+                <Edit3 className="w-4 h-4" /> Edit Record
+              </button>
 
-          <button
-            onClick={() => setIsDeleteModalOpen(true)}
-            className="px-3.5 py-2 rounded-lg bg-status-error/10 hover:bg-status-error text-status-error hover:text-white border border-status-error/30 font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5"
-            title="Permanently delete record from central registry"
-          >
-            <Trash2 className="w-4 h-4" /> Delete Record
-          </button>
+              <button
+                onClick={() => setIsDeleteModalOpen(true)}
+                className="px-3.5 py-2 rounded-lg bg-status-error/10 hover:bg-status-error text-status-error hover:text-white border border-status-error/30 font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5"
+                title="Permanently delete record from central registry"
+              >
+                <Trash2 className="w-4 h-4" /> Delete Record
+              </button>
 
-          {onEditRecord && (
-            <button
-              onClick={() => onEditRecord(record)}
-              className="px-3 py-2 rounded-lg bg-surface-card hover:bg-surface-container border border-border-structural text-text-primary font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5"
-              title="Open full 50/50 OCR Split View Verification Suite"
-            >
-              <ExternalLink className="w-3.5 h-3.5 text-primary" /> Split View Editor
-            </button>
+              {onEditRecord && (
+                <button
+                  onClick={() => onEditRecord(record)}
+                  className="px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary border border-border-structural font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5"
+                  title="Open HITL Editor"
+                >
+                  <ExternalLink className="w-4 h-4" /> Open HITL Editor
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>

@@ -13,7 +13,9 @@ import {
   Globe,
   ChevronDown,
   CheckCircle2,
-  Sparkles
+  Sparkles,
+  LogOut,
+  UserCheck
 } from 'lucide-react';
 import { MOCK_USERS } from '../data/mockData';
 import { useTranslation } from '../context/LanguageContext';
@@ -23,11 +25,13 @@ export default function NavigationShell({
   setCurrentTab, 
   activeRole, 
   setActiveRole, 
+  currentUser,
+  onLogout,
   children,
   searchQuery,
   setSearchQuery
 }) {
-  const activeUser = MOCK_USERS.find(u => u.role === activeRole) || MOCK_USERS[0];
+  const activeUser = currentUser || MOCK_USERS.find(u => u.role === activeRole) || MOCK_USERS[0];
   const { activeLang, setActiveLang, currentLangObj, languages, t } = useTranslation();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langDropdownRef = useRef(null);
@@ -43,15 +47,18 @@ export default function NavigationShell({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const navItems = [
-    { id: 'dashboard', label: t('nav_dashboard', 'Dashboard'), icon: LayoutDashboard, badge: null },
-    { id: 'document-upload', label: t('nav_document_upload', 'Document Upload'), icon: Upload, badge: null },
-    { id: 'verification-queue', label: t('nav_verification_queue', 'Verification Queue'), icon: CheckSquare, badge: '14' },
-    { id: 'records', label: t('nav_records_registry', 'Records Registry'), icon: Folder, badge: null },
-    { id: 'audit-logs', label: t('nav_audit_logs', 'Audit & Ingestion Logs'), icon: ShieldCheck, badge: null },
-    { id: 'gis-map', label: t('nav_gis_map', 'GIS Cadastral Map'), icon: Map, badge: null },
-    { id: 'admin-rbac', label: t('nav_admin_rbac', 'Admin & RBAC'), icon: Shield, badge: null },
+  const allNavItems = [
+    { id: 'dashboard', label: t('nav_dashboard', 'Dashboard'), icon: LayoutDashboard, badge: null, roles: ['clerk', 'patwari', 'tehsildar', 'citizen'] },
+    { id: 'document-upload', label: t('nav_document_upload', 'Document Upload'), icon: Upload, badge: null, roles: ['clerk', 'patwari', 'tehsildar'] },
+    { id: 'verification-queue', label: t('nav_verification_queue', 'Verification Queue'), icon: CheckSquare, badge: '14', roles: ['clerk', 'patwari', 'tehsildar'] },
+    { id: 'records', label: t('nav_records_registry', 'Records Registry'), icon: Folder, badge: null, roles: ['clerk', 'patwari', 'tehsildar', 'citizen'] },
+    { id: 'audit-logs', label: t('nav_audit_logs', 'Audit & Ingestion Logs'), icon: ShieldCheck, badge: null, roles: ['clerk', 'patwari', 'tehsildar', 'citizen'] },
+    { id: 'gis-map', label: t('nav_gis_map', 'GIS Cadastral Map'), icon: Map, badge: null, roles: ['clerk', 'patwari', 'tehsildar', 'citizen'] },
+    { id: 'admin-rbac', label: t('nav_admin_rbac', 'Admin & RBAC'), icon: Shield, badge: null, roles: ['tehsildar'] },
   ];
+
+  const currentRole = activeUser?.role || activeRole || 'tehsildar';
+  const navItems = allNavItems.filter(item => item.roles.includes(currentRole));
 
   return (
     <div className="min-h-screen bg-canvas-bg font-body text-text-primary flex">
@@ -69,11 +76,14 @@ export default function NavigationShell({
             </div>
           </div>
 
-          <div className="px-space-base py-space-xs mt-3">
+          <div className="px-space-base py-space-xs mt-3 flex items-center justify-between">
             <span className="font-heading text-[10px] uppercase tracking-wider text-text-secondary font-semibold opacity-70">Navigation</span>
+            <span className="font-mono text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-primary/10 text-primary">
+              {currentRole}
+            </span>
           </div>
 
-          {/* Navigation Links */}
+          {/* Navigation Links (Filtered strictly by RBAC matrix) */}
           <nav className="flex flex-col px-space-sm gap-space-2xs">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -225,16 +235,6 @@ export default function NavigationShell({
               <span className="font-mono text-xs font-semibold">{t('gov_gateway_active', 'Gov Gateway Active')}</span>
             </div>
 
-            <button 
-              className="relative p-2 rounded-xl text-text-secondary hover:bg-surface-container hover:text-text-primary transition-colors border border-transparent hover:border-border-structural"
-              title="Notifications"
-            >
-              <Bell className="w-4 h-4" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-status-warning"></span>
-            </button>
-
-            <div className="h-6 w-[1px] bg-border-structural"></div>
-
             {/* Role Switcher & User Profile */}
             <div className="flex items-center gap-3">
               <div className="flex flex-col text-right">
@@ -258,6 +258,15 @@ export default function NavigationShell({
                 style={{ width: '34px', height: '34px' }}
                 className="w-8.5 h-8.5 rounded-full object-cover shadow-sm border border-border-structural flex-shrink-0" 
               />
+              {onLogout && (
+                <button
+                  onClick={onLogout}
+                  className="p-2 rounded-xl text-text-secondary hover:bg-status-error/10 hover:text-status-error transition-colors border border-border-structural/60"
+                  title="Sign out of DigiLand"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
         </header>

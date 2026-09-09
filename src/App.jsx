@@ -8,13 +8,16 @@ import RecordDetailsView from './components/RecordDetailsView';
 import AuditLogsView from './components/AuditLogsView';
 import GisMapView from './components/GisMapView';
 import AdminRbac from './components/AdminRbac';
-import { MOCK_LAND_RECORDS } from './data/mockData';
+import LoginPage from './components/LoginPage';
+import { MOCK_LAND_RECORDS, MOCK_USERS } from './data/mockData';
 import { fetchAllRecordsApi, deleteRecordApi, purgeDuplicatesApi, resetRegistryApi } from './services/api';
 
 import { LanguageProvider, useTranslation } from './context/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [currentUser, setCurrentUser] = useState(MOCK_USERS[0]);
   const [currentTab, setCurrentTab] = useState('dashboard');
   const [activeRole, setActiveRole] = useState('tehsildar');
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,6 +25,24 @@ export default function App() {
   const [viewingRecordDetails, setViewingRecordDetails] = useState(null);
   const [docTypeFilter, setDocTypeFilter] = useState('ALL');
   const [toastMessage, setToastMessage] = useState(null);
+
+  // Synchronize activeRole changes with currentUser profile
+  const handleRoleChange = (role) => {
+    setActiveRole(role);
+    const user = MOCK_USERS.find(u => u.role === role) || MOCK_USERS[0];
+    setCurrentUser(user);
+  };
+
+  const handleLogin = (user) => {
+    setCurrentUser(user);
+    setActiveRole(user.role || 'tehsildar');
+    setIsLoggedIn(true);
+    setCurrentTab('dashboard');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   // Persistent purged record IDs tracking
   const [purgedIds, setPurgedIds] = useState(() => {
@@ -306,6 +327,7 @@ export default function App() {
           <SplitViewVerification 
             record={selectedRecord} 
             allRecords={validRecordsList}
+            activeRole={activeRole}
             onApproveComplete={(approvedRec) => {
               // Ensure approved record is never hidden by stale purgedIds
               const updatedPurged = purgedIds.filter(id => id !== approvedRec.id);
@@ -342,6 +364,7 @@ export default function App() {
           return (
             <RecordDetailsView 
               record={viewingRecordDetails} 
+              activeRole={activeRole}
               onBack={() => setViewingRecordDetails(null)} 
               onDeleteRecord={(recId) => {
                 handleRemoveSingleDuplicate(recId);
@@ -634,21 +657,27 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      <NavigationShell
-        currentTab={currentTab}
-        setCurrentTab={(tab) => {
-          setViewingRecordDetails(null);
-          setCurrentTab(tab);
-        }}
-        activeRole={activeRole}
-        setActiveRole={setActiveRole}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      >
-        <ErrorBoundary>
-          {renderTabContent()}
-        </ErrorBoundary>
-      </NavigationShell>
+      {!isLoggedIn ? (
+        <LoginPage onLogin={handleLogin} />
+      ) : (
+        <NavigationShell
+          currentTab={currentTab}
+          setCurrentTab={(tab) => {
+            setViewingRecordDetails(null);
+            setCurrentTab(tab);
+          }}
+          activeRole={activeRole}
+          setActiveRole={handleRoleChange}
+          currentUser={currentUser}
+          onLogout={handleLogout}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        >
+          <ErrorBoundary>
+            {renderTabContent()}
+          </ErrorBoundary>
+        </NavigationShell>
+      )}
     </LanguageProvider>
   );
 }
