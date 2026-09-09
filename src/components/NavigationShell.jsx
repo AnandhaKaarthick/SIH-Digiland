@@ -6,6 +6,7 @@ import {
   Folder, 
   Map, 
   Shield,
+  ShieldCheck,
   Search,
   Bell,
   X,
@@ -47,6 +48,7 @@ export default function NavigationShell({
     { id: 'document-upload', label: t('nav_document_upload', 'Document Upload'), icon: Upload, badge: null },
     { id: 'verification-queue', label: t('nav_verification_queue', 'Verification Queue'), icon: CheckSquare, badge: '14' },
     { id: 'records', label: t('nav_records_registry', 'Records Registry'), icon: Folder, badge: null },
+    { id: 'audit-logs', label: t('nav_audit_logs', 'Audit & Ingestion Logs'), icon: ShieldCheck, badge: null },
     { id: 'gis-map', label: t('nav_gis_map', 'GIS Cadastral Map'), icon: Map, badge: null },
     { id: 'admin-rbac', label: t('nav_admin_rbac', 'Admin & RBAC'), icon: Shield, badge: null },
   ];

@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import DocumentUpload from './components/DocumentUpload';
 import SplitViewVerification from './components/SplitViewVerification';
 import RecordDetailsView from './components/RecordDetailsView';
+import AuditLogsView from './components/AuditLogsView';
 import GisMapView from './components/GisMapView';
 import AdminRbac from './components/AdminRbac';
 import { MOCK_LAND_RECORDS } from './data/mockData';
@@ -211,9 +212,11 @@ export default function App() {
       case 'document-upload':
         return (
           <DocumentUpload 
+            liveRecords={recordsList}
+            purgedIds={purgedIds}
             onProcessComplete={(record) => {
               setSelectedRecord(record);
-              setRecordsList(prev => [record, ...prev]);
+              setRecordsList(prev => [record, ...prev.filter(r => r.id !== record.id)]);
               setCurrentTab('verification-queue');
             }} 
           />
@@ -450,6 +453,14 @@ export default function App() {
               )}
             </div>
           </div>
+        );
+
+      case 'audit-logs':
+        return (
+          <AuditLogsView 
+            recordsList={recordsList} 
+            purgedIds={purgedIds} 
+          />
         );
 
       case 'gis-map':
