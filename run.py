@@ -6,7 +6,7 @@ import os
 
 def start_services():
     print("=" * 60)
-    print("        🏛️  DigiLand Platform - 1-Click Python Launcher")
+    print("        DigiLand Platform - 1-Click Python Launcher")
     print("=" * 60)
     print()
 
@@ -38,7 +38,7 @@ def start_services():
 
     print()
     print("=" * 60)
-    print("   🚀 DigiLand Platform Services are Running!")
+    print("   [+] DigiLand Platform Services are Running!")
     print("   - Web Application: http://localhost:5173")
     print("   - API Documentation: http://localhost:8000/docs")
     print("   - Press Ctrl+C at any time to shut down both servers.")
@@ -55,7 +55,7 @@ def start_services():
             frontend_process.terminate()
         except Exception:
             pass
-        print("[✔] All services stopped successfully.")
+        print("[+] All services stopped successfully.")
 
 if __name__ == "__main__":
     start_services()
