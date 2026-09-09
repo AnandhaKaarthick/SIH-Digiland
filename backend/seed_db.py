@@ -371,14 +371,20 @@ CLEAN_8_RECORDS = [
 ]
 
 def seed_database():
+    import datetime
+    from backend.services.audit_chain import AuditChainService
+
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
     try:
-        # Clear existing records to ensure clean dataset
+        # Clear existing records & audit trail to ensure clean dataset
         db.query(LandRecord).delete()
+        db.query(AuditTrail).delete()
         db.commit()
 
-        for r_data in CLEAN_8_RECORDS:
+        prev_hash = AuditChainService.GENESIS_HASH
+
+        for idx, r_data in enumerate(CLEAN_8_RECORDS):
             rec = LandRecord(
                 id=r_data["id"],
                 doc_type=r_data["doc_type"],
@@ -410,8 +416,64 @@ def seed_database():
                 raw_payload=r_data.get("raw_payload")
             )
             db.add(rec)
+
+            # Block 1: Initial Ingestion & Upload
+            upload_payload = {
+                "record_id": r_data["id"],
+                "action": "DOCUMENT_INGESTION",
+                "field_changed": "Initial Document Intake & OCR Parsing",
+                "new_value": f"Ingested Document {r_data['document_id']} (Schema: {r_data['doc_type']})",
+                "actor_name": "System Pipeline Engine"
+            }
+            curr_hash1 = AuditChainService.calculate_block_hash(prev_hash, upload_payload)
+            sig1 = AuditChainService.generate_digital_signature("system", curr_hash1)
+            
+            audit1 = AuditTrail(
+                record_id=r_data["id"],
+                action="DOCUMENT_INGESTION",
+                field_changed="Initial Document Intake & OCR Parsing",
+                old_value="RAW_SCAN",
+                new_value=f"Ingested Document {r_data['document_id']} (Schema: {r_data['doc_type']})",
+                previous_hash=prev_hash,
+                current_hash=curr_hash1,
+                actor_name="System Pipeline Engine",
+                actor_role="system",
+                digital_signature=sig1,
+                timestamp=datetime.datetime.utcnow() - datetime.timedelta(hours=(len(CLEAN_8_RECORDS) - idx)*2)
+            )
+            db.add(audit1)
+            prev_hash = curr_hash1
+
+            # Block 2: Revenue Officer Approval
+            if r_data.get("status_flag") == "VALID":
+                approve_payload = {
+                    "record_id": r_data["id"],
+                    "action": "HUMAN_REVIEW_APPROVE",
+                    "field_changed": "status_flag & digital_signature",
+                    "new_value": f"Approved & Certified by Tehsildar (ULPIN: {r_data.get('ulpin')})",
+                    "actor_name": "Rajesh Sharma, IRS"
+                }
+                curr_hash2 = AuditChainService.calculate_block_hash(prev_hash, approve_payload)
+                sig2 = AuditChainService.generate_digital_signature("tehsildar", curr_hash2)
+
+                audit2 = AuditTrail(
+                    record_id=r_data["id"],
+                    action="HUMAN_REVIEW_APPROVE",
+                    field_changed="status_flag & digital_signature",
+                    old_value="REQUIRES_REVIEW",
+                    new_value=f"Approved & Certified by Tehsildar (ULPIN: {r_data.get('ulpin')})",
+                    previous_hash=prev_hash,
+                    current_hash=curr_hash2,
+                    actor_name="Rajesh Sharma, IRS",
+                    actor_role="tehsildar",
+                    digital_signature=sig2,
+                    timestamp=datetime.datetime.utcnow() - datetime.timedelta(hours=(len(CLEAN_8_RECORDS) - idx)*2 - 1)
+                )
+                db.add(audit2)
+                prev_hash = curr_hash2
+
         db.commit()
-        print(f"Successfully seeded SQLite digiland.db with {len(CLEAN_8_RECORDS)} clean 4-schema records.")
+        print(f"Successfully seeded SQLite digiland.db with {len(CLEAN_8_RECORDS)} clean records & cryptographic audit trail blocks.")
     except Exception as e:
         print("Error seeding database:", e)
         db.rollback()

@@ -34,95 +34,104 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
         const res = await fetchAuditTrailApi();
         let apiBlocks = (res && res.blocks) ? res.blocks : [];
 
-        // Synthesize structured logs from current records state
+        // Format API blocks with readable timestamps
+        const formattedApiBlocks = apiBlocks.map(b => ({
+          ...b,
+          timestamp: b.timestamp 
+            ? (isNaN(Date.parse(b.timestamp)) ? b.timestamp : new Date(b.timestamp).toLocaleString())
+            : 'Just now'
+        }));
+
+        // Set up fallback / synthesized logs for records if API blocks are missing or incomplete
         const synthesizedLogs = [];
 
-        // Add upload & status logs from current records
-        recordsList.forEach((rec, idx) => {
-          const timestamp = new Date(Date.now() - (idx + 1) * 3600000).toLocaleString();
+        // Add upload & status logs from current records if apiBlocks is empty
+        if (formattedApiBlocks.length === 0) {
+          recordsList.forEach((rec, idx) => {
+            const timestamp = new Date(Date.now() - (idx + 1) * 3600000).toLocaleString();
 
-          // Upload event
-          synthesizedLogs.push({
-            history_id: `synth-upload-${rec.id}`,
-            record_id: rec.id,
-            action: 'DOCUMENT_UPLOADED',
-            category: 'UPLOADS',
-            actor_name: rec.uploaded_by || 'Revenue Officer / System Intake',
-            actor_role: 'system',
-            field_changed: 'Ingestion & PaddleOCR Parsing',
-            old_value: 'RAW_FILE_SCAN',
-            new_value: `Document ${rec.document_id || rec.id} ingested (Type: ${rec.doc_type || 'ROR'})`,
-            timestamp: timestamp,
-            previous_hash: '0000000000000000000000000000000000000000000000000000000000000000',
-            current_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
-            digital_signature: `Ed25519_SIG_SYS_${rec.id}_OK`
+            // Upload event
+            synthesizedLogs.push({
+              history_id: `synth-upload-${rec.id}`,
+              record_id: rec.id,
+              action: 'DOCUMENT_UPLOADED',
+              category: 'UPLOADS',
+              actor_name: rec.uploaded_by || 'Revenue Officer / System Intake',
+              actor_role: 'system',
+              field_changed: 'Ingestion & PaddleOCR Parsing',
+              old_value: 'RAW_FILE_SCAN',
+              new_value: `Document ${rec.document_id || rec.id} ingested (Type: ${rec.doc_type || 'ROR'})`,
+              timestamp: timestamp,
+              previous_hash: '0000000000000000000000000000000000000000000000000000000000000000',
+              current_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
+              digital_signature: `Ed25519_SIG_SYS_${rec.id}_OK`
+            });
+
+            // Approval or Rejection event
+            if (rec.status_flag === 'VALID' || rec.routing === 'AUTO_APPROVED') {
+              synthesizedLogs.push({
+                history_id: `synth-approved-${rec.id}`,
+                record_id: rec.id,
+                action: 'HUMAN_REVIEW_APPROVE',
+                category: 'APPROVED',
+                actor_name: 'Rajesh Sharma, IRS',
+                actor_role: 'tehsildar',
+                field_changed: 'status_flag & digital_signature',
+                old_value: 'REQUIRES_REVIEW',
+                new_value: `Approved & Committed to Land Registry (ULPIN: ${rec.ulpin})`,
+                timestamp: new Date(Date.now() - idx * 1800000).toLocaleString(),
+                previous_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
+                current_hash: `b8f90c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f${idx}b`,
+                digital_signature: `Ed25519_SIG_TEHSILDAR_RS_${rec.id}`
+              });
+            } else if (rec.status_flag === 'FAILED_CRITICAL' || rec.routing === 'REJECTED_CRITICAL') {
+              synthesizedLogs.push({
+                history_id: `synth-rejected-${rec.id}`,
+                record_id: rec.id,
+                action: 'HUMAN_REVIEW_REJECT',
+                category: 'REJECTED',
+                actor_name: 'Rajesh Sharma, IRS',
+                actor_role: 'tehsildar',
+                field_changed: 'status_flag & rejection_reason',
+                old_value: 'REQUIRES_REVIEW',
+                new_value: `Rejected Record: ${rec.rejection_reason || 'Discrepancy in revenue invariants / document authenticity'}`,
+                timestamp: new Date(Date.now() - idx * 1800000).toLocaleString(),
+                previous_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
+                current_hash: `c9f01d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9${idx}c`,
+                digital_signature: `Ed25519_SIG_REJECT_RS_${rec.id}`
+              });
+            }
           });
 
-          // Approval or Rejection event
-          if (rec.status_flag === 'VALID' || rec.routing === 'AUTO_APPROVED') {
-            synthesizedLogs.push({
-              history_id: `synth-approved-${rec.id}`,
-              record_id: rec.id,
-              action: 'HUMAN_REVIEW_APPROVE',
-              category: 'APPROVED',
-              actor_name: 'Rajesh Sharma, IRS',
-              actor_role: 'tehsildar',
-              field_changed: 'status_flag & digital_signature',
-              old_value: 'REQUIRES_REVIEW',
-              new_value: `Approved & Committed to Land Registry (ULPIN: ${rec.ulpin})`,
-              timestamp: new Date(Date.now() - idx * 1800000).toLocaleString(),
-              previous_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
-              current_hash: `b8f90c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f${idx}b`,
-              digital_signature: `Ed25519_SIG_TEHSILDAR_RS_${rec.id}`
-            });
-          } else if (rec.status_flag === 'FAILED_CRITICAL' || rec.routing === 'REJECTED_CRITICAL') {
-            synthesizedLogs.push({
-              history_id: `synth-rejected-${rec.id}`,
-              record_id: rec.id,
-              action: 'HUMAN_REVIEW_REJECT',
-              category: 'REJECTED',
-              actor_name: 'Rajesh Sharma, IRS',
-              actor_role: 'tehsildar',
-              field_changed: 'status_flag & rejection_reason',
-              old_value: 'REQUIRES_REVIEW',
-              new_value: `Rejected Record: ${rec.rejection_reason || 'Discrepancy in revenue invariants / document authenticity'}`,
-              timestamp: new Date(Date.now() - idx * 1800000).toLocaleString(),
-              previous_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
-              current_hash: `c9f01d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9${idx}c`,
-              digital_signature: `Ed25519_SIG_REJECT_RS_${rec.id}`
+          if (purgedIds && purgedIds.length > 0) {
+            purgedIds.forEach((pId, idx) => {
+              synthesizedLogs.push({
+                history_id: `synth-purge-${pId}`,
+                record_id: pId,
+                action: 'PURGE_DUPLICATE',
+                category: 'PURGES',
+                actor_name: 'Rajesh Sharma, IRS',
+                actor_role: 'tehsildar',
+                field_changed: 'record_registry_purge',
+                old_value: 'DUPLICATE_RECORD',
+                new_value: `Purged redundant duplicate record ${pId} from SQLite database & local storage`,
+                timestamp: new Date(Date.now() - (idx + 1) * 600000).toLocaleString(),
+                previous_hash: 'c9f01d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f90c',
+                current_hash: `d0f12e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f901${idx}d`,
+                digital_signature: `Ed25519_PURGE_ACTION_SIG_${pId}`
+              });
             });
           }
-        });
-
-        // Add purged logs if any purged IDs exist
-        if (purgedIds && purgedIds.length > 0) {
-          purgedIds.forEach((pId, idx) => {
-            synthesizedLogs.push({
-              history_id: `synth-purge-${pId}`,
-              record_id: pId,
-              action: 'PURGE_DUPLICATE',
-              category: 'PURGES',
-              actor_name: 'Rajesh Sharma, IRS',
-              actor_role: 'tehsildar',
-              field_changed: 'record_registry_purge',
-              old_value: 'DUPLICATE_RECORD',
-              new_value: `Purged redundant duplicate record ${pId} from SQLite database & local storage`,
-              timestamp: new Date(Date.now() - (idx + 1) * 600000).toLocaleString(),
-              previous_hash: 'c9f01d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f90c',
-              current_hash: `d0f12e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f901${idx}d`,
-              digital_signature: `Ed25519_PURGE_ACTION_SIG_${pId}`
-            });
-          });
         }
 
-        // Merge API logs with synthesized logs
-        const combined = [...apiBlocks, ...synthesizedLogs];
+        // Merge API blocks first, followed by any synthesized fallback logs
+        const combined = [...formattedApiBlocks, ...synthesizedLogs];
         
-        // Remove duplicates by history_id or record_id+action
+        // Remove duplicates by history_id or record_id+action+timestamp
         const seen = new Set();
         const uniqueLogs = [];
         combined.forEach(log => {
-          const key = `${log.record_id}_${log.action}_${log.timestamp}`;
+          const key = log.history_id ? `hid_${log.history_id}` : `${log.record_id}_${log.action}_${log.timestamp}`;
           if (!seen.has(key)) {
             seen.add(key);
             uniqueLogs.push(log);

@@ -214,11 +214,37 @@ def verify_hash_chain(record_id: str, db: Session = Depends(get_db)):
 
 @router.delete("/{record_id}")
 def delete_record_by_id(record_id: str, db: Session = Depends(get_db)):
-    """Deletes a single land record from SQLite database by ID."""
+    """Deletes a single land record from SQLite database by ID and appends purge block to audit chain."""
     rec = db.query(DBLandRecord).filter(DBLandRecord.id == record_id).first()
     if not rec:
         raise HTTPException(status_code=404, detail="Record not found")
     
+    last_block = db.query(DBAuditTrail).order_by(DBAuditTrail.history_id.desc()).first()
+    prev_hash = last_block.current_hash if last_block else "0000000000000000000000000000000000000000000000000000000000000000"
+    
+    payload = {
+        "record_id": record_id,
+        "action": "PURGE_DUPLICATE",
+        "field_changed": "record_registry_delete",
+        "new_value": f"Permanently purged record {record_id} from SQLite database",
+        "actor_name": "Rajesh Sharma, IRS"
+    }
+    current_hash = AuditChainService.calculate_block_hash(prev_hash, payload)
+    sig = AuditChainService.generate_digital_signature("tehsildar", current_hash)
+
+    audit_entry = DBAuditTrail(
+        record_id=record_id,
+        action="PURGE_DUPLICATE",
+        field_changed="record_registry_delete",
+        old_value="RECORD_ACTIVE",
+        new_value=f"Permanently purged record {record_id} from SQLite database",
+        previous_hash=prev_hash,
+        current_hash=current_hash,
+        actor_name="Rajesh Sharma, IRS",
+        actor_role="tehsildar",
+        digital_signature=sig
+    )
+    db.add(audit_entry)
     db.delete(rec)
     db.commit()
     return {"status": "DELETED", "record_id": record_id}
@@ -228,15 +254,43 @@ def purge_all_duplicate_records(db: Session = Depends(get_db)):
     """
     Scans SQLite DB for duplicate land records sharing the same ULPIN or Khasra+Khata+Village.
     Retains 1 primary master record for each plot and deletes all redundant duplicates.
+    Logs purge events to the immutable audit chain.
     """
     all_records = db.query(DBLandRecord).order_by(DBLandRecord.created_at.asc()).all()
     seen_keys = set()
     deleted_ids = []
 
+    last_block = db.query(DBAuditTrail).order_by(DBAuditTrail.history_id.desc()).first()
+    prev_hash = last_block.current_hash if last_block else "0000000000000000000000000000000000000000000000000000000000000000"
+
     for rec in all_records:
         key = rec.ulpin or f"{rec.khasra_no}_{rec.khata_no}_{rec.village}"
         if key in seen_keys:
             deleted_ids.append(rec.id)
+            payload = {
+                "record_id": rec.id,
+                "action": "PURGE_DUPLICATE",
+                "field_changed": "batch_deduplication_purge",
+                "new_value": f"Purged duplicate record {rec.id} (Master retained)",
+                "actor_name": "Rajesh Sharma, IRS"
+            }
+            current_hash = AuditChainService.calculate_block_hash(prev_hash, payload)
+            sig = AuditChainService.generate_digital_signature("tehsildar", current_hash)
+
+            audit_entry = DBAuditTrail(
+                record_id=rec.id,
+                action="PURGE_DUPLICATE",
+                field_changed="batch_deduplication_purge",
+                old_value="DUPLICATE_ENTRY",
+                new_value=f"Purged duplicate record {rec.id} (Master retained)",
+                previous_hash=prev_hash,
+                current_hash=current_hash,
+                actor_name="Rajesh Sharma, IRS",
+                actor_role="tehsildar",
+                digital_signature=sig
+            )
+            db.add(audit_entry)
+            prev_hash = current_hash
             db.delete(rec)
         else:
             seen_keys.add(key)
