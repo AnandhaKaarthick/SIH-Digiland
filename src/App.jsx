@@ -130,12 +130,39 @@ export default function App() {
     }
   };
 
-  // Persistent uploaded records state to ensure uploaded records never disappear on tab change
-  const [uploadedRecords, setUploadedRecords] = useState([]);
+  // Persistent uploaded records state per user account role across reloads and logins
+  const [uploadedRecords, setUploadedRecords] = useState(() => {
+    try {
+      const stored = localStorage.getItem(`digiland_user_records_${activeRole}`);
+      return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+
+  const saveAccountUploadedRecords = (newRecords, role = activeRole) => {
+    setUploadedRecords(newRecords);
+    try {
+      localStorage.setItem(`digiland_user_records_${role}`, JSON.stringify(newRecords));
+    } catch (e) {
+      console.warn("LocalStorage account records save error:", e);
+    }
+  };
+
+  // Synchronize account records whenever activeRole changes
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(`digiland_user_records_${activeRole}`);
+      const parsed = stored ? JSON.parse(stored) : [];
+      setUploadedRecords(parsed);
+    } catch (e) {
+      setUploadedRecords([]);
+    }
+  }, [activeRole]);
 
   const handleResetRegistry = async () => {
     savePurgedIds([]);
-    setUploadedRecords([]);
+    saveAccountUploadedRecords([]);
     try {
       const res = await resetRegistryApi();
       if (res && res.records) {
@@ -259,7 +286,8 @@ export default function App() {
             purgedIds={purgedIds}
             onProcessComplete={(record) => {
               setSelectedRecord(record);
-              setUploadedRecords(prev => [record, ...prev.filter(r => r.id !== record.id)]);
+              const newUploaded = [record, ...uploadedRecords.filter(r => r.id !== record.id)];
+              saveAccountUploadedRecords(newUploaded);
               setRecordsList(prev => [record, ...prev.filter(r => r.id !== record.id)]);
               setCurrentTab('verification-queue');
             }} 
@@ -283,7 +311,8 @@ export default function App() {
                 priority_level: 'LOW_PRIORITY'
               };
 
-              setUploadedRecords(prev => [formattedApproved, ...prev.filter(r => r.id !== approvedRec.id)]);
+              const newUploaded = [formattedApproved, ...uploadedRecords.filter(r => r.id !== approvedRec.id)];
+              saveAccountUploadedRecords(newUploaded);
               setRecordsList(prev => {
                 const exists = prev.some(r => r.id === approvedRec.id);
                 if (exists) {

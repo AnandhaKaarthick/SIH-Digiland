@@ -15,6 +15,7 @@ import {
   Layers,
   Files,
   X,
+  XCircle,
   AlertCircle
 } from 'lucide-react';
 import { MOCK_LAND_RECORDS, transformDatasetRecordToLandRecord } from '../data/mockData';
