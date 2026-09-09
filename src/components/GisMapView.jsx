@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, GeoJSON, Popup, Polygon } from 'react-leaflet';
-import { MapPin, Search, Info, CheckCircle2, AlertTriangle, XCircle, ExternalLink, ShieldCheck, FileText, Layers } from 'lucide-react';
+import { MapContainer, TileLayer, GeoJSON, Popup, Polygon, useMap } from 'react-leaflet';
+import { MapPin, Search, Info, CheckCircle2, AlertTriangle, XCircle, ExternalLink, ShieldCheck, FileText, Layers, Navigation } from 'lucide-react';
 import { MOCK_CADASTRAL_PARCELS, MOCK_LAND_RECORDS } from '../data/mockData';
 import { useLanguage } from '../context/LanguageContext';
+
+// Helper component to control map panning/zooming dynamically
+function MapController({ center, zoom = 16 }) {
+  const map = useMap();
+  useEffect(() => {
+    if (center && center[0] && center[1]) {
+      map.flyTo(center, zoom, { animate: true, duration: 1.2 });
+    }
+  }, [center, zoom, map]);
+  return null;
+}
 
 export default function GisMapView({ recordsList = [], onSelectRecord }) {
   const { t } = useLanguage();
@@ -11,57 +22,102 @@ export default function GisMapView({ recordsList = [], onSelectRecord }) {
   const allAvailableRecords = recordsList && recordsList.length > 0 ? recordsList : MOCK_LAND_RECORDS;
   
   const [selectedRecord, setSelectedRecord] = useState(allAvailableRecords[0] || null);
-  const [selectedParcel, setSelectedParcel] = useState(MOCK_CADASTRAL_PARCELS.features[0]?.properties || null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Center coordinates for GIS map (Lucknow / Tamil Nadu default region)
-  const centerCoordinates = [26.8512, 80.9425];
+  // Helper function to map record locations to geographic lat/lng coordinates
+  const getRecordCoordinates = (rec) => {
+    if (!rec) return [26.8512, 80.9425];
+    const village = (rec.village || rec.raw_payload?.village || '').toLowerCase();
+    const district = (rec.district || rec.raw_payload?.district || '').toLowerCase();
+    const id = (rec.id || '').toLowerCase();
 
-  // Sync selectedRecord with selectedParcel when record changes from dropdown
-  useEffect(() => {
-    if (!selectedRecord) return;
-    
-    // Find matching GeoJSON feature parcel by khasra or ulpin if available
-    const matchedFeature = MOCK_CADASTRAL_PARCELS.features.find(f => 
-      f.properties.khasra_no === selectedRecord.khasra_no || 
-      f.properties.ulpin === selectedRecord.ulpin
-    );
-
-    if (matchedFeature) {
-      setSelectedParcel(matchedFeature.properties);
-    } else {
-      // Create dynamic spatial parcel representation for uploaded FMB document
-      const khasra = selectedRecord.khasra_no || selectedRecord.raw_payload?.khasra_no || '142/3B';
-      const ulpin = selectedRecord.ulpin || selectedRecord.raw_payload?.ulpin || '14BW89201L9842';
-      const village = selectedRecord.village || selectedRecord.raw_payload?.village || 'Nemili';
-      const owner = Array.isArray(selectedRecord.owner_names) 
-        ? selectedRecord.owner_names.join(', ') 
-        : (selectedRecord.owner_names || 'K. Raman');
-      const area = selectedRecord.plot_area || selectedRecord.raw_payload?.plot_area || 1821.08;
-
-      setSelectedParcel({
-        khasra_no: khasra,
-        ulpin: ulpin,
-        village: village,
-        owner_name: owner,
-        recorded_area: `${area} sqm`,
-        gis_computed_area: `${(floatArea(area) * 1.0002).toFixed(2)} sqm`,
-        status: selectedRecord.status_flag === 'VALID' || selectedRecord.routing === 'AUTO_APPROVED' ? 'VALID' : 
-                selectedRecord.status_flag === 'FAILED_CRITICAL' ? 'FLAGGED_DISPUTE' : 'FLAGGED_WARNING'
-      });
+    if (district.includes('thanjavur') || village.includes('kurungulam') || id.includes('8257') || id.includes('tn-005')) {
+      return [10.7412, 79.1125]; // Thanjavur, Tamil Nadu (FMB Map location)
     }
-  }, [selectedRecord]);
+    if (district.includes('kanchipuram') || village.includes('nemili') || id.includes('3267') || id.includes('ror-001') || id.includes('deed-3267')) {
+      return [12.9814, 79.9415]; // Nemili / Kanchipuram, Tamil Nadu
+    }
+    if (village.includes('kondhali') || district.includes('fatehpur') || district.includes('lucknow')) {
+      return [26.8512, 80.9425]; // UP region
+    }
 
-  const floatArea = (val) => {
-    const num = parseFloat(val);
-    return isNaN(num) ? 1821.08 : num;
+    // Consistent pseudo-random offset for any custom record ID
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) hash = (hash << 5) - hash + id.charCodeAt(i);
+    const latOffset = ((Math.abs(hash) % 100) - 50) * 0.0005;
+    const lngOffset = ((Math.abs(hash * 3) % 100) - 50) * 0.0005;
+    return [12.9814 + latOffset, 79.9415 + lngOffset];
+  };
+
+  // Generate dynamic GeoJSON FeatureCollection for ALL available records
+  const generateDynamicGeoJSON = () => {
+    const features = [];
+
+    allAvailableRecords.forEach((rec, idx) => {
+      const [lat, lng] = getRecordCoordinates(rec);
+      const size = 0.0012 + (idx % 3) * 0.0003;
+      const khasra = rec.khasra_no || rec.raw_payload?.khasra_no || '142/3B';
+      const ulpin = rec.ulpin || rec.raw_payload?.ulpin || '14BW89201L9842';
+      const village = rec.village || rec.raw_payload?.village || 'Nemili';
+      const owner = Array.isArray(rec.owner_names) 
+        ? rec.owner_names.join(', ') 
+        : (rec.owner_names || 'K. Raman');
+      const area = rec.plot_area || rec.raw_payload?.plot_area || 1821.08;
+
+      features.push({
+        type: "Feature",
+        id: rec.id,
+        properties: {
+          record_id: rec.id,
+          khasra_no: khasra,
+          ulpin: ulpin,
+          owner_name: owner,
+          recorded_area: `${area} sqm`,
+          gis_computed_area: `${(parseFloat(area || 1821.08) * 1.0002).toFixed(2)} sqm`,
+          status: rec.status_flag === 'VALID' || rec.routing === 'AUTO_APPROVED' ? 'VALID' : 
+                  rec.status_flag === 'FAILED_CRITICAL' ? 'FLAGGED_DISPUTE' : 'FLAGGED_WARNING',
+          village: village,
+          district: rec.district || 'Tamil Nadu',
+          center: [lat, lng]
+        },
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+              [lng - size, lat + size * 0.8],
+              [lng + size * 1.2, lat + size],
+              [lng + size, lat - size * 0.9],
+              [lng - size * 0.9, lat - size],
+              [lng - size, lat + size * 0.8]
+            ]
+          ]
+        }
+      });
+    });
+
+    return {
+      type: "FeatureCollection",
+      features
+    };
+  };
+
+  const dynamicGeoJSON = generateDynamicGeoJSON();
+  const currentCenter = getRecordCoordinates(selectedRecord);
+
+  // Derive parcel properties for currently selected record
+  const selectedParcel = dynamicGeoJSON.features.find(f => f.id === selectedRecord?.id)?.properties || {
+    khasra_no: selectedRecord?.khasra_no || '142/3B',
+    ulpin: selectedRecord?.ulpin || '14BW89201L9842',
+    village: selectedRecord?.village || 'Nemili',
+    owner_name: Array.isArray(selectedRecord?.owner_names) ? selectedRecord.owner_names.join(', ') : (selectedRecord?.owner_names || 'K. Raman'),
+    recorded_area: `${selectedRecord?.plot_area || 1821.08} sqm`,
+    gis_computed_area: `${((selectedRecord?.plot_area || 1821.08) * 1.0002).toFixed(2)} sqm`,
+    status: selectedRecord?.status_flag === 'VALID' ? 'VALID' : 'FLAGGED_WARNING',
+    center: currentCenter
   };
 
   const getStyle = (feature) => {
-    const isSelected = selectedParcel && (
-      selectedParcel.khasra_no === feature.properties.khasra_no ||
-      selectedParcel.ulpin === feature.properties.ulpin
-    );
+    const isSelected = selectedRecord && (feature.id === selectedRecord.id || feature.properties.record_id === selectedRecord.id);
     const status = feature.properties.status;
     let strokeColor = '#2E7D32';
     let fillColor = '#2E7D32';
@@ -77,8 +133,8 @@ export default function GisMapView({ recordsList = [], onSelectRecord }) {
     return {
       color: isSelected ? '#1B4D3E' : strokeColor,
       fillColor: fillColor,
-      fillOpacity: isSelected ? 0.60 : 0.35,
-      weight: isSelected ? 3.5 : 2
+      fillOpacity: isSelected ? 0.65 : 0.35,
+      weight: isSelected ? 4 : 2
     };
   };
 
@@ -165,33 +221,36 @@ export default function GisMapView({ recordsList = [], onSelectRecord }) {
           {/* Active Parcel Bar */}
           <div className="bg-canvas-bg px-4 py-2 border-b border-border-structural flex items-center justify-between text-xs">
             <span className="font-heading font-semibold text-text-secondary flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-primary" /> Active FMB Parcel: <strong className="text-text-primary">{selectedRecord?.id || 'DL-MAP-001'}</strong>
+              <Navigation className="w-4 h-4 text-primary animate-pulse" /> Map Pan Active: <strong className="text-text-primary">{selectedRecord?.id || 'DL-MAP-001'}</strong> ({selectedParcel.village})
             </span>
             <span className="font-mono text-[11px] text-primary font-bold">
-              ULPIN: {selectedParcel?.ulpin || selectedRecord?.ulpin || 'N/A'}
+              GPS Centroid: [{currentCenter[0].toFixed(4)}, {currentCenter[1].toFixed(4)}]
             </span>
           </div>
 
           {/* Fallback & Custom Map Container */}
           <div className="w-full flex-1 min-h-[450px] relative">
             <MapContainer 
-              center={centerCoordinates} 
+              center={currentCenter} 
               zoom={16} 
               style={{ width: '100%', height: '100%' }}
               scrollWheelZoom={true}
             >
+              {/* Dynamic Map Camera Controller */}
+              <MapController center={currentCenter} zoom={16} />
+
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <GeoJSON 
-                data={MOCK_CADASTRAL_PARCELS}
+                key={selectedRecord?.id || 'default_geojson'}
+                data={dynamicGeoJSON}
                 style={getStyle}
                 onEachFeature={(feature, layer) => {
                   layer.on({
                     click: () => {
-                      setSelectedParcel(feature.properties);
-                      const matchingRec = allAvailableRecords.find(r => r.khasra_no === feature.properties.khasra_no);
+                      const matchingRec = allAvailableRecords.find(r => r.id === feature.id || r.id === feature.properties.record_id);
                       if (matchingRec) setSelectedRecord(matchingRec);
                     }
                   });
@@ -221,7 +280,7 @@ export default function GisMapView({ recordsList = [], onSelectRecord }) {
                 <span className="text-[10px] font-mono font-bold uppercase text-primary">Record ID: {selectedRecord?.id || 'N/A'}</span>
                 <h3 className="font-heading font-bold text-base text-text-primary mt-0.5">Khasra #{selectedParcel.khasra_no}</h3>
                 <p className="text-xs text-text-secondary mt-0.5">
-                  Village: {selectedParcel.village || selectedRecord?.village || 'Nemili'}, {selectedRecord?.district || 'Lucknow'}
+                  Village: {selectedParcel.village || selectedRecord?.village || 'Nemili'}, {selectedRecord?.district || 'Tamil Nadu'}
                 </p>
               </div>
 
