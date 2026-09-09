@@ -7,6 +7,7 @@ import base64
 import hashlib
 import datetime
 import random
+import json
 
 from backend.models.database import (
     SessionLocal, 
@@ -190,32 +191,61 @@ def process_full_pipeline(req: ProcessPipelineRequest, db: Session = Depends(get
         db_rec.raw_payload = {**raw_data, "scoring_breakdown": scoring_res}
         db_rec.updated_at = datetime.datetime.utcnow()
 
-        # Append to Audit Ledger Chain
+        # Append to Audit Ledger Chain: Block 1 - Document Upload / Ingestion
         last_audit = db.query(DBAuditTrail).order_by(DBAuditTrail.history_id.desc()).first()
         prev_hash = last_audit.current_hash if last_audit else "0000000000000000000000000000000000000000000000000000000000000000"
         
-        audit_payload = {
+        upload_payload = {
+            "record_id": record_id,
+            "action": "DOCUMENT_UPLOADED",
+            "field_changed": "Ingestion & PaddleOCR Parsing",
+            "new_value": f"Ingested Document {doc_id} (Schema: {doc_type}, File: {file_name})",
+            "actor_name": "Revenue Officer / System Intake"
+        }
+        curr_hash1 = AuditChainService.calculate_block_hash(prev_hash, upload_payload)
+        sig1 = AuditChainService.generate_digital_signature("system", curr_hash1)
+
+        upload_entry = DBAuditTrail(
+            record_id=record_id,
+            action="DOCUMENT_UPLOADED",
+            field_changed="Ingestion & PaddleOCR Parsing",
+            old_value="RAW_FILE_SCAN",
+            new_value=f"Ingested Document {doc_id} (Schema: {doc_type}, File: {file_name})",
+            previous_hash=prev_hash,
+            current_hash=curr_hash1,
+            actor_name="Revenue Officer / System Intake",
+            actor_role="system",
+            digital_signature=sig1,
+            timestamp=datetime.datetime.utcnow()
+        )
+        db.add(upload_entry)
+        db.commit()
+
+        # Block 2 - Pipeline Classification & Confidence Score
+        pipeline_payload = {
             "record_id": record_id,
             "action": f"PIPELINE_{routing}",
             "field_changed": "composite_confidence_score",
             "new_value": f"Score: {composite_score}% ({priority_level}) -> Routed to {routing}",
             "actor_name": "System Pipeline Engine"
         }
-        current_hash = AuditChainService.calculate_block_hash(prev_hash, audit_payload)
-        sig = AuditChainService.generate_digital_signature("system", current_hash)
+        curr_hash2 = AuditChainService.calculate_block_hash(curr_hash1, pipeline_payload)
+        sig2 = AuditChainService.generate_digital_signature("system", curr_hash2)
 
-        audit_entry = DBAuditTrail(
+        pipeline_entry = DBAuditTrail(
             record_id=record_id,
             action=f"PIPELINE_{routing}",
             field_changed="Initial Pipeline Processing",
+            old_value="DOCUMENT_UPLOADED",
             new_value=f"Score: {composite_score}% ({priority_level}) -> {routing}",
-            previous_hash=prev_hash,
-            current_hash=current_hash,
+            previous_hash=curr_hash1,
+            current_hash=curr_hash2,
             actor_name="System Pipeline Engine",
             actor_role="system",
-            digital_signature=sig
+            digital_signature=sig2,
+            timestamp=datetime.datetime.utcnow()
         )
-        db.add(audit_entry)
+        db.add(pipeline_entry)
         db.commit()
 
         return {
@@ -229,7 +259,7 @@ def process_full_pipeline(req: ProcessPipelineRequest, db: Session = Depends(get
             "routing": routing,
             "priority_level": priority_level,
             "scoring_breakdown": scoring_res,
-            "current_hash": current_hash,
+            "current_hash": curr_hash2,
             "record": {
                 "id": record_id,
                 "doc_type": doc_type,

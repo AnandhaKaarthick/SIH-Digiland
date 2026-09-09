@@ -417,7 +417,7 @@ export default function DocumentUpload({ onProcessComplete, liveRecords = [], pu
       ]);
 
       if (onProcessComplete && processedRecords.length > 0) {
-        onProcessComplete(processedRecords[0]);
+        onProcessComplete(processedRecords);
       }
     }
   };

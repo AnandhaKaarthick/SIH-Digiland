@@ -45,12 +45,16 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
         // Set up fallback / synthesized logs for records if API blocks are missing or incomplete
         const synthesizedLogs = [];
 
-        // Add upload & status logs from current records if apiBlocks is empty
-        if (formattedApiBlocks.length === 0) {
-          recordsList.forEach((rec, idx) => {
-            const timestamp = new Date(Date.now() - (idx + 1) * 3600000).toLocaleString();
+        // Ensure EVERY uploaded document in recordsList has a UPLOADS audit trail entry
+        recordsList.forEach((rec, idx) => {
+          const timestamp = new Date(Date.now() - (idx + 1) * 3600000).toLocaleString();
 
-            // Upload event
+          // Check if apiBlocks already contains an ingestion/upload log for this record ID
+          const hasUploadApiBlock = formattedApiBlocks.some(
+            b => b.record_id === rec.id && ((b.action || '').includes('UPLOAD') || (b.action || '').includes('INGEST'))
+          );
+
+          if (!hasUploadApiBlock) {
             synthesizedLogs.push({
               history_id: `synth-upload-${rec.id}`,
               record_id: rec.id,
@@ -66,8 +70,10 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
               current_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
               digital_signature: `Ed25519_SIG_SYS_${rec.id}_OK`
             });
+          }
 
-            // Approval or Rejection event
+          // If apiBlocks is empty, also add status approval/rejection fallback logs
+          if (formattedApiBlocks.length === 0) {
             if (rec.status_flag === 'VALID' || rec.routing === 'AUTO_APPROVED') {
               synthesizedLogs.push({
                 history_id: `synth-approved-${rec.id}`,
@@ -101,10 +107,16 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
                 digital_signature: `Ed25519_SIG_REJECT_RS_${rec.id}`
               });
             }
-          });
+          }
+        });
 
-          if (purgedIds && purgedIds.length > 0) {
-            purgedIds.forEach((pId, idx) => {
+        // Add purged logs if any purged IDs exist and not present in API blocks
+        if (purgedIds && purgedIds.length > 0) {
+          purgedIds.forEach((pId, idx) => {
+            const hasPurgeApiBlock = formattedApiBlocks.some(
+              b => b.record_id === pId && (b.action || '').includes('PURGE')
+            );
+            if (!hasPurgeApiBlock) {
               synthesizedLogs.push({
                 history_id: `synth-purge-${pId}`,
                 record_id: pId,
@@ -120,8 +132,8 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
                 current_hash: `d0f12e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f901${idx}d`,
                 digital_signature: `Ed25519_PURGE_ACTION_SIG_${pId}`
               });
-            });
-          }
+            }
+          });
         }
 
         // Merge API blocks first, followed by any synthesized fallback logs
@@ -153,6 +165,7 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
   const getLogCategory = (log) => {
     const act = (log.action || '').toUpperCase();
     if (act.includes('PURGE')) return 'PURGES';
+    if (act.includes('UPLOAD') || act.includes('INGEST')) return 'UPLOADS';
     if (act.includes('REJECT') || act.includes('FAILED')) return 'REJECTED';
     if (act.includes('APPROVE') || act.includes('VALID')) return 'APPROVED';
     return 'UPLOADS';

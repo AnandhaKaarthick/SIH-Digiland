@@ -287,11 +287,15 @@ export default function App() {
           <DocumentUpload 
             liveRecords={recordsList}
             purgedIds={purgedIds}
-            onProcessComplete={(record) => {
-              setSelectedRecord(record);
-              const newUploaded = [record, ...uploadedRecords.filter(r => r.id !== record.id)];
+            onProcessComplete={(recordOrList) => {
+              const recList = Array.isArray(recordOrList) ? recordOrList : [recordOrList];
+              if (recList.length > 0) {
+                setSelectedRecord(recList[0]);
+              }
+              const recIds = new Set(recList.map(r => r.id));
+              const newUploaded = [...recList, ...uploadedRecords.filter(r => !recIds.has(r.id))];
               saveAccountUploadedRecords(newUploaded);
-              setRecordsList(prev => [record, ...prev.filter(r => r.id !== record.id)]);
+              setRecordsList(prev => [...recList, ...prev.filter(r => !recIds.has(r.id))]);
               setCurrentTab('verification-queue');
             }} 
           />
