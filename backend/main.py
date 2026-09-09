@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.models.database import init_db
+from backend.models.database import init_db, SessionLocal, LandRecord
+from backend.seed_db import seed_database
 from backend.routers import auth, documents, records, gis, dashboard, teammate_ocr
 
 app = FastAPI(
@@ -27,6 +28,14 @@ app.include_router(teammate_ocr.router)
 @app.on_event("startup")
 def on_startup():
     init_db()
+    db = SessionLocal()
+    try:
+        if db.query(LandRecord).count() == 0:
+            seed_database()
+    except Exception as e:
+        print("Startup seed check:", e)
+    finally:
+        db.close()
 
 @app.get("/")
 def read_root():
