@@ -187,11 +187,31 @@ def commit_human_review(req: CommitReviewRequest, db: Session = Depends(get_db))
 
 @router.get("/audit-trail/all")
 def get_audit_trail(db: Session = Depends(get_db)):
-    """Fetches full immutable ledger audit chain from database."""
+    """Fetches full immutable ledger audit chain from database with ISO UTC timestamps."""
     blocks = db.query(DBAuditTrail).order_by(DBAuditTrail.history_id.asc()).all()
+    formatted_blocks = []
+    for b in blocks:
+        ts_str = None
+        if b.timestamp:
+            iso = b.timestamp.isoformat()
+            ts_str = iso + "Z" if not iso.endswith("Z") and "+" not in iso else iso
+        formatted_blocks.append({
+            "history_id": b.history_id,
+            "record_id": b.record_id,
+            "action": b.action,
+            "field_changed": b.field_changed,
+            "old_value": b.old_value,
+            "new_value": b.new_value,
+            "previous_hash": b.previous_hash,
+            "current_hash": b.current_hash,
+            "actor_name": b.actor_name,
+            "actor_role": b.actor_role,
+            "digital_signature": b.digital_signature,
+            "timestamp": ts_str
+        })
     return {
-        "count": len(blocks),
-        "blocks": blocks
+        "count": len(formatted_blocks),
+        "blocks": formatted_blocks
     }
 
 @router.get("/{record_id}/verify-chain")

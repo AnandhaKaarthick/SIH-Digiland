@@ -27,6 +27,23 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
   const [selectedLogModal, setSelectedLogModal] = useState(null);
 
   // Load audit trail logs from backend API & synthesize live local event logs
+  // Helper function to parse ISO timestamp (handling UTC strings without 'Z' suffix correctly)
+  const parseIsoTimestamp = (ts) => {
+    if (!ts) return { display: 'Just now', timeMs: Date.now() };
+    let s = String(ts).trim();
+    if (s.includes('T') && !s.endsWith('Z') && !s.includes('+') && !s.includes('-', 11)) {
+      s += 'Z';
+    } else if (!s.includes('T') && s.includes(' ') && !s.endsWith('Z')) {
+      s = s.replace(' ', 'T') + 'Z';
+    }
+    const d = new Date(s);
+    if (isNaN(d.getTime())) {
+      return { display: ts, timeMs: 0 };
+    }
+    return { display: d.toLocaleString(), timeMs: d.getTime() };
+  };
+
+  // Load audit trail logs from backend API & synthesize live local event logs
   useEffect(() => {
     async function loadAuditLogs() {
       setLoading(true);
@@ -34,9 +51,10 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
         const res = await fetchAuditTrailApi();
         let apiBlocks = (res && res.blocks) ? res.blocks : [];
 
-        // Format API blocks with readable timestamps & attach registry metadata
+        // Format API blocks with accurate local timezone timestamps & attach registry metadata
         const formattedApiBlocks = apiBlocks.map(b => {
           const matchedRecord = recordsList.find(r => r.id === b.record_id);
+          const parsed = parseIsoTimestamp(b.timestamp);
           return {
             ...b,
             ulpin: b.ulpin || matchedRecord?.ulpin || '',
@@ -45,17 +63,18 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
             village: b.village || matchedRecord?.village || '',
             district: b.district || matchedRecord?.district || '',
             owner_names: b.owner_names || matchedRecord?.owner_names || '',
-            timestamp: b.timestamp 
-              ? (isNaN(Date.parse(b.timestamp)) ? b.timestamp : new Date(b.timestamp).toLocaleString())
-              : 'Just now'
+            timestamp: parsed.display,
+            timeMs: parsed.timeMs
           };
         });
 
-        // Set up fallback / synthesized logs for ALL records in recordsList so every registry record has audit logs
+        // Set up fallback / synthesized logs ONLY for active records that don't have DB audit blocks yet
         const synthesizedLogs = [];
 
         recordsList.forEach((rec, idx) => {
-          const timestamp = new Date(Date.now() - (idx + 1) * 3600000).toLocaleString();
+          const recParsed = parseIsoTimestamp(rec.created_at || rec.timestamp);
+          const timestampDisplay = recParsed.display !== 'Just now' ? recParsed.display : new Date().toLocaleString();
+          const timeMs = recParsed.timeMs || Date.now();
 
           // Check if apiBlocks already contains an ingestion/upload log for this record ID
           const hasUploadApiBlock = formattedApiBlocks.some(
@@ -79,7 +98,8 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
               field_changed: 'Ingestion & PaddleOCR Parsing',
               old_value: 'RAW_FILE_SCAN',
               new_value: `Document ${rec.document_id || rec.id} ingested (Type: ${rec.doc_type || 'ROR'}) | ULPIN: ${rec.ulpin || 'N/A'}`,
-              timestamp: timestamp,
+              timestamp: timestampDisplay,
+              timeMs: timeMs,
               previous_hash: '0000000000000000000000000000000000000000000000000000000000000000',
               current_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
               digital_signature: `Ed25519_SIG_SYS_${rec.id}_OK`
@@ -109,7 +129,8 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
                 field_changed: 'status_flag & digital_signature',
                 old_value: 'REQUIRES_REVIEW',
                 new_value: `Approved & Committed to Land Registry | ULPIN: ${rec.ulpin || 'N/A'}`,
-                timestamp: new Date(Date.now() - idx * 1800000).toLocaleString(),
+                timestamp: timestampDisplay,
+                timeMs: timeMs + 1000,
                 previous_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
                 current_hash: `b8f90c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f${idx}b`,
                 digital_signature: `Ed25519_SIG_TEHSILDAR_RS_${rec.id}`
@@ -131,7 +152,8 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
                 field_changed: 'status_flag & rejection_reason',
                 old_value: 'REQUIRES_REVIEW',
                 new_value: `Rejected Record: ${rec.rejection_reason || 'Discrepancy in revenue invariants / document authenticity'} | ULPIN: ${rec.ulpin || 'N/A'}`,
-                timestamp: new Date(Date.now() - idx * 1800000).toLocaleString(),
+                timestamp: timestampDisplay,
+                timeMs: timeMs + 1000,
                 previous_hash: `a4f89b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e${idx}a`,
                 current_hash: `c9f01d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9${idx}c`,
                 digital_signature: `Ed25519_SIG_REJECT_RS_${rec.id}`
@@ -140,50 +162,24 @@ export default function AuditLogsView({ recordsList = [], purgedIds = [] }) {
           }
         });
 
-        // Add purged logs if any purged IDs exist and not present in API blocks
-        if (purgedIds && purgedIds.length > 0) {
-          purgedIds.forEach((pId, idx) => {
-            const hasPurgeApiBlock = formattedApiBlocks.some(
-              b => b.record_id === pId && (b.action || '').includes('PURGE')
-            );
-            if (!hasPurgeApiBlock) {
-              synthesizedLogs.push({
-                history_id: `synth-purge-${pId}`,
-                record_id: pId,
-                action: 'PURGE_DUPLICATE',
-                category: 'PURGES',
-                actor_name: 'Rajesh Sharma, IRS',
-                actor_role: 'tehsildar',
-                field_changed: 'record_registry_purge',
-                old_value: 'DUPLICATE_RECORD',
-                new_value: `Purged redundant duplicate record ${pId} from SQLite database & local storage`,
-                timestamp: new Date(Date.now() - (idx + 1) * 600000).toLocaleString(),
-                previous_hash: 'c9f01d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f90c',
-                current_hash: `d0f12e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f901${idx}d`,
-                digital_signature: `Ed25519_PURGE_ACTION_SIG_${pId}`
-              });
-            }
-          });
-        }
-
         // Merge API blocks first, followed by synthesized fallback logs
         const combined = [...formattedApiBlocks, ...synthesizedLogs];
         
-        // Remove duplicates by history_id or record_id+action+timestamp
+        // Remove duplicates by history_id or record_id+action
         const seen = new Set();
         const uniqueLogs = [];
         combined.forEach(log => {
-          const key = log.history_id ? `hid_${log.history_id}` : `${log.record_id}_${log.action}_${log.timestamp}`;
+          const key = log.history_id ? `hid_${log.history_id}` : `${log.record_id}_${log.action}`;
           if (!seen.has(key)) {
             seen.add(key);
             uniqueLogs.push(log);
           }
         });
 
-        // Filter out legacy DL-00 fake entries and reverse sort so latest activity is at the top
+        // Filter out legacy DL-00 fake entries and sort strictly by timestamp (newest first)
         const cleanRealLogs = uniqueLogs
           .filter(log => !((log.record_id || '').startsWith('DL-00') && (log.action || '').includes('INITIAL_SEED')))
-          .reverse();
+          .sort((a, b) => (b.timeMs || 0) - (a.timeMs || 0));
 
         setAuditLogs(cleanRealLogs);
       } catch (err) {
