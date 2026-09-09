@@ -334,14 +334,24 @@ export default function App() {
         );
 
       case 'records':
-        if (viewingRecordDetails) {
-          return (
             <RecordDetailsView 
               record={viewingRecordDetails} 
               onBack={() => setViewingRecordDetails(null)} 
+              onDeleteRecord={(recId) => {
+                handleRemoveSingleDuplicate(recId);
+                setViewingRecordDetails(null);
+              }}
+              onEditRecord={(rec) => {
+                setViewingRecordDetails(null);
+                handleNavigateToReview(rec);
+              }}
+              onUpdateRecord={(updatedRec) => {
+                setViewingRecordDetails(updatedRec);
+                setRecordsList(prev => prev.map(r => r.id === updatedRec.id ? updatedRec : r));
+                const newUploaded = [updatedRec, ...uploadedRecords.filter(r => r.id !== updatedRec.id)];
+                saveAccountUploadedRecords(newUploaded);
+              }}
             />
-          );
-        }
 
         return (
           <div className="flex flex-col gap-space-lg max-w-[1400px] mx-auto w-full">
