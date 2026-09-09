@@ -182,6 +182,16 @@ export default function DocumentUpload({ onProcessComplete, liveRecords = [], pu
     }
   };
 
+  const handleStopUploadAndClear = () => {
+    setUploading(false);
+    setDuplicateAlert(null);
+    setStagedBatch([]);
+    setProcessingLogs(prev => [
+      ...prev,
+      `[${new Date().toLocaleTimeString()}] OPERATION_STOPPED: Upload and pipeline processing operation cancelled by user.`
+    ]);
+  };
+
   const removeStagedFile = (id) => {
     setStagedBatch(prev => prev.filter(item => item.id !== id));
   };
@@ -707,9 +717,20 @@ export default function DocumentUpload({ onProcessComplete, liveRecords = [], pu
                 {uploading ? `Processing Batch Item ${batchProgress.current} of ${batchProgress.total}...` : 'Batch Pipeline Ingestion Complete'}
               </h3>
             </div>
-            <span className="font-mono text-xs font-bold text-primary px-3 py-1 rounded bg-primary-container">
-              Engine: PaddleOCR PP-OCRv4 Batch Pipeline
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs font-bold text-primary px-3 py-1 rounded bg-primary-container">
+                Engine: PaddleOCR PP-OCRv4 Batch Pipeline
+              </span>
+              {uploading && (
+                <button
+                  onClick={handleStopUploadAndClear}
+                  className="px-3 py-1 rounded bg-status-error/10 hover:bg-status-error text-status-error hover:text-white border border-status-error/30 font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5"
+                  title="Abort live pipeline processing"
+                >
+                  <XCircle className="w-3.5 h-3.5" /> Stop / Cancel Processing
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
@@ -844,16 +865,24 @@ export default function DocumentUpload({ onProcessComplete, liveRecords = [], pu
             </div>
 
             {/* Action Footer */}
-            <div className="p-4 bg-surface-container-low border-t border-border-structural flex items-center justify-between">
+            <div className="p-4 bg-surface-container-low border-t border-border-structural flex flex-col sm:flex-row items-center justify-between gap-3">
               <span className="text-xs text-text-secondary font-mono">
                 Audit Ledger Event: SHA256_DEDUP_TRIGGERED
               </span>
-              <button
-                onClick={() => setDuplicateAlert(null)}
-                className="px-5 py-2 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-2"
-              >
-                <CheckCircle2 className="w-4 h-4" /> Acknowledge &amp; Continue
-              </button>
+              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <button
+                  onClick={handleStopUploadAndClear}
+                  className="px-4 py-2 rounded-xl bg-status-error/10 hover:bg-status-error text-status-error hover:text-white border border-status-error/30 font-heading text-xs font-bold shadow-sm transition-all flex items-center gap-1.5"
+                >
+                  <XCircle className="w-4 h-4" /> Stop Process / Cancel Upload
+                </button>
+                <button
+                  onClick={() => setDuplicateAlert(null)}
+                  className="px-5 py-2 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-heading text-xs font-bold shadow-md transition-all flex items-center gap-2"
+                >
+                  <CheckCircle2 className="w-4 h-4" /> Acknowledge &amp; Continue
+                </button>
+              </div>
             </div>
 
           </div>
