@@ -238,3 +238,16 @@ def purge_all_duplicate_records(db: Session = Depends(get_db)):
         "purged_count": len(deleted_ids),
         "purged_record_ids": deleted_ids
     }
+
+@router.post("/reset-registry")
+def reset_registry(db: Session = Depends(get_db)):
+    """Resets SQLite database to clean master state with 8 sample land records."""
+    from backend.seed_db import seed_database
+    seed_database()
+    records = db.query(DBLandRecord).order_by(DBLandRecord.created_at.desc()).all()
+    return {
+        "status": "RESET_SUCCESS",
+        "count": len(records),
+        "records": records
+    }
+

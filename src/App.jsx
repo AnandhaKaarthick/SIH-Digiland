@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, X, Filter, CheckCircle2, AlertCircle, AlertTriangle, Trash2 } from 'lucide-react';
+import { Search, X, Filter, CheckCircle2, AlertCircle, AlertTriangle, Trash2, RotateCcw } from 'lucide-react';
 import NavigationShell from './components/NavigationShell';
 import Dashboard from './components/Dashboard';
 import DocumentUpload from './components/DocumentUpload';
@@ -9,7 +9,7 @@ import AuditLogsView from './components/AuditLogsView';
 import GisMapView from './components/GisMapView';
 import AdminRbac from './components/AdminRbac';
 import { MOCK_LAND_RECORDS } from './data/mockData';
-import { fetchAllRecordsApi, deleteRecordApi, purgeDuplicatesApi } from './services/api';
+import { fetchAllRecordsApi, deleteRecordApi, purgeDuplicatesApi, resetRegistryApi } from './services/api';
 
 import { LanguageProvider, useTranslation } from './context/LanguageContext';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -123,21 +123,57 @@ export default function App() {
     }
   };
 
+  // Persistent uploaded records state to ensure uploaded records never disappear on tab change
+  const [uploadedRecords, setUploadedRecords] = useState([]);
+
+  const handleResetRegistry = async () => {
+    savePurgedIds([]);
+    setUploadedRecords([]);
+    try {
+      const res = await resetRegistryApi();
+      if (res && res.records) {
+        setRecordsList(res.records);
+      } else {
+        setRecordsList(MOCK_LAND_RECORDS);
+      }
+    } catch (e) {
+      setRecordsList(MOCK_LAND_RECORDS);
+    }
+    setToastMessage("Registry reset successfully: All master sample records restored.");
+    setTimeout(() => setToastMessage(null), 4000);
+  };
+
   // Fetch live database records on mount & search query change with persistent purged filter
   useEffect(() => {
     async function loadDbRecords() {
       const res = await fetchAllRecordsApi(searchQuery);
+      let basePool = (res && res.records && res.records.length > 0) ? res.records : MOCK_LAND_RECORDS;
+
+      // Merge uploaded records that might not be in basePool yet
+      const seenIds = new Set(basePool.map(r => r.id));
+      const combined = [...basePool];
+      uploadedRecords.forEach(uRec => {
+        if (!seenIds.has(uRec.id)) {
+          seenIds.add(uRec.id);
+          combined.unshift(uRec);
+        }
+      });
+
       const purgedSet = new Set(purgedIds);
 
-      if (res && res.records && res.records.length > 0) {
-        const filtered = res.records.filter(r => !purgedSet.has(r.id));
-        setRecordsList(filtered);
-      } else {
-        setRecordsList(prev => prev.filter(r => !purgedSet.has(r.id)));
+      // Protect seed records from accidental total erasure in purgedIds:
+      // If purgedSet filtered out almost everything (leaving < 2 records while DB has > 4), clear stale purgedIds!
+      let filtered = combined.filter(r => !purgedSet.has(r.id));
+      if (filtered.length < 2 && combined.length >= 4) {
+        console.warn("PurgedIds filtered out master records. Resetting stale purgedIds cache...");
+        savePurgedIds([]);
+        filtered = combined;
       }
+
+      setRecordsList(filtered);
     }
     loadDbRecords();
-  }, [currentTab, searchQuery, purgedIds]);
+  }, [searchQuery, purgedIds, uploadedRecords]);
 
   const handleNavigateToReview = (record) => {
     if (record) setSelectedRecord(record);
@@ -216,6 +252,7 @@ export default function App() {
             purgedIds={purgedIds}
             onProcessComplete={(record) => {
               setSelectedRecord(record);
+              setUploadedRecords(prev => [record, ...prev.filter(r => r.id !== record.id)]);
               setRecordsList(prev => [record, ...prev.filter(r => r.id !== record.id)]);
               setCurrentTab('verification-queue');
             }} 
@@ -269,6 +306,14 @@ export default function App() {
               </div>
 
               <div className="flex items-center gap-2">
+                <button
+                  onClick={handleResetRegistry}
+                  className="px-3.5 py-1.5 rounded-lg bg-surface-card hover:bg-surface-container border border-border-structural text-text-primary text-xs font-heading font-semibold shadow-sm transition-all flex items-center gap-1.5"
+                  title="Reset & restore all 8 master land records in SQLite database"
+                >
+                  <RotateCcw className="w-3.5 h-3.5 text-primary" />
+                  Restore Master Records
+                </button>
                 <span className="font-mono text-xs font-semibold px-3 py-1.5 rounded-lg bg-surface-card border border-border-structural text-primary shadow-sm flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-status-success"></span>
                   SQLite DB Active

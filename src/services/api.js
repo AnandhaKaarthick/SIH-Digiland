@@ -79,3 +79,16 @@ export async function purgeDuplicatesApi() {
     return null;
   }
 }
+
+export async function resetRegistryApi() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/records/reset-registry`, {
+      method: "POST"
+    });
+    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("Backend reset registry API offline:", err);
+    return null;
+  }
+}
