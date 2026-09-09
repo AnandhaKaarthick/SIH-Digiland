@@ -619,6 +619,7 @@ export default function App() {
       case 'gis-map':
         return (
           <GisMapView 
+            recordsList={recordsList}
             onSelectRecord={(rec) => handleNavigateToReview(rec)} 
           />
         );
