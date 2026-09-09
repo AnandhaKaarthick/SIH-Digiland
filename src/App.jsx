@@ -42,8 +42,13 @@ export default function App() {
     }
   };
 
+  const [recordsList, setRecordsList] = useState(() => {
+    const purgedSet = new Set(purgedIds);
+    return MOCK_LAND_RECORDS.filter(r => !purgedSet.has(r.id));
+  });
+
   // Filter out invalid/empty blank records from display list
-  const validRecordsList = recordsList.filter(rec => 
+  const validRecordsList = (recordsList || []).filter(rec => 
     rec && rec.id && (rec.ulpin || rec.khasra_no || (Array.isArray(rec.owner_names) ? rec.owner_names.length > 0 : rec.owner_names))
   );
 
