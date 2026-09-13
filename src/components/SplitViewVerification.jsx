@@ -306,59 +306,62 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
   });
 
   return (
-    <div className="flex flex-col gap-space-md max-w-[1720px] mx-auto w-full h-[calc(100vh-6rem)]">
+    <div className="flex flex-col gap-space-md max-w-[1720px] mx-auto w-full min-h-[calc(100vh-6rem)] h-auto lg:h-[calc(100vh-6rem)]">
       {/* Top Priority Filter & Selection Bar */}
-      <div className="bg-surface-card p-3 rounded-xl border border-border-structural shadow-sm flex flex-wrap items-center justify-between gap-3 flex-shrink-0">
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-primary" />
-          <span className="font-heading text-xs font-bold text-text-primary">Triage Queue by Priority:</span>
+      <div className="bg-surface-card p-3 rounded-xl border border-border-structural shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-3 flex-shrink-0">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 min-w-0">
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <Filter className="w-4 h-4 text-primary" />
+            <span className="font-heading text-xs font-bold text-text-primary">Triage Queue:</span>
+          </div>
           
-          <div className="flex items-center gap-1.5 ml-2">
+          <div className="flex items-center gap-1.5 overflow-x-auto py-1 max-w-full">
             <button 
               onClick={() => setPriorityFilter('ALL')}
-              className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all ${
+              className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono font-semibold whitespace-nowrap transition-all ${
                 priorityFilter === 'ALL' ? 'bg-primary text-on-primary shadow-sm' : 'bg-surface-container text-text-secondary hover:bg-surface-container-high'
               }`}
             >
-              All Records ({MOCK_LAND_RECORDS.length})
+              All ({MOCK_LAND_RECORDS.length})
             </button>
             <button 
               onClick={() => setPriorityFilter('HIGH_PRIORITY')}
-              className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all ${
+              className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono font-semibold whitespace-nowrap transition-all ${
                 priorityFilter === 'HIGH_PRIORITY' ? 'bg-status-error text-white shadow-sm' : 'bg-status-error/10 text-status-error hover:bg-status-error/20'
               }`}
             >
-              High Priority (Critical Flags / Invariant Fail)
+              High Priority (Critical Flags)
             </button>
             <button 
               onClick={() => setPriorityFilter('MEDIUM_PRIORITY')}
-              className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all ${
+              className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono font-semibold whitespace-nowrap transition-all ${
                 priorityFilter === 'MEDIUM_PRIORITY' ? 'bg-status-warning text-white shadow-sm' : 'bg-status-warning/10 text-status-warning hover:bg-status-warning/20'
               }`}
             >
-              Medium Priority (Human Verification Queue)
+              Medium Priority (Queue)
             </button>
             <button 
               onClick={() => setPriorityFilter('LOW_PRIORITY')}
-              className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all ${
+              className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono font-semibold whitespace-nowrap transition-all ${
                 priorityFilter === 'LOW_PRIORITY' ? 'bg-status-success text-white shadow-sm' : 'bg-status-success/10 text-status-success hover:bg-status-success/20'
               }`}
             >
-              Low Priority (STP Auto-Accepted)
+              Low Priority (STP)
             </button>
           </div>
         </div>
 
         {/* Record Quick Selector */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-text-secondary font-heading font-semibold">Select Active Record:</span>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <span className="text-xs text-text-secondary font-heading font-semibold whitespace-nowrap">Active Record:</span>
           <select 
             value={record.id}
             onChange={(e) => {
               const selected = MOCK_LAND_RECORDS.find(r => r.id === e.target.value);
               if (selected) setRecord(selected);
             }}
-            className="px-2.5 py-1 rounded bg-surface-card border border-border-structural font-mono text-xs font-bold text-primary"
+            className="px-2.5 py-1 rounded bg-surface-card border border-border-structural font-mono text-xs font-bold text-primary max-w-[200px] sm:max-w-none truncate"
+            aria-label="Select Record for Verification"
           >
             {filteredRecords.map(r => (
               <option key={r.id} value={r.id}>
@@ -370,27 +373,27 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
       </div>
 
       {/* Record Status Header Bar */}
-      <div className="flex items-center justify-between bg-surface-card p-space-md rounded-xl border border-border-structural shadow-sm flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <span className="font-mono font-bold text-sm px-2.5 py-1 rounded bg-primary-container text-on-primary">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface-card p-space-md rounded-xl border border-border-structural shadow-sm flex-shrink-0">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="font-mono font-bold text-sm px-2.5 py-1 rounded bg-primary-container text-on-primary flex-shrink-0">
             {record.id}
           </span>
-          <div>
-            <div className="flex items-center gap-2">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
               <h1 className="font-heading font-bold text-base text-text-primary leading-tight">
                 {t('verification_header', 'Split-View Verification (Human-in-the-Loop)')}
               </h1>
-              <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-surface-container-high text-primary border border-border-structural uppercase">
+              <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-surface-container-high text-primary border border-border-structural uppercase whitespace-nowrap">
                 {docType.replace('_', ' ')}
               </span>
             </div>
-            <p className="text-xs text-text-secondary mt-0.5">
+            <p className="text-xs text-text-secondary mt-0.5 truncate">
               {t('roi_bounding_box', 'Interactive OCR Bounding Box Backtracking Active')}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-shrink-0 self-start sm:self-auto">
           <span className={`font-mono text-xs font-semibold px-2.5 py-1 rounded border ${
             record.status_flag === 'VALID' ? 'bg-status-success/10 text-status-success border-status-success/20' :
             record.status_flag === 'FLAGGED_WARNING' ? 'bg-status-warning/10 text-status-warning border-status-warning/20' : 'bg-status-error/10 text-status-error border-status-error/20'
@@ -402,14 +405,14 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
 
       {/* Dynamic Rule Alert Banner */}
       {!isShareSumValid && docType === 'RECORD_OF_RIGHTS' && (
-        <div className="bg-status-warning/10 border-l-4 border-status-warning p-3 rounded-r-lg flex items-center justify-between text-xs text-status-warning font-mono flex-shrink-0">
+        <div className="bg-status-warning/10 border-l-4 border-status-warning p-3 rounded-r-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-status-warning font-mono flex-shrink-0">
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 flex-shrink-0" />
             <span>
               <strong>Revenue Invariant Alert:</strong> Joint ownership share fractions sum to <strong>{shareSum.toFixed(2)}</strong> (Must equal 1.00). Update shares below to auto-clear warning.
             </span>
           </div>
-          <button onClick={() => setOwnerShares("1/2, 1/2")} className="underline text-xs font-semibold hover:text-text-primary">
+          <button onClick={() => setOwnerShares("1/2, 1/2")} className="underline text-xs font-semibold hover:text-text-primary whitespace-nowrap self-start sm:self-auto">
             Auto-Fix Shares (1/2, 1/2)
           </button>
         </div>
@@ -421,21 +424,21 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
         (r.khasra_no && khasraNo && r.khata_no && khataNo && r.khasra_no.trim() === khasraNo.trim() && r.khata_no.trim() === khataNo.trim()) ||
         (r.file_name && record.file_name && r.file_name.trim().toLowerCase() === record.file_name.trim().toLowerCase())
       )) && (
-        <div className="bg-status-warning/15 border-l-4 border-status-warning p-3 rounded-r-lg flex items-center justify-between text-xs text-status-warning font-mono flex-shrink-0 shadow-sm">
+        <div className="bg-status-warning/15 border-l-4 border-status-warning p-3 rounded-r-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-status-warning font-mono flex-shrink-0 shadow-sm">
           <div className="flex items-center gap-2.5">
             <AlertTriangle className="w-4 h-4 flex-shrink-0 text-status-warning" />
             <span>
               <strong>Registry Duplicate Warning:</strong> Identical plot ULPIN <strong>{ulpin || record.ulpin}</strong> / Khasra <strong>{khasraNo || record.khasra_no}</strong> detected in database queue.
             </span>
           </div>
-          <span className="bg-status-warning text-white font-mono text-[10px] px-2 py-0.5 rounded font-bold uppercase shadow-sm">
+          <span className="bg-status-warning text-white font-mono text-[10px] px-2 py-0.5 rounded font-bold uppercase shadow-sm whitespace-nowrap self-start sm:self-auto">
             Duplicate Detected
           </span>
         </div>
       )}
 
       {/* Main Dual-Pane Viewport (50/50 Split View) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-space-md flex-1 min-h-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-space-md flex-1 lg:min-h-0">
         
         {/* Left Pane: Interactive Document Canvas */}
         <div className="bg-surface-card rounded-xl border border-border-structural flex flex-col overflow-hidden shadow-sm">
@@ -500,7 +503,7 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
 
           <div 
             onClick={() => setIsModalOpen(true)}
-            className="flex-1 bg-gray-900 overflow-auto p-4 flex items-center justify-center relative cursor-pointer group"
+            className="flex-1 bg-gray-900 overflow-auto p-4 flex items-center justify-center relative cursor-pointer group min-h-[380px] sm:min-h-[480px] lg:min-h-0"
             title="Click to view complete uploaded document in full screen"
           >
             {/* Click Hover Hint Overlay */}
@@ -517,7 +520,7 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
                 <iframe
                   src={currentImageSrc}
                   title={record.file_name || "Uploaded PDF Document"}
-                  className="w-full h-full min-h-[550px] rounded border border-gray-700 bg-white"
+                  className="w-full h-full min-h-[350px] sm:min-h-[550px] rounded border border-gray-700 bg-white"
                 />
               ) : (
                 <img 
@@ -530,18 +533,18 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
                 />
               )}
 
-              {/* Bounding Box Highlight Overlay */}
+              {/* Dynamic ROI Bounding Box Overlay */}
               <div 
-                className="absolute border-2 border-secondary bg-secondary/20 shadow-[0_0_15px_rgba(193,120,23,0.6)] transition-all duration-300 rounded pointer-events-none flex items-start justify-end p-1"
+                className="absolute border-2 border-secondary bg-secondary/20 transition-all duration-300 pointer-events-none"
                 style={{
                   left: `${activeBbox.x}px`,
                   top: `${activeBbox.y}px`,
                   width: `${activeBbox.width}px`,
-                  height: `${activeBbox.height}px`
+                  height: `${activeBbox.height}px`,
                 }}
               >
-                <span className="bg-secondary text-white font-mono text-[9px] px-1 rounded font-bold uppercase shadow">
-                  {activeField}
+                <span className="absolute -top-5 left-0 bg-secondary text-white font-mono text-[9px] px-1 rounded shadow-sm whitespace-nowrap">
+                  OCR: {activeField}
                 </span>
               </div>
             </div>
@@ -578,94 +581,115 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
 
                 <div onClick={() => handleFieldFocus('owner_names')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'owner_names' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">{t('field_owners')}</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-warning/10 text-status-warning font-semibold">71% Review</span>
+                    <label className="font-heading text-xs font-semibold">{t('field_landowners')}</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">97% Conf</span>
                   </div>
-                  <input type="text" value={ownerNames} onChange={(e) => setOwnerNames(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-body text-xs" />
+                  <input type="text" value={ownerNames} onChange={(e) => setOwnerNames(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural text-xs" />
                 </div>
 
                 <div onClick={() => handleFieldFocus('owner_shares')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'owner_shares' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">{t('field_shares')}</label>
-                    <span className={`font-mono text-[10px] px-2 py-0.5 rounded font-semibold ${isShareSumValid ? 'bg-status-success/10 text-status-success' : 'bg-status-warning/10 text-status-warning'}`}>
-                      {isShareSumValid ? 'Sum = 1.00 (Valid)' : `Sum = ${shareSum.toFixed(2)} (Mismatch)`}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <label className="font-heading text-xs font-semibold">{t('field_shares')}</label>
+                      {!isShareSumValid && (
+                        <span className="text-[10px] text-status-warning font-mono font-bold">
+                          (! ∑ = {shareSum.toFixed(2)})
+                        </span>
+                      )}
+                    </div>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-warning/10 text-status-warning font-semibold">82% Conf</span>
                   </div>
                   <input type="text" value={ownerShares} onChange={(e) => setOwnerShares(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
+                </div>
+
+                <div onClick={() => handleFieldFocus('plot_area')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'plot_area' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
+                  <div className="flex justify-between mb-1">
+                    <label className="font-heading text-xs font-semibold">{t('field_plot_area')}</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">99% Conf</span>
+                  </div>
+                  <input type="text" value={plotArea} onChange={(e) => setPlotArea(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
                 </div>
 
                 <div onClick={() => handleFieldFocus('ulpin')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'ulpin' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
                     <label className="font-heading text-xs font-semibold">{t('field_ulpin')}</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">99% Verified</span>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">98% Conf</span>
                   </div>
-                  <input type="text" value={ulpin} onChange={(e) => setUlpin(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
+                  <input type="text" value={ulpin} onChange={(e) => setUlpin(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs text-primary font-bold" />
                 </div>
               </>
             )}
 
-            {/* SCHEMA 2: CONVEYANCE / SALE DEED */}
+            {/* SCHEMA 2: CONVEYANCE & SALE DEED */}
             {docType === 'CONVEYANCE_DEED' && (
               <>
                 <div onClick={() => handleFieldFocus('registration_number')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'registration_number' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">{t('field_reg_no')}</label>
+                    <label className="font-heading text-xs font-semibold">Deed Registration Number</label>
                     <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">99% Conf</span>
                   </div>
-                  <input type="text" value={regNo} onChange={(e) => setRegNo(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
+                  <input type="text" value={regNumber} onChange={(e) => setRegNumber(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs font-bold text-primary" />
                 </div>
 
                 <div onClick={() => handleFieldFocus('seller_name')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'seller_name' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">{t('field_seller')}</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">96% Conf</span>
+                    <label className="font-heading text-xs font-semibold">Executant / Vendor (Seller)</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">97% Conf</span>
                   </div>
-                  <input type="text" value={sellerName} onChange={(e) => setSellerName(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-body text-xs" />
+                  <input type="text" value={sellerName} onChange={(e) => setSellerName(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural text-xs" />
                 </div>
 
                 <div onClick={() => handleFieldFocus('buyer_name')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'buyer_name' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">{t('field_buyer')}</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">97% Conf</span>
-                  </div>
-                  <input type="text" value={buyerName} onChange={(e) => setBuyerName(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-body text-xs" />
-                </div>
-
-                <div onClick={() => handleFieldFocus('sale_value_inr')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'sale_value_inr' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
-                  <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">{t('field_sale_value')}</label>
+                    <label className="font-heading text-xs font-semibold">Claimant / Vendee (Buyer)</label>
                     <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">98% Conf</span>
                   </div>
-                  <input type="number" value={saleValue} onChange={(e) => setSaleValue(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
+                  <input type="text" value={buyerName} onChange={(e) => setBuyerName(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural text-xs font-semibold" />
+                </div>
+
+                <div onClick={() => handleFieldFocus('sale_value')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'sale_value' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
+                  <div className="flex justify-between mb-1">
+                    <label className="font-heading text-xs font-semibold">Financial Consideration (Sale Value INR)</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">99% Conf</span>
+                  </div>
+                  <input type="text" value={saleValue} onChange={(e) => setSaleValue(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
+                </div>
+
+                <div onClick={() => handleFieldFocus('plot_area')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'plot_area' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
+                  <div className="flex justify-between mb-1">
+                    <label className="font-heading text-xs font-semibold">Transacted Schedule Area (sqm)</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">97% Conf</span>
+                  </div>
+                  <input type="text" value={plotArea} onChange={(e) => setPlotArea(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
                 </div>
               </>
             )}
 
-            {/* SCHEMA 3: MUTATION ORDER */}
+            {/* SCHEMA 3: MUTATION REGISTER */}
             {docType === 'MUTATION_ORDER' && (
               <>
                 <div onClick={() => handleFieldFocus('mutation_serial_number')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'mutation_serial_number' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">{t('field_mut_serial')}</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">88% Conf</span>
+                    <label className="font-heading text-xs font-semibold">Mutation Serial Order #</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">99% Conf</span>
                   </div>
-                  <input type="text" value={mutSerial} onChange={(e) => setMutSerial(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
+                  <input type="text" value={mutationSerial} onChange={(e) => setMutationSerial(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs font-bold text-primary" />
                 </div>
 
-                <div onClick={() => handleFieldFocus('transferor_prior_owner')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'transferor_prior_owner' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
+                <div onClick={() => handleFieldFocus('transferor')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'transferor' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">Transferor (Prior Owner)</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-warning/10 text-status-warning font-semibold">75% Review</span>
+                    <label className="font-heading text-xs font-semibold">Prior Owner (Transferor)</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">96% Conf</span>
                   </div>
-                  <input type="text" value={priorOwner} onChange={(e) => setPriorOwner(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-body text-xs" />
+                  <input type="text" value={priorOwner} onChange={(e) => setPriorOwner(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural text-xs" />
                 </div>
 
-                <div onClick={() => handleFieldFocus('transferee_new_owner')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'transferee_new_owner' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
+                <div onClick={() => handleFieldFocus('transferee')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'transferee' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">Transferee (New Owner)</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-warning/10 text-status-warning font-semibold">71% Review</span>
+                    <label className="font-heading text-xs font-semibold">New Sanctioned Owner (Transferee)</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">98% Conf</span>
                   </div>
-                  <input type="text" value={newOwner} onChange={(e) => setNewOwner(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-body text-xs" />
+                  <input type="text" value={newOwner} onChange={(e) => setNewOwner(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural text-xs font-semibold" />
                 </div>
               </>
             )}
@@ -675,15 +699,15 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
               <>
                 <div onClick={() => handleFieldFocus('map_sheet_number')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'map_sheet_number' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">Map Sheet Number</label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">95% Conf</span>
+                    <label className="font-heading text-xs font-semibold">Cadastral Map Sheet Number</label>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">99% Conf</span>
                   </div>
-                  <input type="text" value={mapSheet} onChange={(e) => setMapSheet(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
+                  <input type="text" value={mapSheet} onChange={(e) => setMapSheet(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs font-bold text-primary" />
                 </div>
 
                 <div onClick={() => handleFieldFocus('projection_system')} className={`p-3 rounded-lg border transition-all cursor-pointer ${activeField === 'projection_system' ? 'border-secondary bg-surface-container-low' : 'border-border-structural'}`}>
                   <div className="flex justify-between mb-1">
-                    <label className="font-heading text-xs font-semibold">Projection System EPSG</label>
+                    <label className="font-heading text-xs font-semibold">Geodetic Spatial Projection (CRS)</label>
                     <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-status-success/10 text-status-success font-semibold">99% Conf</span>
                   </div>
                   <input type="text" value={epsg} onChange={(e) => setEpsg(e.target.value)} className="w-full px-3 py-1.5 rounded bg-surface-card border border-border-structural font-mono text-xs" />
@@ -693,12 +717,12 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
 
           </div>
 
-          {/* Action Sign-Off Footer */}
-          <div className="p-4 bg-surface-container-low border-t border-border-structural flex items-center justify-between gap-3 flex-shrink-0 flex-wrap">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-primary" />
-              <div className="flex flex-col">
-                <span className="text-xs font-heading font-semibold text-text-primary">Officer ECDSA Digital Sign &amp; Database Commit</span>
+          {/* Action Footer: Officer Sign / Reject */}
+          <div className="p-4 bg-surface-container-low border-t border-border-structural flex flex-col sm:flex-row sm:items-center justify-between gap-3 flex-shrink-0">
+            <div className="flex items-center gap-2 min-w-0">
+              <ShieldCheck className="w-5 h-5 text-primary flex-shrink-0" />
+              <div className="flex flex-col min-w-0">
+                <span className="text-xs font-heading font-semibold text-text-primary truncate">Officer ECDSA Digital Sign &amp; Database Commit</span>
                 {activeRole !== 'tehsildar' && activeRole !== 'admin' && (
                   <span className="text-[10px] font-mono text-status-warning font-bold flex items-center gap-1">
                     🔒 Sign-off Restricted: Tehsildar / Admin Approval Required
@@ -707,12 +731,12 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
               {/* Reject Button */}
               <button
                 onClick={() => setIsRejectModalOpen(true)}
                 disabled={isSigned || isRejected}
-                className={`px-4 py-2 rounded-lg font-heading text-xs font-semibold transition-all shadow-sm flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-lg font-heading text-xs font-semibold transition-all shadow-sm flex items-center justify-center gap-1.5 ${
                   isRejected 
                     ? 'bg-status-error text-white' 
                     : 'bg-status-error/10 hover:bg-status-error text-status-error hover:text-white border border-status-error/30'
@@ -735,7 +759,7 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
                 <button 
                   onClick={handleApprove}
                   disabled={isSigned || isRejected}
-                  className={`px-5 py-2 rounded-lg font-heading text-xs font-semibold text-on-primary transition-all shadow-sm flex items-center gap-2 ${
+                  className={`px-5 py-2 rounded-lg font-heading text-xs font-semibold text-on-primary transition-all shadow-sm flex items-center justify-center gap-2 ${
                     isSigned ? 'bg-status-success' : 'bg-primary hover:bg-primary-container'
                   }`}
                 >
@@ -753,9 +777,9 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
                 <button 
                   onClick={() => alert(`Review draft saved by ${activeRole.toUpperCase()}. Forwarded to Tehsildar for ECDSA Digital Sign-Off.`)}
                   disabled={isSigned || isRejected}
-                  className="px-5 py-2 rounded-lg font-heading text-xs font-semibold bg-status-warning/20 text-status-warning border border-status-warning/40 hover:bg-status-warning/30 transition-all shadow-sm flex items-center gap-2"
+                  className="px-5 py-2 rounded-lg font-heading text-xs font-semibold bg-status-warning/20 text-status-warning border border-status-warning/40 hover:bg-status-warning/30 transition-all shadow-sm flex items-center justify-center gap-2"
                 >
-                  <FileCheck className="w-4 h-4" /> Save HITL Review Draft (Pending Tehsildar Sign-Off)
+                  <FileCheck className="w-4 h-4" /> Save HITL Review Draft (Pending Sign-Off)
                 </button>
               )}
             </div>
@@ -768,31 +792,31 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col animate-fadeIn">
           {/* Modal Header Bar */}
-          <div className="bg-surface-card border-b border-border-structural px-6 py-3 flex items-center justify-between shadow-md flex-shrink-0">
+          <div className="bg-surface-card border-b border-border-structural px-3 sm:px-6 py-2.5 sm:py-3 flex flex-col md:flex-row md:items-center justify-between gap-2.5 shadow-md flex-shrink-0">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-heading font-bold text-sm">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-heading font-bold text-sm flex-shrink-0">
                 DL
               </div>
-              <div>
-                <div className="flex items-center gap-2">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
                   <h2 className="font-heading font-bold text-sm text-text-primary">
                     Full Document Inspection Viewer — {record.id}
                   </h2>
-                  <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-primary-container text-on-primary border border-border-structural uppercase">
+                  <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-primary-container text-on-primary border border-border-structural uppercase whitespace-nowrap">
                     {docType.replace('_', ' ')}
                   </span>
                 </div>
-                <p className="text-[11px] font-mono text-text-secondary">
+                <p className="text-[11px] font-mono text-text-secondary truncate">
                   Doc Ref: {record.document_id || 'DOC-ORIGINAL'} | File: {record.file_name || `${record.id}.pdf`}
                 </p>
               </div>
             </div>
 
             {/* Toolbar Controls */}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center justify-between sm:justify-end gap-2 w-full md:w-auto">
               {/* Page Stepper */}
               {totalPages > 1 && (
-                <div className="flex items-center gap-2 bg-surface-container p-1 rounded-lg border border-border-structural">
+                <div className="flex items-center gap-1 sm:gap-2 bg-surface-container p-1 rounded-lg border border-border-structural">
                   <button
                     onClick={() => setCurrentPage(p => Math.max(0, p - 1))}
                     disabled={currentPage === 0}
@@ -802,7 +826,7 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <span className="font-mono text-xs font-bold text-text-primary px-1">
-                    Page {currentPage + 1} of {totalPages}
+                    {currentPage + 1}/{totalPages}
                   </span>
                   <button
                     onClick={() => setCurrentPage(p => Math.min(totalPages - 1, p + 1))}
@@ -820,7 +844,7 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
                 <button onClick={() => setModalZoom(z => Math.max(0.5, z - 0.25))} className="p-1 rounded hover:bg-surface-card text-text-primary" title="Zoom Out">
                   <ZoomOut className="w-4 h-4" />
                 </button>
-                <span className="font-mono text-xs font-bold text-text-primary w-12 text-center">
+                <span className="font-mono text-xs font-bold text-text-primary w-10 sm:w-12 text-center">
                   {Math.round(modalZoom * 100)}%
                 </span>
                 <button onClick={() => setModalZoom(z => Math.min(3.0, z + 0.25))} className="p-1 rounded hover:bg-surface-card text-text-primary" title="Zoom In">
@@ -834,18 +858,18 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
               {/* Toggle Bounding Boxes */}
               <button
                 onClick={() => setShowModalBbox(!showModalBbox)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-heading font-semibold border transition-all ${
+                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-heading font-semibold border transition-all ${
                   showModalBbox ? 'bg-secondary text-white border-secondary' : 'bg-surface-container text-text-secondary border-border-structural'
                 }`}
               >
                 {showModalBbox ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                <span>OCR Bounding Box</span>
+                <span className="hidden sm:inline">OCR Bounding Box</span>
               </button>
 
               {/* Close Button */}
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-2 rounded-lg bg-surface-container hover:bg-status-error hover:text-white text-text-primary transition-colors"
+                className="p-1.5 sm:p-2 rounded-lg bg-surface-container hover:bg-status-error hover:text-white text-text-primary transition-colors"
                 title="Close Viewer (Esc)"
               >
                 <X className="w-5 h-5" />
@@ -857,19 +881,19 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
           <div className="flex-1 overflow-hidden flex bg-gray-950 relative">
             {/* Left Thumbnail Strip for Multi-Page Documents */}
             {totalPages > 1 && (
-              <div className="w-48 bg-gray-900 border-r border-gray-800 p-3 overflow-y-auto flex flex-col gap-3 flex-shrink-0">
+              <div className="w-24 sm:w-44 bg-gray-900 border-r border-gray-800 p-2 sm:p-3 overflow-y-auto flex flex-col gap-2 sm:gap-3 flex-shrink-0">
                 <span className="font-heading text-[10px] uppercase font-bold text-gray-400 tracking-wider">Pages ({totalPages})</span>
                 {pagePreviews.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentPage(idx)}
-                    className={`p-1.5 rounded border transition-all text-left flex flex-col gap-1 ${
+                    className={`p-1 rounded border transition-all text-left flex flex-col gap-1 ${
                       currentPage === idx ? 'border-primary bg-primary/10 ring-2 ring-primary/40' : 'border-gray-800 hover:border-gray-600 bg-gray-900/50'
                     }`}
                   >
-                    <img src={img} alt={`Page ${idx + 1}`} className="w-full h-28 object-cover rounded bg-white" />
+                    <img src={img} alt={`Page ${idx + 1}`} className="w-full h-16 sm:h-24 object-cover rounded bg-white" />
                     <span className={`font-mono text-[10px] text-center font-bold ${currentPage === idx ? 'text-primary' : 'text-gray-400'}`}>
-                      Page {idx + 1}
+                      P.{idx + 1}
                     </span>
                   </button>
                 ))}
@@ -877,22 +901,22 @@ export default function SplitViewVerification({ record: initialRecord, allRecord
             )}
 
             {/* Main Document Inspection Canvas */}
-            <div className="flex-1 overflow-auto p-8 flex items-center justify-center">
+            <div className="flex-1 overflow-auto p-2 sm:p-8 flex items-center justify-center">
               <div
-                className="relative transition-transform duration-200 shadow-2xl"
+                className="relative transition-transform duration-200 shadow-2xl max-w-full"
                 style={{ transform: `scale(${modalZoom})`, transformOrigin: 'top center' }}
               >
                 {isPdf ? (
                   <iframe
                     src={currentImageSrc}
                     title={record.file_name || "Uploaded PDF Document"}
-                    className="w-full h-[85vh] min-w-[70vw] rounded border border-gray-700 bg-white shadow-2xl"
+                    className="w-full max-w-5xl h-[75vh] sm:h-[85vh] min-w-[280px] rounded border border-gray-700 bg-white shadow-2xl"
                   />
                 ) : (
                   <img
                     src={currentImageSrc}
                     alt={`Uploaded Document - Page ${currentPage + 1}`}
-                    className="max-w-none w-auto max-h-[85vh] rounded border border-gray-700 bg-white select-none"
+                    className="max-w-full sm:max-w-none w-auto max-h-[75vh] sm:max-h-[85vh] rounded border border-gray-700 bg-white select-none"
                   />
                 )}
 

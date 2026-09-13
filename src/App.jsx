@@ -600,7 +600,7 @@ export default function App() {
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full md:w-auto justify-start md:justify-end">
                           {/* 1-CLICK REMOVE DUPLICATE BUTTON */}
                           {isDuplicate && (
                             <button
@@ -608,7 +608,7 @@ export default function App() {
                                 e.stopPropagation();
                                 handleRemoveSingleDuplicate(rec.id);
                               }}
-                              className="px-3 py-2 rounded-lg bg-status-error/10 hover:bg-status-error text-status-error hover:text-white border border-status-error/30 font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5 flex-shrink-0"
+                              className="px-3 py-2 rounded-lg bg-status-error/10 hover:bg-status-error text-status-error hover:text-white border border-status-error/30 font-heading text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5 flex-1 sm:flex-initial justify-center"
                               title="Delete this duplicate record from system"
                             >
                               <Trash2 className="w-3.5 h-3.5" /> Remove Duplicate
@@ -617,7 +617,7 @@ export default function App() {
 
                           <button 
                             onClick={() => handleOpenRecordDetails(rec)}
-                            className="px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-heading text-xs font-semibold shadow-sm transition-all flex-shrink-0"
+                            className="px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-heading text-xs font-semibold shadow-sm transition-all flex-1 sm:flex-initial text-center justify-center"
                           >
                             View Full Details
                           </button>

@@ -158,7 +158,7 @@ export default function GisMapView({ recordsList = [], onSelectRecord }) {
   });
 
   return (
-    <div className="flex flex-col gap-space-md max-w-[1720px] mx-auto w-full h-[calc(100vh-6rem)]">
+    <div className="flex flex-col gap-space-md max-w-[1720px] mx-auto w-full min-h-[calc(100vh-6rem)] h-auto lg:h-[calc(100vh-6rem)]">
       {/* Header Bar with FMB Document Chooser Toolbar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between bg-surface-card p-space-md rounded-xl border border-border-structural shadow-sm gap-3 flex-shrink-0">
         <div>
@@ -205,31 +205,29 @@ export default function GisMapView({ recordsList = [], onSelectRecord }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="w-2.5 h-2.5 rounded-full bg-status-success inline-block"></span> Validated
-            <span className="w-2.5 h-2.5 rounded-full bg-status-warning inline-block ml-2"></span> Flagged
-            <span className="w-2.5 h-2.5 rounded-full bg-status-error inline-block ml-2"></span> Mismatch / Dispute
-          </div>
+        <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+          <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-status-success inline-block"></span> Validated</span>
+          <span className="flex items-center gap-1.5 ml-2"><span className="w-2.5 h-2.5 rounded-full bg-status-warning inline-block"></span> Flagged</span>
+          <span className="flex items-center gap-1.5 ml-2"><span className="w-2.5 h-2.5 rounded-full bg-status-error inline-block"></span> Dispute</span>
         </div>
       </div>
 
       {/* Main Grid: Left Map + Right Parcel Details Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-space-md flex-1 min-h-0">
         {/* Left GIS Leaflet Map (2 Columns) */}
-        <div className="lg:col-span-2 bg-surface-card rounded-xl border border-border-structural overflow-hidden relative shadow-sm flex flex-col">
+        <div className="lg:col-span-2 bg-surface-card rounded-xl border border-border-structural overflow-hidden relative shadow-sm flex flex-col min-h-[380px] sm:min-h-[480px] lg:min-h-0">
           {/* Active Parcel Bar */}
-          <div className="bg-canvas-bg px-4 py-2 border-b border-border-structural flex items-center justify-between text-xs">
-            <span className="font-heading font-semibold text-text-secondary flex items-center gap-1.5">
-              <Navigation className="w-4 h-4 text-primary animate-pulse" /> Map Pan Active: <strong className="text-text-primary">{selectedRecord?.id || 'DL-MAP-001'}</strong> ({selectedParcel.village})
+          <div className="bg-canvas-bg px-4 py-2 border-b border-border-structural flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-1">
+            <span className="font-heading font-semibold text-text-secondary flex items-center gap-1.5 truncate">
+              <Navigation className="w-4 h-4 text-primary animate-pulse flex-shrink-0" /> Map Pan Active: <strong className="text-text-primary">{selectedRecord?.id || 'DL-MAP-001'}</strong> ({selectedParcel.village})
             </span>
-            <span className="font-mono text-[11px] text-primary font-bold">
+            <span className="font-mono text-[11px] text-primary font-bold flex-shrink-0">
               GPS Centroid: [{currentCenter[0].toFixed(4)}, {currentCenter[1].toFixed(4)}]
             </span>
           </div>
 
           {/* Fallback & Custom Map Container */}
-          <div className="w-full flex-1 min-h-[450px] relative">
+          <div className="w-full flex-1 min-h-[340px] sm:min-h-[440px] lg:min-h-0 relative">
             <MapContainer 
               center={currentCenter} 
               zoom={16} 

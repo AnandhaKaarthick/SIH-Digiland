@@ -52,6 +52,11 @@ def read_root():
         }
     }
 
+@app.get("/health")
+@app.get("/api/v1/health")
+def health_check():
+    return {"status": "ok", "service": "DigiLand API", "sih_problem_statement": "26018"}
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)
