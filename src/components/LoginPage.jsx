@@ -94,7 +94,7 @@ export default function LoginPage({ onLogin }) {
                 🔐 Role-Based Access Control (RBAC)
               </span>
               <h2 className="font-heading font-bold text-2xl text-white leading-snug">
-                Unified Indian Land Revenue Portal
+                Unified Indian Land Record Portal
               </h2>
               <p className="text-xs text-white/80 leading-relaxed">
                 Secure access gateway supporting DILRMP land registry records, PaddleOCR FMB map extraction, SHA-256 immutable audit chains, and Ed25519 officer digital sign-off.
